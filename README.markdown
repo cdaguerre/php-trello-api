@@ -94,6 +94,9 @@ $service->addListener(Events::BOARD_UPDATE, function ($event) {
 
 // ...or add an EventSubscriber
 $service->addSubscriber(EventSubscriberInterface $subscriber);
+
+// Tell the service to check for a Trello web hook
+$service->handleRequest();
 ```
 
 ## Documentation
