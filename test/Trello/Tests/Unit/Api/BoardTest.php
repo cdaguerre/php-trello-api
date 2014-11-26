@@ -78,12 +78,12 @@ class BoardTest extends TestCase
      */
     public function shouldGetField()
     {
-        $field = 'name';
+        $field = 'desc';
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeBoardId.'/name')
+            ->with($this->apiPath.'/'.$this->fakeBoardId.'/desc')
             ->will($this->returnValue($field));
 
         $this->assertEquals($field, $api->getField($this->fakeBoardId, $field));

@@ -120,9 +120,9 @@ class ChecklistTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeChecklistId.'/name')
-            ->will($this->returnValue($field));
+            ->will($this->returnValue(true));
 
-        $this->assertEquals($field, $api->getField($this->fakeChecklistId, $field));
+        $this->assertEquals(true, $api->getField($this->fakeChecklistId, $field));
     }
 
     /**

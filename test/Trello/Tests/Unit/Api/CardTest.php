@@ -102,12 +102,12 @@ class CardTest extends TestCase
      */
     public function shouldGetField()
     {
-        $field = 'name';
+        $field = 'desc';
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/name')
+            ->with($this->apiPath.'/'.$this->fakeCardId.'/desc')
             ->will($this->returnValue($field));
 
         $this->assertEquals($field, $api->getField($this->fakeCardId, $field));
