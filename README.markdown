@@ -98,7 +98,11 @@ $service->addSubscriber(EventSubscriberInterface $subscriber);
 
 ## Documentation
 
-Yet to be written.
+Yet to be written, but you can take a look at the `phpdoc` blocks and the official [API documentation](https://trello.com/docs/index.html).
+
+## Contributing
+
+Feel free to make any comments, file issues or make pull requests.
 
 ## License
 
