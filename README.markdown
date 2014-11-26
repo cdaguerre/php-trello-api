@@ -43,7 +43,7 @@ Now we can use autoloader from Composer by:
 
 > `php-trello-api` follows the PSR-0 convention names for its classes, which means you can easily integrate `php-trello-api` classes loading in your own autoloader.
 
-## Basic usage of `php-trello-api` client
+## Basic usage
 
 ```php
 <?php
