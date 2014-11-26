@@ -108,9 +108,9 @@ class CardTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeCardId.'/desc')
-            ->will($this->returnValue($field));
+            ->will($this->returnValue(true));
 
-        $this->assertEquals($field, $api->getField($this->fakeCardId, $field));
+        $this->assertEquals(true, $api->getField($this->fakeCardId, $field));
     }
 
     /**
