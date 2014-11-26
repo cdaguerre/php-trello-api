@@ -42,6 +42,19 @@ class Service
     }
 
     /**
+     * Attach an event listener
+     *
+     * @param string $eventName @see Events for name constants
+     * @param callable $listener  The listener
+     * @param int      $priority  The higher this value, the earlier an event
+     *                            listener will be triggered in the chain (defaults to 0)
+     */
+    public function on($eventName, $listener, $priority = 0)
+    {
+        $this->dispatcher->addListener($eventName, $listener, $priority);
+    }
+
+    /**
      * Checks whether a given request is a Trello webhook
      * and raises appropriate events @see Events
      *
@@ -49,7 +62,7 @@ class Service
      */
     public function handleWebhook(Request $request = null)
     {
-        if (!$requests) {
+        if (!$request) {
             $request = Request::createFromGlobals();
         }
 

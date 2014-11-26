@@ -52,11 +52,49 @@ Now we can use autoloader from Composer by:
 require_once 'vendor/autoload.php';
 
 $client = new \Trello\Client();
+
+$client->authenticate('api_key', 'token', Client::AUTH_URL_CLIENT_ID);
+
 $boards = $client->api('member')->boards()->all();
 ```
 
 The `$client` object gives you access to the entire Trello API.
 
+## Model layer usage
+
+This package includes a simple Model layer above the API with a nice chainable API allowing following manipulation of Trello objects:
+
+```php
+$service = new \Trello\Service($client);
+
+$card = $service->getCard('547440ad3f8b882bc11f0497');
+
+$card
+    ->setName('Test card')
+    ->setDescription('Test description')
+    ->save();
+```
+
+## Dispatching Trello events to your app
+
+The service uses the [Symfony EventDispatcher](https://github.com/symfony/EventDispatcher) component to dispatch events occuring on incoming webhooks.
+
+Take a look at the [Events](https://github.com/cdaguerre/php-trello-api/blob/master/lib/Trello/Events.php) class constants for names and associated event classes.
+
+```php
+use \Trello\Events;
+use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+// Bind a callable to a given event...
+$service->addListener(Events::BOARD_UPDATE, function ($event) {
+    $board = $event->getBoard();
+
+    // do something
+});
+
+// ...or add an EventSubscriber
+$service->addSubscriber(EventSubscriberInterface $subscriber);
+```
 
 ## Documentation
 
