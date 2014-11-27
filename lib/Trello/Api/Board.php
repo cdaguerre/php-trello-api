@@ -6,6 +6,8 @@ use Trello\Exception\InvalidArgumentException;
 
 /**
  * Trello Board API
+ * @package PHP Trello API
+ * @category API
  * @link https://trello.com/docs/api/board
  *
  * Not implemented:
@@ -61,6 +63,8 @@ class Board extends AbstractApi
      */
     public function show($id, array $params = array())
     {
+        echo $banane;
+
         return $this->get($this->getPath().'/'.rawurlencode($id), $params);
     }
 

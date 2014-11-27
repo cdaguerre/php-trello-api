@@ -2,6 +2,8 @@
 
 namespace Trello\Api;
 
+use Trello\Exception\InvalidArgumentException;
+
 /**
  * Trello Action API
  * @link https://trello.com/docs/api/action

@@ -2,6 +2,8 @@
 
 namespace Trello\Api;
 
+use Trello\Exception\InvalidArgumentException;
+
 /**
  * Trello Notification API
  * @link https://trello.com/docs/api/notification
