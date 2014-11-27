@@ -63,8 +63,6 @@ class Board extends AbstractApi
      */
     public function show($id, array $params = array())
     {
-        echo $banane;
-
         return $this->get($this->getPath().'/'.rawurlencode($id), $params);
     }
 
