@@ -13,6 +13,7 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
+  - mkdir -p build
   - mkdir -p build/logs
   - phpunit --coverage-clover build/logs/clover.xml -c test/
 
