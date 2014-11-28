@@ -1,7 +1,7 @@
 PHP Trello API v1 client
 ========================
 
-[![Build Status](https://travis-ci.org/cdaguerre/php-trello-api.svg?branch=master)](https://travis-ci.org/cdaguerre/php-trello-api) [![Coverage Status](https://coveralls.io/repos/cdaguerre/php-trello-api/badge.png)](https://coveralls.io/r/cdaguerre/php-trello-api)
+[![Build Status](https://travis-ci.org/cdaguerre/php-trello-api.svg?branch=master)](https://travis-ci.org/cdaguerre/php-trello-api) [![Coverage Status](https://img.shields.io/coveralls/cdaguerre/php-trello-api.svg)](https://coveralls.io/r/cdaguerre/php-trello-api?branch=master)
 
 A simple Object Oriented wrapper for the Trello API, written in PHP5.
 
