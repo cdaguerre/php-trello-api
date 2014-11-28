@@ -2,6 +2,9 @@
 
 namespace Trello\Model;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Board extends AbstractObject implements BoardInterface
 {
     protected $apiName = 'board';
@@ -13,7 +16,7 @@ class Board extends AbstractObject implements BoardInterface
         'members'                  => 'all',
         'membersInvited'           => 'all',
         'memberships'              => 'all',
-        'lists'                    => 'all'
+        'lists'                    => 'all',
     );
 
     /**

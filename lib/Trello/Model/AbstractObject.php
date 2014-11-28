@@ -6,6 +6,9 @@ use Trello\Client;
 use Trello\Api\ApiInterface;
 use Trello\Exception\BadMethodCallException;
 
+/**
+ * @codeCoverageIgnore
+ */
 abstract class AbstractObject
 {
     /**

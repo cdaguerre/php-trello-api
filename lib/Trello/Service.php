@@ -4,16 +4,12 @@ namespace Trello;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Trello\Exception\InvalidArgumentException;
 
-class Service
+class Service extends Manager
 {
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
     /**
      * @var EventDispatcherInterface
      */
@@ -27,7 +23,8 @@ class Service
      */
     public function __construct(ClientInterface $client, EventDispatcherInterface $dispatcher = null)
     {
-        $this->client = $client;
+        parent::__construct($client);
+
         $this->dispatcher = $dispatcher ?: new EventDispatcher();
     }
 
@@ -44,14 +41,40 @@ class Service
     /**
      * Attach an event listener
      *
-     * @param string $eventName @see Events for name constants
+     * @param string   $eventName @see Events for name constants
      * @param callable $listener  The listener
      * @param int      $priority  The higher this value, the earlier an event
      *                            listener will be triggered in the chain (defaults to 0)
      */
-    public function on($eventName, $listener, $priority = 0)
+    public function addListener($eventName, $listener, $priority = 0)
     {
         $this->dispatcher->addListener($eventName, $listener, $priority);
+    }
+
+    /**
+     * Attach an event subscriber
+     *
+     * @param EventSubscriberInterface $subscriber The subscriber
+     */
+    public function addEventSubscriber(EventSubscriberInterface $subscriber)
+    {
+        $this->dispatcher->addSubscriber($subscriber);
+    }
+
+    /**
+     * Checks whether a given request is a Trello webhook
+     *
+     * @param Request $request
+     *
+     * @return bool
+     */
+    public function isTrelloWebhook(Request $request)
+    {
+        if (!$request->headers->has('X-Trello-Webhook')) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -200,129 +223,5 @@ class Service
         }
 
         $this->dispatcher->dispatch($eventName, $event);
-    }
-
-    /**
-     * Checks whether a given request is a Trello webhook
-     *
-     * @param Request $request
-     *
-     * @return bool
-     */
-    public function isTrelloWebhook(Request $request)
-    {
-        if (!$request->headers->has('X-Trello-Webhook')) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Get organization by id or create a new one
-     *
-     * @param string $id the organization's id
-     *
-     * @return Model\OrganizationInterface
-     */
-    public function getOrganization($id = null)
-    {
-        return new Model\Organization($this->client, $id);
-    }
-
-    /**
-     * Get board by id or create a new one
-     *
-     * @param string $id the board's id
-     *
-     * @return Model\BoardInterface
-     */
-    public function getBoard($id = null)
-    {
-        return new Model\Board($this->client, $id);
-    }
-
-    /**
-     * Get cardlist by id or create a new one
-     *
-     * @param string $id the cardlist's id
-     *
-     * @return Model\CardlistInterface
-     */
-    public function getList($id = null)
-    {
-        return new Model\Cardlist($this->client, $id);
-    }
-
-    /**
-     * Get card by id or create a new one
-     *
-     * @param string $id the card's id
-     *
-     * @return Model\CardInterface
-     */
-    public function getCard($id = null)
-    {
-        return new Model\Card($this->client, $id);
-    }
-
-    /**
-     * Get checklist by id or create a new one
-     *
-     * @param string $id the checklist's id
-     *
-     * @return Model\ChecklistInterface
-     */
-    public function getChecklist($id = null)
-    {
-        return new Model\Checklist($this->client, $id);
-    }
-
-    /**
-     * Get member by id or create a new one
-     *
-     * @param string $id the member's id
-     *
-     * @return Model\MemberInterface
-     */
-    public function getMember($id = null)
-    {
-        return new Model\Member($this->client, $id);
-    }
-
-    /**
-     * Get action by id
-     *
-     * @param string $id the action's id
-     *
-     * @return Model\ActionInterface
-     */
-    public function getAction($id)
-    {
-        return new Model\Action($this->client, $id);
-    }
-
-    /**
-     * Get token by id
-     *
-     * @param string $id the token's id
-     *
-     * @return Model\TokenInterface
-     */
-    public function getToken($id)
-    {
-        return new Model\Token($this->client, $id);
-    }
-
-    /**
-     * Get webhook by id
-     *
-     * @param string $id the webhook's id
-     *
-     * @return Model\WebhookInterface
-     */
-    public function getWebhook($id)
-    {
-        return new Model\Webhook($this->client, $id);
     }
 }

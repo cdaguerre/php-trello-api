@@ -2,12 +2,15 @@
 
 namespace Trello\Model;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Checklist extends AbstractObject implements ChecklistInterface
 {
     protected $apiName = 'checklist';
 
     protected $loadParams = array(
-        'fields' => 'all'
+        'fields' => 'all',
     );
 
     /**
@@ -141,7 +144,7 @@ class Checklist extends AbstractObject implements ChecklistInterface
         $this->data['checkItems'][] = array(
             'name' => $name,
             'state' => $checked ? 'complete' : 'incomplete',
-            'position' => $position
+            'position' => $position,
         );
 
         return $this;

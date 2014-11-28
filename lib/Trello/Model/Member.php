@@ -2,12 +2,15 @@
 
 namespace Trello\Model;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Member extends AbstractObject implements MemberInterface
 {
     protected $apiName = 'member';
 
     protected $loadParams = array(
-        'fields' => 'all'
+        'fields' => 'all',
     );
 
     /**
@@ -490,5 +493,4 @@ class Member extends AbstractObject implements MemberInterface
     {
         return $this->data['premiumFeatures'];
     }
-
 }

@@ -6,6 +6,9 @@ use Trello\Events;
 use Trello\Exception\InvalidArgumentException;
 use Trello\Exception\RuntimeException;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Card extends AbstractObject implements CardInterface
 {
     protected $apiName = 'card';
@@ -132,6 +135,10 @@ class Card extends AbstractObject implements CardInterface
      */
     public function getDueDate()
     {
+        if ($this->data['due'] instanceof \DateTime) {
+            return $this->data['due'];
+        }
+
         return new \DateTime($this->data['due']);
     }
 

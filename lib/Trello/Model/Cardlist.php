@@ -2,13 +2,16 @@
 
 namespace Trello\Model;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Cardlist extends AbstractObject implements CardlistInterface
 {
     protected $apiName = 'list';
 
     protected $loadParams = array(
         'cards'  => 'all',
-        'fields' => 'all'
+        'fields' => 'all',
     );
 
     /**

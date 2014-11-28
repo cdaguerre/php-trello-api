@@ -26,8 +26,15 @@
     <filter>
         <whitelist>
             <directory suffix=".php">./lib/Trello/</directory>
+            <exclude>
+              <directory suffix=".php">./lib/Trello/Model</directory>
+              <directory suffix=".php">./lib/Trello/Event</directory>
+              <file>./lib/Trello/Service.php</file>
+              <file>./lib/Trello/Manager.php</file>
+            </exclude>
         </whitelist>
     </filter>
+    
     <logging>
         <log type="coverage-html" target="build/coverage" title="PHP Trello API"
             charset="UTF-8" yui="true" highlight="true"

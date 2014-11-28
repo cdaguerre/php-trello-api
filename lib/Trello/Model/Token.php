@@ -2,13 +2,16 @@
 
 namespace Trello\Model;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Token extends AbstractObject implements TokenInterface
 {
     protected $apiName = 'token';
 
     protected $loadParams = array(
         'fields' => 'all',
-        'webhooks' => true
+        'webhooks' => true,
     );
 
     /**
