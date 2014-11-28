@@ -101,8 +101,8 @@ $service->handleWebhook();
 ```
 
 ## Documentation
-
-Yet to be written, but you can take a look at the `phpdoc` blocks and the official [API documentation](https://trello.com/docs/index.html).
+* [API](docs/Api/Index.md)
+* Official [API documentation](https://trello.com/docs/index.html).
 
 ## Contributing
 
