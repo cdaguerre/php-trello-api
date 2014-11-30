@@ -78,7 +78,6 @@ Take a look at the [Events](https://github.com/cdaguerre/php-trello-api/blob/mas
 use Trello\Client;
 use Trello\Service;
 use Trello\Events;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 $client = new Client();
 $client->authenticate('api_key', 'token', Client::AUTH_URL_CLIENT_ID);
