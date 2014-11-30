@@ -92,8 +92,8 @@ $service->addListener(Events::BOARD_UPDATE, function ($event) {
     // do something
 });
 
-// ...or add an EventSubscriber
-$service->addSubscriber(EventSubscriberInterface $subscriber);
+// ...or add an EventSubscriber (Symfony\Component\EventDispatcher\EventSubscriberInterface)
+$service->addSubscriber($subscriber);
 
 // Check if the current request was made by a Trello webhook
 // This will dispatch any Trello event to listeners defined above
