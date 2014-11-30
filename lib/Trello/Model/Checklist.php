@@ -2,6 +2,8 @@
 
 namespace Trello\Model;
 
+use Trello\Exception\InvalidArgumentException;
+
 /**
  * @codeCoverageIgnore
  */
@@ -11,7 +13,11 @@ class Checklist extends AbstractObject implements ChecklistInterface
 
     protected $loadParams = array(
         'fields' => 'all',
+        'checkItems' => 'all',
+        'checkItem_fields' => 'all',
     );
+
+    protected $itemsToBeRemoved = array();
 
     /**
      * {@inheritdoc}
@@ -128,24 +134,47 @@ class Checklist extends AbstractObject implements ChecklistInterface
     /**
      * {@inheritdoc}
      */
-    public function setItem($name, $checked = null, $position = null)
+    public function hasItem($nameOrId)
     {
-        foreach ($this->data['checkItems'] as $key => $item) {
-            if ($item['name'] === $name) {
-                $this->data['checkItems'][$key]['state'] = $checked ? 'complete' : 'incomplete';
-                if (isset($position)) {
-                    $this->data['checkItems'][$key]['position'] = $position;
-                }
-
-                return $this;
+        foreach ($this->getItems() as $item) {
+            if ($item['name'] === $nameOrId || (isset($item['id']) && $item['id'] === $nameOrId)) {
+                return true;
             }
         }
 
-        $this->data['checkItems'][] = array(
-            'name' => $name,
-            'state' => $checked ? 'complete' : 'incomplete',
-            'position' => $position,
-        );
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemKey($nameOrId)
+    {
+        foreach ($this->getItems() as $key => $item) {
+            if ($item['name'] === $nameOrId || (isset($item['id']) && $item['id'] === $nameOrId)) {
+                return $key;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf(
+            'Checklist "%s" does not have an item with name or id "%s"',
+            $this->getName(),
+            $nameOrId
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeItem($nameOrId)
+    {
+        $key = $this->getItemKey($nameOrId);
+
+        if (isset($this->data['checkItems'][$key]['id'])) {
+            $this->itemsToBeRemoved[] = $this->data['checkItems'][$key]['id'];
+        }
+
+        unset($this->data['checkItems'][$key]);
 
         return $this;
     }
@@ -153,11 +182,74 @@ class Checklist extends AbstractObject implements ChecklistInterface
     /**
      * {@inheritdoc}
      */
-    public function isItemChecked($name)
+    public function setItem($nameOrId, $checked = null, $position = null)
     {
+        if ($this->hasItem($nameOrId)) {
+            $key = $this->getItemKey($nameOrId);
+
+            $this->data['checkItems'][$key]['state'] = $checked;
+
+            if (isset($position)) {
+                $this->data['checkItems'][$key]['position'] = $position;
+            }
+        } else {
+            $this->data['checkItems'][] = array(
+                'name'     => $nameOrId,
+                'state'    => $checked,
+                'position' => $position,
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setItemChecked($nameOrId, $bool)
+    {
+        $key = $this->getItemKey($nameOrId);
+        $this->data['checkItems'][$key]['state'] = $bool;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isItemChecked($nameOrId)
+    {
+        $key = $this->getItemKey($nameOrId);
+
+        return $this->data['checkItems'][$key]['state'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function postRefresh()
+    {
+        foreach ($this->data['checkItems'] as $key => $item) {
+            $this->data['checkItems'][$key]['state'] = in_array($item['state'], array(true, 'complete', 'true'));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function preSave()
+    {
+        // var_dump($this->data['checkItems']);
+        // die;
+
+        foreach ($this->itemsToBeRemoved as $itemId) {
+            $this->api->items()->remove($this->id, $itemId);
+        }
         foreach ($this->data['checkItems'] as $item) {
-            if ($item['name'] === $name) {
-                return $item['state'] === 'complete';
+            if (isset($item['id'])) {
+                $this->api->items()->update($this->id, $item['id'], $item);
+            } else {
+                $this->api->items()->create($this->id, $item['name'], $item['state'], $item);
             }
         }
     }

@@ -77,6 +77,78 @@ class Checklists extends AbstractApi
      */
     public function itemStates($id, array $params = array())
     {
-        return $this->get('cards/'.rawurlencode($id).'/checkItemStates', $params);
+        return $this->get($this->getPath($id).'/checkItemStates', $params);
+    }
+
+    /**
+     * Update a given check item
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklistcurrent-checkitem-idcheckitem
+     *
+     * @param string $id          the card's id or short link
+     * @param string $checklistId the checklist's id
+     * @param string $checkItemId the check item's id
+     * @param array  $data        check item data
+     *
+     * @return array
+     */
+    public function updateItem($id, $checklistId, $checkItemId, array $data)
+    {
+        return $this->put(
+            $this->getPath($id).'/'.rawurlencode($checklistId).'/checkItem/'.rawurlencode($checkItemId),
+            $data
+        );
+    }
+
+    /**
+     * Create a check item
+     * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
+     *
+     * @param string $id          the card's id or short link
+     * @param string $checklistId the checklist's id
+     * @param string $name        check item name
+     * @param array  $data        check item data
+     *
+     * @return array
+     */
+    public function createItem($id, $checklistId, $name, array $data = array())
+    {
+        $data['idChecklist'] = $checklistId;
+        $data['name'] = $name;
+
+        return $this->post($this->getPath($id).'/'.rawurlencode($checklistId).'/checkItem', $data);
+    }
+
+    /**
+     * Convert a check item to card
+     * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
+     *
+     * @param string $id          the card's id or short link
+     * @param string $checklistId the checklist's id
+     * @param string $checkItemId the check item's id
+     *
+     * @return array
+     */
+    public function convertItemToCard($id, $checklistId, $checkItemId)
+    {
+        return $this->post(
+            $this->getPath($id).'/'.rawurlencode($checklistId).'/checkItem/'.rawurlencode($checkItemId).'/convertToCard'
+        );
+    }
+
+    /**
+     * Remove a check item from card
+     * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
+     *
+     * @param string $id          the card's id or short link
+     * @param string $checklistId the checklist's id
+     * @param string $checkItemId the check item's id
+     *
+     * @return array
+     */
+    public function removeItem($id, $checklistId, $checkItemId)
+    {
+        return $this->delete(
+            $this->getPath($id).'/'.rawurlencode($checklistId).'/checkItem/'.rawurlencode($checkItemId)
+        );
     }
 }

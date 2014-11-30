@@ -96,7 +96,7 @@ class Member extends AbstractObject implements MemberInterface
     /**
      * {@inheritdoc}
      */
-    public function setIdPremOrgsAdmin($idPremOrgsAdmin)
+    public function setIdPremOrgsAdmin(array $idPremOrgsAdmin)
     {
         $this->data['idPremOrgsAdmin'] = $idPremOrgsAdmin;
 
@@ -347,7 +347,7 @@ class Member extends AbstractObject implements MemberInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrganizationIds($organizationIds)
+    public function setOrganizationIds(array $organizationIds)
     {
         $this->data['idOrganizations'] = $organizationIds;
 
@@ -407,7 +407,7 @@ class Member extends AbstractObject implements MemberInterface
     /**
      * {@inheritdoc}
      */
-    public function setOneTimeMessagesDismissed($messages)
+    public function setOneTimeMessagesDismissed(array $messages)
     {
         $this->data['oneTimeMessagesDismissed'] = $messages;
 

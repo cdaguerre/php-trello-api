@@ -70,6 +70,10 @@ class Service extends Manager
      */
     public function isTrelloWebhook(Request $request)
     {
+        if (!$request->getMethod() === 'POST') {
+            return false;
+        }
+
         if (!$request->headers->has('X-Trello-Webhook')) {
             return false;
         }
@@ -153,6 +157,8 @@ class Service extends Manager
             case Events::CARD_UPDATE_CLOSED:
             case Events::CARD_DELETE:
             case Events::CARD_EMAIL:
+            case Events::CARD_ADD_LABEL:
+            case Events::CARD_REMOVE_LABEL:
                 $event = new Event\CardEvent();
                 $event->setCard($this->getCard($data['card']['id']));
                 break;
@@ -221,6 +227,8 @@ class Service extends Manager
                     serialize($data)
                 ));
         }
+
+        $event->setRequestData($data);
 
         $this->dispatcher->dispatch($eventName, $event);
     }

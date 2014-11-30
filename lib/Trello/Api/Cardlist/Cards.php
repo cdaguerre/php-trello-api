@@ -32,7 +32,7 @@ class Cards extends AbstractApi
      * Filter cards related to a given list
      * @link https://trello.com/docs/api/list/#get-1-lists-idlist-cards-filter
      *
-     * @param string $id    the list's id
+     * @param string $id     the list's id
      * @param array  $filter one of 'none', 'open', 'closed', 'all'
      *
      * @return array
@@ -90,11 +90,11 @@ class Cards extends AbstractApi
      */
     public function moveAll($id, $boardId, $destListId)
     {
-        $params = array(
+        $data = array(
             'idBoard' => $boardId,
-            'idList' => $destListId
+            'idList' => $destListId,
         );
 
-        return $this->post('lists/'.rawurlencode($id).'/moveAllCards');
+        return $this->post('lists/'.rawurlencode($id).'/moveAllCards', $data);
     }
 }

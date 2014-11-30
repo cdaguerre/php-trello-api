@@ -201,6 +201,18 @@ final class Events
     const CARD_REMOVE_MEMBER                  = 'removeMemberFromCard';
 
     /**
+     * When a new label is added to a card
+     * The event listener method receives a Trello\Event\CardEvent instance.
+     */
+    const CARD_ADD_LABEL                      = 'addLabelToCard';
+
+    /**
+     * When a new label is removed from a card
+     * The event listener method receives a Trello\Event\CardEvent instance.
+     */
+    const CARD_REMOVE_LABEL                   = 'removeLabelFromCard';
+
+    /**
      * When a comment is added to a card
      * The event listener method receives a Trello\Event\CardCommentEvent instance.
      */
@@ -260,7 +272,7 @@ final class Events
 
     /**
      * When a checklist is removed from a card
-     * The event listener method receives a Trello\Event\CardCheckItemEvent instance.
+     * The event listener method receives a Trello\Event\CardChecklistEvent instance.
      */
     const CARD_UPDATE_CHECKLIST_ITEM_STATE    = 'updateCheckItemStateOnCard';
 
@@ -395,7 +407,7 @@ final class Events
             self::MEMBER_JOINED,
             self::MEMBER_UPDATE,
             self::POWERUP_ENABLE,
-            self::POWERUP_DISABLE
+            self::POWERUP_DISABLE,
         );
     }
 }

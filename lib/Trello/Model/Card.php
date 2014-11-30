@@ -22,9 +22,11 @@ class Card extends AbstractObject implements CardInterface
         'membersVoted'    => true,
         'attachments'     => true,
         'checklists'      => 'all',
-        'checkItemStates' => 'all',
+        'checkItemStates' => true,
         'actions'         => Events::CARD_COMMENT,
     );
+
+    protected $newChecklists = array();
 
     /**
      * {@inheritdoc}
@@ -282,6 +284,24 @@ class Card extends AbstractObject implements CardInterface
         return new Cardlist($this->client, $this->getListId());
     }
 
+    public function moveToList($name)
+    {
+        foreach ($this->getBoard()->getLists() as $list) {
+            if ($list->getName() === $name) {
+                $this->setList($list);
+
+                return $this;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf(
+            'Card "%s" could not be moved to list "%s" as no list with that name exists on the board named "%s"',
+            $this->getName(),
+            $name,
+            $this->getBoard()->getName()
+        ));
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -325,24 +345,60 @@ class Card extends AbstractObject implements CardInterface
             $checklists[] = new Checklist($this->client, $id);
         }
 
+        $checklists = array_merge($checklists, $this->newChecklists);
+
         return $checklists;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasChecklist(ChecklistInterface $checklist)
+    public function getChecklist($name)
     {
-        return in_array($checklist->getId(), $this->data['idChecklists']);
+        foreach ($this->getChecklists() as $checklist) {
+            if ($checklist->getName() === $name) {
+                return $checklist;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf(
+            'There is no checklist named "%s"  on this card (%s).',
+            $name,
+            $this->getName()
+        ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addChecklist(ChecklistInterface $checklist)
+    public function hasChecklist($checklist)
+    {
+        if ($checklist instanceof ChecklistInterface) {
+            return in_array($checklist->getId(), $this->data['idChecklists']);
+        }
+
+        foreach ($this->getChecklists() as $existingList) {
+            if ($existingList->getName() === $checklist) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChecklist($checklist)
     {
         if (!$this->id) {
             throw new RuntimeException("You can't add checklists to a new card, you have to save it first.");
+        }
+
+        if (!$checklist instanceof ChecklistInterface) {
+            $name = $checklist;
+            $checklist = new Checklist($this->client);
+            $checklist->setName($name);
         }
 
         $checklist->setCard($this);
@@ -369,7 +425,7 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function removeChecklist(ChecklistInterface $checklist)
+    public function removeChecklist($checklist)
     {
         if (!$this->hasChecklist($checklist)) {
             throw new InvalidArgumentException(sprintf(
@@ -379,9 +435,14 @@ class Card extends AbstractObject implements CardInterface
             ));
         }
 
-        foreach ($this->data['idChecklists'] as $key => $checklistArray) {
-            if ($checklistArray['id'] === $checklist->getId()) {
+        if (!$checklist instanceof ChecklistInterface) {
+            $checklist = $this->getChecklist($checklist);
+        }
+
+        foreach ($this->data['idChecklists'] as $key => $checklistId) {
+            if ($checklistId === $checklist->getId()) {
                 unset($this->data['idChecklists'][$key]);
+                $checklist->remove();
             }
         }
 

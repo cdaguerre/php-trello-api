@@ -115,7 +115,7 @@ abstract class AbstractObject
     {
         try {
             $this->preRemove();
-            $this->remove();
+            $this->api->remove($this->id);
             $this->postRemove();
         } catch (BadMethodCallException $e) {
             throw new BadMethodCallException(sprintf(

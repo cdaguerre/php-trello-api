@@ -19,7 +19,7 @@ class Items extends AbstractApi
         'nameData',
         'type',
         'pos',
-        'state'
+        'state',
     );
 
     /**
@@ -43,16 +43,39 @@ class Items extends AbstractApi
      * @param string $id      Id of the checklist
      * @param string $name    Name of the item
      * @param bool   $checked Check status
-     * @param array  $params  optional attributes
+     * @param array  $data    optional attributes
      *
      * @return array
      */
-    public function create($id, $name, $checked = false, array $params = array())
+    public function create($id, $name, $checked = false, array $data = array())
     {
-        $params['checked'] = $checked;
-        $params['name'] = $name;
+        $data['checked'] = $checked;
+        $data['name'] = $name;
 
-        return $this->post($this->getPath($id), $params);
+        return $this->post($this->getPath($id), $data);
+    }
+
+    /**
+     * Update an item in the given checklist
+     *
+     * FIXME
+     * There is no put method on checklist items, so this is
+     * a dirty workaround which works by deleting the item
+     * and recreating it.
+     *
+     * @param string $id     Id of the checklist
+     * @param string $itemId the id of the item to update
+     * @param array  $data   check item data
+     *
+     * @return array
+     */
+    public function update($id, $itemId, array $data)
+    {
+        $this->remove($id, $itemId);
+
+        return $this->create($id, $data['name'], $data['state'], $data);
+
+        // return $this->put($this->getPath($id).'/'.rawurlencode($itemId), $data);
     }
 
     /**

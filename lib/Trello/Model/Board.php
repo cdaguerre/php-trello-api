@@ -2,6 +2,8 @@
 
 namespace Trello\Model;
 
+use Trello\Exception\InvalidArgumentException;
+
 /**
  * @codeCoverageIgnore
  */
@@ -133,6 +135,24 @@ class Board extends AbstractObject implements BoardInterface
         }
 
         return $lists;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getList($idOrName)
+    {
+        foreach ($this->getLists() as $list) {
+            if ($list->getName() === $idOrName || $list->getId() === $idOrName) {
+                return $list;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf(
+            'There is no list with name or id "%s" on this board ("%s")',
+            $idOrName,
+            $this->getName()
+        ));
     }
 
     /**

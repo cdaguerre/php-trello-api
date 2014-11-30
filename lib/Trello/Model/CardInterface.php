@@ -264,31 +264,42 @@ interface CardInterface extends ObjectInterface
     public function getChecklists();
 
     /**
-     * Has checklist
+     * Get checklist by name
      *
-     * @param ChecklistInterface $checklist
+     * @return ChecklistInterface
+     */
+    public function getChecklist($name);
+
+    /**
+     * Has checklist?
+     *
+     * @param ChecklistInterface|string $checklistOrName
      *
      * @return bool
      */
-    public function hasChecklist(ChecklistInterface $checklist);
+    public function hasChecklist($checklistOrName);
 
     /**
-     * Add checklist
+     * Add checklist to card
      *
-     * @param ChecklistInterface $checklist
+     * @param ChecklistInterface|string $checklistOrName
      *
      * @return CardInterface
      */
-    public function addChecklist(ChecklistInterface $checklist);
+    public function addChecklist($checklistOrName);
 
     /**
-     * Remove checklist
+     * Remove checklist from card
      *
-     * @param ChecklistInterface $checklist
+     * This will only remove the checklist from this card,
+     * without actually deleting it. Call ChecklistInterface::remove()
+     * to removed it completely.
+     *
+     * @param ChecklistInterface|string $checklistOrName
      *
      * @return CardInterface
      */
-    public function removeChecklist(ChecklistInterface $checklist);
+    public function removeChecklist($checklistOrName);
 
     /**
      * Set memberIds
@@ -522,5 +533,4 @@ interface CardInterface extends ObjectInterface
      * @return \DateTime
      */
     public function getDateOfLastActivity();
-
 }

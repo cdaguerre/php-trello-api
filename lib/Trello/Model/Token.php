@@ -41,7 +41,7 @@ class Token extends AbstractObject implements TokenInterface
     /**
      * {@inheritdoc}
      */
-    public function getDateCreated()
+    public function getDateOfCreation()
     {
         return new \DateTime($this->data['dateCreated']);
     }
@@ -49,7 +49,7 @@ class Token extends AbstractObject implements TokenInterface
     /**
      * {@inheritdoc}
      */
-    public function getDateExpires()
+    public function getDateOfExpiry()
     {
         return new \DateTime($this->data['dateExpires']);
     }
