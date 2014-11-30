@@ -101,7 +101,7 @@ $service->handleWebhook();
 ```
 
 ## Documentation
-* [API](docs/Api/Index.md)
+* Package [API](docs/Api/Index.md)
 * Official [API documentation](https://trello.com/docs/index.html).
 
 ## Contributing
