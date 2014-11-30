@@ -104,7 +104,7 @@ class Members extends AbstractApi
         $params = array(
             'email'    => $email,
             'fullName' => $fullName,
-            'type'     => $role
+            'type'     => $role,
         );
 
         return $this->put($this->getPath($id), $params);
@@ -114,12 +114,12 @@ class Members extends AbstractApi
      * Get members invited to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-membersinvited
      *
-     * @param string $id       the board's id
-     * @param array  $params   optional parameters
+     * @param string $id     the board's id
+     * @param array  $params optional parameters
      *
      * @return array
      */
-    public function invited($id, array $params = array())
+    public function getInvitedMembers($id, array $params = array())
     {
         return $this->get($this->getPath($id).'Invited', $params);
     }
@@ -133,7 +133,7 @@ class Members extends AbstractApi
      *
      * @return array
      */
-    public function getInvitedMemberField($id, $field)
+    public function getInvitedMembersField($id, $field)
     {
         if (!in_array($field, Member::$fields)) {
             throw new InvalidArgumentException(sprintf(
@@ -167,7 +167,7 @@ class Members extends AbstractApi
 
         $params = array(
             'idMember' => $memberOrOrganization,
-            'type' => $role
+            'type' => $role,
         );
 
         return $this->post($this->getPath($id).'/'.rawurlencode($memberOrOrganization), $params);

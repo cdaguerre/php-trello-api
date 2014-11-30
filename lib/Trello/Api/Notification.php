@@ -28,7 +28,7 @@ class Notification extends AbstractApi
         'type',
         'date',
         'data',
-        'idMemberCreator'
+        'idMemberCreator',
     );
 
     /**
@@ -49,14 +49,14 @@ class Notification extends AbstractApi
      * Update a notification
      * @link https://trello.com/docs/api/notification/#put-1-notifications-idnotification
      *
-     * @param string $id     the notification's id
-     * @param array  $params attributes to update
+     * @param string $id   the notification's id
+     * @param array  $data attributes to update
      *
      * @return arrays
      */
-    public function update($id, array $params = array())
+    public function update($id, array $data)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->put($this->getPath().'/'.rawurlencode($id), $data);
     }
 
     /**
@@ -70,7 +70,7 @@ class Notification extends AbstractApi
      */
     public function setUnread($id, $status)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id), array('value' => $status));
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/unread', array('value' => $status));
     }
 
     /**
@@ -88,8 +88,9 @@ class Notification extends AbstractApi
      * Get a given notification's entities
      * @link https://trello.com/docs/api/notification/#get-1-notifications-notification-id-entities
      *
-     * @param  string $id     the notification's id
-     * @param  array  $params optional parameters
+     * @param string $id     the notification's id
+     * @param array  $params optional parameters
+     *
      * @return array
      */
     public function getEntities($id, array $params = array())

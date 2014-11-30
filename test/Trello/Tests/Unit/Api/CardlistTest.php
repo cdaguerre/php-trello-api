@@ -33,7 +33,7 @@ class CardlistTest extends TestCase
     {
         $expectedArray = array(
             'name' => 'Test List',
-            'idBoard' => $this->fakeId('board')
+            'idBoard' => $this->fakeId('board'),
         );
 
         $api = $this->getApiMock();
@@ -52,7 +52,7 @@ class CardlistTest extends TestCase
     public function shouldNotCreateListWithoutName()
     {
         $data = array(
-            'idBoard' => $this->fakeId('board')
+            'idBoard' => $this->fakeId('board'),
         );
 
         $api = $this->getApiMock();
@@ -93,6 +93,22 @@ class CardlistTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeListId, $expectedArray));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSetBoard()
+    {
+        $lisId = $this->fakeId('list');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with($this->apiPath.'/'.$this->fakeId.'/idBoard')
+            ->will($this->returnValue(true));
+
+        $this->assertEquals(true, $api->setBoard($this->fakeId, $lisId));
     }
 
     /**

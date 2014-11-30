@@ -5,21 +5,21 @@ namespace Trello\Tests\Unit\Api;
 /**
  * @group unit
  */
-class NotificationTest extends TestCase
+class ActionTest extends TestCase
 {
-    protected $apiPath = 'notifications';
+    protected $apiPath = 'actions';
 
     /**
      * @test
      */
-    public function shouldShowNotification()
+    public function shouldShowAction()
     {
         $expectedArray = array('id' => $this->fakeId);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('notifications/'.$this->fakeId)
+            ->with($this->apiPath.'/'.$this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeId));
@@ -28,14 +28,14 @@ class NotificationTest extends TestCase
     /**
      * @test
      */
-    public function shouldUpdateNotification()
+    public function shouldUpdateAction()
     {
         $expectedArray = array('id' => $this->fakeId);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('notifications/'.$this->fakeId)
+            ->with($this->apiPath.'/'.$this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeId, $expectedArray));
@@ -44,49 +44,31 @@ class NotificationTest extends TestCase
     /**
      * @test
      */
-    public function shouldSetUnread()
+    public function shouldRemoveAction()
     {
-        $expectedArray = array('id' => $this->fakeId);
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with($this->apiPath.'/'.$this->fakeId)
+            ->will($this->returnValue($this->fakeId));
+
+        $this->assertEquals($this->fakeId, $api->remove($this->fakeId));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSetText()
+    {
+        $text = 'Lorem Ipsum';
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('notifications/'.$this->fakeId.'/unread')
-            ->will($this->returnValue($expectedArray));
+            ->with($this->apiPath.'/'.$this->fakeId.'/text')
+            ->will($this->returnValue($text));
 
-        $this->assertEquals($expectedArray, $api->setUnread($this->fakeId, true));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldSetAllRead()
-    {
-        $expectedArray = array();
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('post')
-            ->with('notifications/all/read')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->setAllRead());
-    }
-
-    /**
-     * @test
-     */
-    public function shouldGetEntities()
-    {
-        $expectedArray = array();
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('notifications/'.$this->fakeId.'/entities')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->getEntities($this->fakeId));
+        $this->assertEquals($text, $api->setText($this->fakeId, $text));
     }
 
     /**
@@ -337,6 +319,6 @@ class NotificationTest extends TestCase
 
     protected function getApiClass()
     {
-        return 'Trello\Api\Notification';
+        return 'Trello\Api\Action';
     }
 }

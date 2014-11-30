@@ -33,7 +33,7 @@ class ChecklistTest extends TestCase
     {
         $expectedArray = array(
             'name' => 'Test Checklist',
-            'idCard' => $this->fakeId('list')
+            'idCard' => $this->fakeId('list'),
         );
 
         $api = $this->getApiMock();
@@ -52,7 +52,7 @@ class ChecklistTest extends TestCase
     public function shouldNotCreateChecklistWithoutName()
     {
         $data = array(
-            'idCard' => $this->fakeId('list')
+            'idCard' => $this->fakeId('list'),
         );
 
         $api = $this->getApiMock();
@@ -69,7 +69,7 @@ class ChecklistTest extends TestCase
     public function shouldNotCreateChecklistWithoutCardId()
     {
         $data = array(
-            'name'   => 'Test Checklist'
+            'name'   => 'Test Checklist',
         );
 
         $api = $this->getApiMock();

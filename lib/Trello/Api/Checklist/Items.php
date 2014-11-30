@@ -71,6 +71,8 @@ class Items extends AbstractApi
      */
     public function update($id, $itemId, array $data)
     {
+        $this->validateParams(array('name', 'state'), $data);
+
         $this->remove($id, $itemId);
 
         return $this->create($id, $data['name'], $data['state'], $data);

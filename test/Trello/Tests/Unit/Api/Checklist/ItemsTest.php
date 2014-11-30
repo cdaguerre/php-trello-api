@@ -28,17 +28,20 @@ class ItemsTest extends TestCase
     /**
      * @test
      */
-    public function shouldCreateItem()
+    public function shouldUpdateItem()
     {
-        $name = 'Test Item';
+        $expectedArray = array('name' => 'Test item', 'state' => 'complete');
 
         $api = $this->getApiMock();
         $api->expects($this->once())
+            ->method('delete')
+            ->with($this->getPath().'/'.$this->fakeId);
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
-            ->will($this->returnValue($name));
+            ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($name, $api->create($this->fakeParentId, $name, true));
+        $this->assertEquals($expectedArray, $api->update($this->fakeParentId, $this->fakeId, $expectedArray));
     }
 
     /**
@@ -53,6 +56,22 @@ class ItemsTest extends TestCase
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->remove($this->fakeParentId, $this->fakeId));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCreateItem()
+    {
+        $name = 'Test Item';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with($this->getPath())
+            ->will($this->returnValue($name));
+
+        $this->assertEquals($name, $api->create($this->fakeParentId, $name, true));
     }
 
     protected function getApiClass()

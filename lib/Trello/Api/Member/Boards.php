@@ -6,6 +6,7 @@ use Trello\Api\AbstractApi;
 use Trello\Api\Board;
 use Trello\Api\Member\Board\Backgrounds;
 use Trello\Api\Member\Board\Stars;
+use Trello\Exception\InvalidArgumentException;
 
 /**
  * Trello Member Boards API

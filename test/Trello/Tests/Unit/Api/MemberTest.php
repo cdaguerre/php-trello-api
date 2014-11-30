@@ -29,6 +29,22 @@ class MemberTest extends TestCase
     /**
      * @test
      */
+    public function shouldUpdateMember()
+    {
+        $expectedArray = array('id' => $this->fakeMemberId);
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with($this->apiPath.'/'.$this->fakeMemberId)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->update($this->fakeMemberId, $expectedArray));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetDeltas()
     {
         $expectedArray = array('id' => $this->fakeMemberId);
