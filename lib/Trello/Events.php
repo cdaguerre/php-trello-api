@@ -393,6 +393,8 @@ final class Events
             self::CARD_ADD_ATTACHMENT,
             self::CARD_DELETE_ATTACHMENT,
             self::CARD_EMAIL,
+            self::CARD_ADD_LABEL,
+            self::CARD_REMOVE_LABEL,
             self::CARD_ADD_CHECKLIST,
             self::CARD_UPDATE_CHECKLIST,
             self::CARD_REMOVE_CHECKLIST,
