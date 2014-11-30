@@ -31,8 +31,6 @@ However, `php-trello-api` follows the PSR-0 naming conventions, which means you 
 ## Basic usage
 
 ```php
-<?php
-
 use Trello\Client;
 
 $client = new Client();
@@ -48,8 +46,6 @@ The `$client` object gives you access to the entire Trello API.
 This package includes a simple model layer above the API with a nice chainable API allowing following manipulation of Trello objects:
 
 ```php
-<?php
-
 use Trello\Client;
 use Trello\Manager;
 
@@ -73,8 +69,6 @@ The service uses the [Symfony EventDispatcher](https://github.com/symfony/EventD
 Take a look at the [Events](https://github.com/cdaguerre/php-trello-api/blob/master/lib/Trello/Events.php) class constants for names and associated event classes.
 
 ```php
-<?php
-
 use Trello\Client;
 use Trello\Service;
 use Trello\Events;
