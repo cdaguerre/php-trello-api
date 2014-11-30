@@ -24,8 +24,9 @@ class Members extends AbstractApi
      * Get a given board's members
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-members
      *
-     * @param  string $id     the board's id
-     * @param  array  $params optional parameters
+     * @param string $id     the board's id
+     * @param array  $params optional parameters
+     *
      * @return array
      */
     public function all($id, array $params = array())

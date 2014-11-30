@@ -27,16 +27,17 @@ class Checklist extends AbstractApi
         'name',
         'idBoard',
         'idCard',
-        'pos'
+        'pos',
     );
 
     /**
      * Find a list by id
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist
      *
-     * @param  string $id     the checklist's id
-     * @param  array  $params optional attributes
-     * @return array  list info
+     * @param string $id     the checklist's id
+     * @param array  $params optional attributes
+     *
+     * @return array list info
      */
     public function show($id, array $params = array())
     {

@@ -22,8 +22,9 @@ class Cardlists extends AbstractApi
      * Get a given board's lists
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-lists
      *
-     * @param  string $id     the board's id
-     * @param  array  $params optional parameters
+     * @param string $id     the board's id
+     * @param array  $params optional parameters
+     *
      * @return array
      */
     public function all($id, array $params = array())

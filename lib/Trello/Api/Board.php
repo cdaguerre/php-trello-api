@@ -50,16 +50,17 @@ class Board extends AbstractApi
         'powerUps',
         'dateLastActivity',
         'dateLastView',
-        'shortUrl'
+        'shortUrl',
     );
 
     /**
      * Find a board by id
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id
      *
-     * @param  string $id     the board's id
-     * @param  array  $params optional attributes
-     * @return array  board info
+     * @param string $id     the board's id
+     * @param array  $params optional attributes
+     *
+     * @return array board info
      */
     public function show($id, array $params = array())
     {
@@ -169,8 +170,9 @@ class Board extends AbstractApi
      * Get a given board's organization
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-organization
      *
-     * @param  string $id     the board's id
-     * @param  array  $params optional parameters
+     * @param string $id     the board's id
+     * @param array  $params optional parameters
+     *
      * @return array
      */
     public function getOrganization($id, array $params = array())
@@ -182,8 +184,9 @@ class Board extends AbstractApi
      * Get the field of the organization of a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-organization-field
      *
-     * @param  string $id    the board's id
-     * @param  string $field the organization's field name
+     * @param string $id    the board's id
+     * @param string $field the organization's field name
+     *
      * @return array
      */
     public function getOrganizationField($id, $field)
@@ -202,8 +205,9 @@ class Board extends AbstractApi
      * Get a given board's stars
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-boardstars
      *
-     * @param  string $id     the board's id
-     * @param  array  $params optional parameters
+     * @param string $id     the board's id
+     * @param array  $params optional parameters
+     *
      * @return array
      */
     public function getStars($id, array $params = array())
@@ -215,8 +219,9 @@ class Board extends AbstractApi
      * Get a given board's deltas
      * @link https://trello.com/docs/api/board/index.html#get-1-boards-board-id-deltas
      *
-     * @param  string $id     the board's id
-     * @param  array  $params optional parameters
+     * @param string $id     the board's id
+     * @param array  $params optional parameters
+     *
      * @return array
      */
     public function getDeltas($id, array $params = array())
