@@ -104,5 +104,5 @@ Feel free to make any comments, file issues or make pull requests.
 
 ## Credits
 
-- Largely inspired by the excellent [php-trello-api](https://raw.githubusercontent.com/KnpLabs/php-github-api) developed by the guys at [KnpLabs](http://knplabs.fr)
+- Largely inspired by the excellent [php-github-api](https://raw.githubusercontent.com/KnpLabs/php-github-api) developed by the guys at [KnpLabs](http://knplabs.fr)
 - Thanks to Trello for the API and documentation.
