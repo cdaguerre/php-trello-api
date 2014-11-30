@@ -77,7 +77,7 @@ class Checklists extends AbstractApi
      */
     public function itemStates($id, array $params = array())
     {
-        return $this->get($this->getPath($id).'/checkItemStates', $params);
+        return $this->get('cards/'.rawurlencode($id).'/checkItemStates', $params);
     }
 
     /**
