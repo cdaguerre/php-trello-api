@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Php Trello API by cdaguerre</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Php Trello API</h1>
+        <p>A simple Object Oriented wrapper for the Trello API, written in PHP5.</p>
+
+        <p class="view"><a href="https://github.com/cdaguerre/php-trello-api">View the Project on GitHub <small>cdaguerre/php-trello-api</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/cdaguerre/php-trello-api/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/cdaguerre/php-trello-api/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/cdaguerre/php-trello-api">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h4>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h4>
+
+<ul>
+<li>Follows PSR-0 conventions and coding standards: autoload friendly</li>
+<li>Light and fast thanks to lazy loading of API classes</li>
+<li>Extensively tested</li>
+<li>Uses <a href="https://trello.com/docs/index.html">Trello API v1</a>. The object API is very similar to the RESTful API.</li>
+</ul>
+
+<h4>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<p>The recommended way is using <a href="http://getcomposer.org">composer</a>:</p>
+
+<div class="highlight highlight-bash"><pre>$ composer require cdaguerre/php-trello-api:@dev</pre></div>
+
+<p>However, <code>php-trello-api</code> follows the PSR-0 naming conventions, which means you can easily integrate <code>php-trello-api</code> class loading in your own autoloader.</p>
+
+<hr>
+
+<h4>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage</h4>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Trello\Client</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$client</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">Client</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$client</span><span class="pl-k">-&gt;</span>authenticate(<span class="pl-s1"><span class="pl-pds">'</span>api_key<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>token<span class="pl-pds">'</span></span>, <span class="pl-s3">Client</span><span class="pl-k">::</span><span class="pl-c1">AUTH_URL_CLIENT_ID</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$boards</span> <span class="pl-k">=</span> <span class="pl-vo">$client</span><span class="pl-k">-&gt;</span>api(<span class="pl-s1"><span class="pl-pds">'</span>member<span class="pl-pds">'</span></span>)<span class="pl-k">-&gt;</span>boards()<span class="pl-k">-&gt;</span>all();</span></pre></div>
+
+<p>The <code>$client</code> object gives you access to the entire Trello API.</p>
+
+<hr>
+
+<h4>
+<a id="advanced-usage-with-the-trello-manager" class="anchor" href="#advanced-usage-with-the-trello-manager" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced usage with the Trello manager</h4>
+
+<p>This package includes a simple model layer above the API with a nice chainable API allowing following manipulation of Trello objects:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Trello\Client</span>;</span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Trello\Manager</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$client</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">Client</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$client</span><span class="pl-k">-&gt;</span>authenticate(<span class="pl-s1"><span class="pl-pds">'</span>api_key<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>token<span class="pl-pds">'</span></span>, <span class="pl-s3">Client</span><span class="pl-k">::</span><span class="pl-c1">AUTH_URL_CLIENT_ID</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$manager</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">Manager</span>(<span class="pl-vo">$client</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$card</span> <span class="pl-k">=</span> <span class="pl-vo">$manager</span><span class="pl-k">-&gt;</span>getCard(<span class="pl-s1"><span class="pl-pds">'</span>547440ad3f8b882bc11f0497<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$card</span></span>
+<span class="pl-s2">    <span class="pl-k">-&gt;</span>setName(<span class="pl-s1"><span class="pl-pds">'</span>Test card<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s2">    <span class="pl-k">-&gt;</span>setDescription(<span class="pl-s1"><span class="pl-pds">'</span>Test description<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s2">    <span class="pl-k">-&gt;</span>save();</span></pre></div>
+
+<hr>
+
+<h4>
+<a id="dispatching-trello-events-to-your-app" class="anchor" href="#dispatching-trello-events-to-your-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dispatching Trello events to your app</h4>
+
+<p>The service uses the <a href="https://github.com/symfony/EventDispatcher">Symfony EventDispatcher</a> component to dispatch events occuring on incoming webhooks.</p>
+
+<p>Take a look at the <a href="https://github.com/cdaguerre/php-trello-api/blob/master/lib/Trello/Events.php">Events</a> class constants for names and associated event classes.</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Trello\Client</span>;</span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Trello\Service</span>;</span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Trello\Events</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$client</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">Client</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$client</span><span class="pl-k">-&gt;</span>authenticate(<span class="pl-s1"><span class="pl-pds">'</span>api_key<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>token<span class="pl-pds">'</span></span>, <span class="pl-s3">Client</span><span class="pl-k">::</span><span class="pl-c1">AUTH_URL_CLIENT_ID</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-vo">$service</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">Service</span>(<span class="pl-vo">$client</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-c">// Bind a callable to a given event...</span></span>
+<span class="pl-s2"><span class="pl-vo">$service</span><span class="pl-k">-&gt;</span>addListener(<span class="pl-s3">Events</span><span class="pl-k">::</span><span class="pl-c1">BOARD_UPDATE</span>, <span class="pl-st">function</span> (<span class="pl-vo">$event</span>) {</span>
+<span class="pl-s2">    <span class="pl-vo">$board</span> <span class="pl-k">=</span> <span class="pl-vo">$event</span><span class="pl-k">-&gt;</span>getBoard();</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">// do something</span></span>
+<span class="pl-s2">});</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-c">// Check if the current request was made by a Trello webhook</span></span>
+<span class="pl-s2"><span class="pl-c">// This will dispatch any Trello event to listeners defined above</span></span>
+<span class="pl-s2"><span class="pl-vo">$service</span><span class="pl-k">-&gt;</span>handleWebhook();</span></pre></div>
+
+<hr>
+
+<h4>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h4>
+
+<ul>
+<li>Package <a href="docs/Api/Index.md">API</a>
+</li>
+<li>Official <a href="https://trello.com/docs/index.html">API documentation</a>.</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/cdaguerre">cdaguerre</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
