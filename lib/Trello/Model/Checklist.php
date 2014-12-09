@@ -22,12 +22,12 @@ class Checklist extends AbstractObject implements ChecklistInterface
 
     public function __construct(Client $client, $id = null)
     {
-        parent::__construct($client, $id);
-
         $this->data = array(
             'name' => null,
             'checkItems' => array(),
         );
+
+        parent::__construct($client, $id);
     }
 
     /**
