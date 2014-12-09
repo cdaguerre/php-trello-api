@@ -25,7 +25,7 @@ class Service extends Manager
     {
         parent::__construct($client);
 
-        $this->dispatcher = $dispatcher ?: new EventDispatcher();
+        $this->dispatcher = $dispatcher ? $dispatcher : new EventDispatcher();
     }
 
     /**

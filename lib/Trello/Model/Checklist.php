@@ -3,6 +3,7 @@
 namespace Trello\Model;
 
 use Trello\Exception\InvalidArgumentException;
+use Trello\Client;
 
 /**
  * @codeCoverageIgnore
@@ -18,6 +19,16 @@ class Checklist extends AbstractObject implements ChecklistInterface
     );
 
     protected $itemsToBeRemoved = array();
+
+    public function __construct(Client $client, $id = null)
+    {
+        parent::__construct($client, $id);
+
+        $this->data = array(
+            'name' => null,
+            'checkItems' => array(),
+        );
+    }
 
     /**
      * {@inheritdoc}
@@ -239,13 +250,16 @@ class Checklist extends AbstractObject implements ChecklistInterface
      */
     protected function preSave()
     {
-        // var_dump($this->data['checkItems']);
-        // die;
+        $items = $this->data['checkItems'];
+
+        if (!$this->id) {
+            $this->create();
+        }
 
         foreach ($this->itemsToBeRemoved as $itemId) {
             $this->api->items()->remove($this->id, $itemId);
         }
-        foreach ($this->data['checkItems'] as $item) {
+        foreach ($items as $item) {
             if (isset($item['id'])) {
                 $this->api->items()->update($this->id, $item['id'], $item);
             } else {
