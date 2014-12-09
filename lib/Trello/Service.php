@@ -193,7 +193,7 @@ class Service extends Manager
             case Events::CARD_REMOVE_CHECKLIST:
             case Events::CARD_UPDATE_CHECKLIST_ITEM_STATE:
                 $event = new Event\CardChecklistEvent();
-                $cardId = isset($data['card']['id']) ? $data['card']['id'] : $data['checklist']['idCard'];
+                $cardId = isset($data['card']['id']) ? $data['card']['id'] : $data['cardTarget']['_id'];
                 $event->setCard($this->getCard($cardId));
                 $event->setChecklist($this->getChecklist($data['checklist']['id']));
                 break;
