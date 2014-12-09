@@ -189,6 +189,7 @@ class Service extends Manager
                 $event->setAttachment($data['attachment']);
                 break;
             case Events::CARD_ADD_CHECKLIST:
+            case Events::CARD_CREATE_CHECKLIST:
             case Events::CARD_UPDATE_CHECKLIST:
             case Events::CARD_REMOVE_CHECKLIST:
             case Events::CARD_UPDATE_CHECKLIST_ITEM_STATE:

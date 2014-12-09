@@ -262,6 +262,12 @@ final class Events
      * When a checklist is updated on a card
      * The event listener method receives a Trello\Event\CardChecklistEvent instance.
      */
+    const CARD_CREATE_CHECKLIST               = 'createChecklist';
+
+    /**
+     * When a checklist is updated on a card
+     * The event listener method receives a Trello\Event\CardChecklistEvent instance.
+     */
     const CARD_UPDATE_CHECKLIST               = 'updateChecklist';
 
     /**
