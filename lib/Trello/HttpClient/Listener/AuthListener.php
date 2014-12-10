@@ -30,7 +30,7 @@ class AuthListener
             case Client::AUTH_HTTP_PASSWORD:
                 $event['request']->setHeader(
                     'Authorization',
-                    sprintf('Basic %s', base64_encode($this->tokenOrLogin . ':' . $this->password))
+                    sprintf('Basic %s', base64_encode($this->tokenOrLogin.':'.$this->password))
                 );
                 break;
 
@@ -58,7 +58,11 @@ class AuthListener
             case Client::AUTH_URL_TOKEN:
                 $url = $event['request']->getUrl();
                 $url .= (false === strpos($url, '?') ? '?' : '&');
-                $url .= utf8_encode(http_build_query(array('access_token' => $this->tokenOrLogin), '', '&'));
+                $url .= utf8_encode(http_build_query(
+                    array('token' => $this->tokenOrLogin, 'key' => $this->password),
+                    '',
+                    '&'
+                ));
 
                 $event['request']->setUrl($url);
                 break;
