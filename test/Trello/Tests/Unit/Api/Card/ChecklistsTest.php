@@ -19,7 +19,7 @@ class ChecklistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath())
+            ->with('cards/'.$this->fakeParentId.'/checklists')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->all($this->fakeParentId));
