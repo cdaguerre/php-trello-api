@@ -27,6 +27,8 @@ class Card extends AbstractObject implements CardInterface
     );
 
     protected $newChecklists = array();
+    protected $newComments = array();
+    protected $commentsToBeRemoved = array();
 
     /**
      * {@inheritdoc}
@@ -778,22 +780,29 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function getActions($params = array()) {
+    public function getActions($params = array())
+    {
         return $this->api->actions()->all($this->id, $params);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function addComment($text) {
-        return $this->api->actions()->addComment($this->id, $text);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeComment($commentId) {
-        return $this->api->actions()->removeComment($this->id, $commentId);
+    public function addComment($text)
+    {
+        $this->newComments[] = $text;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeComment($commentId)
+    {
+        $this->commentsToBeRemoved[] = $commentId;
+
+        return $this;
     }
 
     /**
@@ -804,6 +813,22 @@ class Card extends AbstractObject implements CardInterface
         foreach ($this->newChecklists as $checklist) {
             $checklist->save();
             $this->addChecklist($checklist);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function postSave()
+    {
+        foreach ($this->newComments as $key => $text) {
+            $this->api->actions()->addComment($this->id, $text);
+            unset($this->newComments[$key]);
+        }
+
+        foreach ($this->commentsToBeRemoved as $key => $commentId) {
+            $this->api->actions()->removeComment($this->id, $commentId);
+            unset($this->commentsToBeRemoved[$key]);
         }
     }
 }
