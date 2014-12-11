@@ -533,4 +533,29 @@ interface CardInterface extends ObjectInterface
      * @return \DateTime
      */
     public function getDateOfLastActivity();
+
+    /**
+     * Get actions
+     *
+     * @return array
+     */
+    public function getActions();
+
+    /**
+     * Add comment
+     *
+     * @param string $text comment text
+     *
+     * @return CardInterface
+     */
+    public function addComment($text);
+
+    /**
+     * Remove comment
+     *
+     * @param string $commentId id of the comment to remove
+     *
+     * @return CardInterface
+     */
+    public function removeComment($commentId);
 }
