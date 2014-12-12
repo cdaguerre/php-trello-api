@@ -59,10 +59,8 @@ abstract class AbstractApi implements ApiInterface
     {
         if (isset($this->fields) && substr($method, 0, 3) === 'get') {
             $property = lcfirst(substr($method, 3));
-            if (in_array($property, $this->fields)) {
-                $field = reset($arguments);
-
-                return $this->getField($field);
+            if (in_array($property, $this->fields) && count($arguments) === 2) {
+                return $this->getField($arguments[0], $arguments[1]);
             }
         }
 
@@ -298,8 +296,8 @@ abstract class AbstractApi implements ApiInterface
      * Validate allowed parameters array
      * Checks whether the passed parameters are allowed
      *
-     * @param array $allowed allowed properties
-     * @param array $params  array to check
+     * @param array        $allowed allowed properties
+     * @param array|string $params  array to check
      *
      * @return array array of validated parameters
      *
