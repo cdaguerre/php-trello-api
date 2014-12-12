@@ -2,7 +2,7 @@
 
 namespace Trello\Model;
 
-use Trello\Client;
+use Trello\ClientInterface;
 use Trello\Api\ApiInterface;
 use Trello\Exception\BadMethodCallException;
 
@@ -12,7 +12,7 @@ use Trello\Exception\BadMethodCallException;
 abstract class AbstractObject
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     protected $client;
 
@@ -52,10 +52,10 @@ abstract class AbstractObject
     /**
      * Constructor.
      *
-     * @param Client $client the Trello client
-     * @param string $id     the id of the object
+     * @param ClientInterface $client the Trello client
+     * @param string          $id     the id of the object
      */
-    public function __construct(Client $client, $id = null)
+    public function __construct(ClientInterface $client, $id = null)
     {
         $this->client = $client;
         $this->api    = $client->api($this->apiName);
