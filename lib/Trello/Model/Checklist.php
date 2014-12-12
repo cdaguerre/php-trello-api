@@ -3,7 +3,7 @@
 namespace Trello\Model;
 
 use Trello\Exception\InvalidArgumentException;
-use Trello\Client;
+use Trello\ClientInterface;
 
 /**
  * @codeCoverageIgnore
@@ -20,7 +20,7 @@ class Checklist extends AbstractObject implements ChecklistInterface
 
     protected $itemsToBeRemoved = array();
 
-    public function __construct(Client $client, $id = null)
+    public function __construct(ClientInterface $client, $id = null)
     {
         $this->data = array(
             'name' => null,
