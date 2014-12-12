@@ -80,7 +80,7 @@ interface ChecklistInterface extends ObjectInterface
     /**
      * Get card
      *
-     * @return ChecklistInterface
+     * @return CardInterface
      */
     public function getCard();
 

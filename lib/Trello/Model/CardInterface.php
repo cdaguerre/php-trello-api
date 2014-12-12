@@ -347,7 +347,7 @@ interface CardInterface extends ObjectInterface
     /**
      * Set members
      *
-     * @param string $members
+     * @param array|MemberInterface[] $members
      *
      * @return CardInterface
      */
@@ -356,7 +356,7 @@ interface CardInterface extends ObjectInterface
     /**
      * Get members
      *
-     * @return string
+     * @return array|MemberInterface[]
      */
     public function getMembers();
 

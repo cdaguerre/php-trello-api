@@ -166,7 +166,7 @@ class Organization extends AbstractObject implements OrganizationInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrefs(array $prefs)
+    public function setPreferences(array $prefs)
     {
         $this->data['prefs'] = $prefs;
 
@@ -176,7 +176,7 @@ class Organization extends AbstractObject implements OrganizationInterface
     /**
      * {@inheritdoc}
      */
-    public function getPrefs()
+    public function getPreferences()
     {
         return $this->data['prefs'];
     }
