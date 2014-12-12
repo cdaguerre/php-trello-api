@@ -44,7 +44,7 @@ class Cardlists extends AbstractApi
     public function filter($id, $filter = 'all')
     {
         $allowed = array('all', 'none', 'open', 'closed');
-        $filter = $this->validateFilters($allowed, $filter);
+        $filter = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
         return $this->get($this->getPath($id).'/'.implode(',', $filter));
     }
@@ -59,7 +59,7 @@ class Cardlists extends AbstractApi
      */
     public function create($id, array $params = array())
     {
-        $this->validateParams(array('name'), $params);
+        $this->validateRequiredParameters(array('name'), $params);
 
         return $this->post($this->getPath($id), $params);
     }

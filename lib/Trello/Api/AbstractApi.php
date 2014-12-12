@@ -31,6 +31,11 @@ abstract class AbstractApi implements ApiInterface
     protected $client;
 
     /**
+     * @var array
+     */
+    public static $fields;
+
+    /**
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -55,7 +60,9 @@ abstract class AbstractApi implements ApiInterface
         if (isset($this->fields) && substr($method, 0, 3) === 'get') {
             $property = lcfirst(substr($method, 3));
             if (in_array($property, $this->fields)) {
-                return $this->getField(reset($arguments));
+                $field = reset($arguments);
+
+                return $this->getField($field);
             }
         }
 
@@ -261,6 +268,15 @@ abstract class AbstractApi implements ApiInterface
         return $parameters;
     }
 
+    protected function getPath($id = null)
+    {
+        if ($id) {
+            return preg_replace('/\#id\#/', $id, $this->path);
+        }
+
+        return $this->path;
+    }
+
     /**
      * Validate parameters array
      *
@@ -269,7 +285,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @throws MissingArgumentException if a required parameter is missing
      */
-    protected function validateParams(array $required, array $params)
+    protected function validateRequiredParameters(array $required, array $params)
     {
         foreach ($required as $param) {
             if (!isset($params[$param])) {
@@ -278,68 +294,59 @@ abstract class AbstractApi implements ApiInterface
         }
     }
 
-    protected function validateFilters(array $allowed, $filters)
+    /**
+     * Validate allowed parameters array
+     * Checks whether the passed parameters are allowed
+     *
+     * @param array $allowed allowed properties
+     * @param array $params  array to check
+     *
+     * @return array array of validated parameters
+     *
+     * @throws InvalidArgumentException if a parameter is not allowed
+     */
+    protected function validateAllowedParameters(array $allowed, $params, $paramName)
     {
-        if (!is_array($filters)) {
-            $filters = array($filters);
+        if (!is_array($params)) {
+            $params = array($params);
         }
 
-        foreach ($filters as $filter) {
-            if (!in_array($filter, $allowed)) {
+        foreach ($params as $param) {
+            if (!in_array($param, $allowed)) {
                 throw new InvalidArgumentException(sprintf(
-                    'The "filter" parameter may contain only values within "%s". "%s" given.',
+                    'The "%s" parameter may contain only values within "%s". "%s" given.',
+                    $paramName,
                     implode(", ", $allowed),
-                    $filter
+                    $param
                 ));
             }
         }
 
-        return $filters;
+        return $params;
     }
 
-    protected function validateFields(array $allowed, $fields)
-    {
-        if (!is_array($fields)) {
-            $fields = array($fields);
-        }
-
-        foreach ($fields as $field) {
-            if (!in_array($field, $allowed)) {
-                throw new InvalidArgumentException(sprintf(
-                    'The "field" parameter may contain only values within "%s". "%s" given.',
-                    implode(", ", $allowed),
-                    $field
-                ));
-            }
-        }
-
-        return $fields;
-    }
-
+    /**
+     * Validate that the params array includes at least one of
+     * the keys in a given array
+     *
+     * @param array $atLeastOneOf allowed properties
+     * @param array $params       array to check
+     *
+     * @return true
+     *
+     * @throws MissingArgumentException
+     */
     protected function validateAtLeastOneOf(array $atLeastOneOf, array $params)
     {
         foreach ($atLeastOneOf as $param) {
             if (isset($params[$param])) {
-                $foundOne = true;
+                return true;
             }
         }
 
-        if (!isset($foundOne)) {
-            throw new MissingArgumentException(sprintf(
-                'You need to provide at least one of the following parameters "%s".',
-                implode('", "', $atLeastOneOf)
-            ));
-        }
-
-        return true;
-    }
-
-    protected function getPath($id = null)
-    {
-        if ($id) {
-            return preg_replace('/\#id\#/', $id, $this->path);
-        }
-
-        return $this->path;
+        throw new MissingArgumentException(sprintf(
+            'You need to provide at least one of the following parameters "%s".',
+            implode('", "', $atLeastOneOf)
+        ));
     }
 }

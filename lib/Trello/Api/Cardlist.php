@@ -28,7 +28,7 @@ class Cardlist extends AbstractApi
         'closed',
         'idBoard',
         'pos',
-        'subscribed'
+        'subscribed',
     );
 
     /**
@@ -56,7 +56,7 @@ class Cardlist extends AbstractApi
      */
     public function create(array $params = array())
     {
-        $this->validateParams(array('name', 'idBoard'), $params);
+        $this->validateRequiredParameters(array('name', 'idBoard'), $params);
 
         return $this->post($this->getPath(), $params);
     }

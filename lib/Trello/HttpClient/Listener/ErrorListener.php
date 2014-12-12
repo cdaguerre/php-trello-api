@@ -56,7 +56,7 @@ class ErrorListener
             if (is_array($content) && isset($content['message'])) {
                 if (400 == $response->getStatusCode()) {
                     throw new ErrorException($content['message'], 400);
-                } elseif (401 == $reposne->getStatusCode()) {
+                } elseif (401 == $response->getStatusCode()) {
                     throw new PermissionDeniedException($content['message'], 401);
                 } elseif (422 == $response->getStatusCode() && isset($content['errors'])) {
                     $errors = array();
@@ -85,7 +85,7 @@ class ErrorListener
                         }
                     }
 
-                    throw new ValidationFailedException('Validation Failed: ' . implode(', ', $errors), 422);
+                    throw new ValidationFailedException('Validation Failed: '.implode(', ', $errors), 422);
                 }
             }
 

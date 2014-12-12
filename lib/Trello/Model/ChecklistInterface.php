@@ -9,7 +9,7 @@ interface ChecklistInterface extends ObjectInterface
      *
      * @param string $name
      *
-     * @return CardInterface
+     * @return ChecklistInterface
      */
     public function setName($name);
 
@@ -25,7 +25,7 @@ interface ChecklistInterface extends ObjectInterface
      *
      * @param string $boardId
      *
-     * @return CardInterface
+     * @return ChecklistInterface
      */
     public function setBoardId($boardId);
 
@@ -41,7 +41,7 @@ interface ChecklistInterface extends ObjectInterface
      *
      * @param BoardInterface $board
      *
-     * @return CardInterface
+     * @return ChecklistInterface
      */
     public function setBoard(BoardInterface $board);
 
@@ -80,7 +80,7 @@ interface ChecklistInterface extends ObjectInterface
     /**
      * Get card
      *
-     * @return CardInterface
+     * @return ChecklistInterface
      */
     public function getCard();
 
@@ -89,7 +89,7 @@ interface ChecklistInterface extends ObjectInterface
      *
      * @param string $pos
      *
-     * @return CardInterface
+     * @return ChecklistInterface
      */
     public function setPosition($pos);
 
@@ -118,7 +118,7 @@ interface ChecklistInterface extends ObjectInterface
      * @param bool    $checked  whether it should be marked as completed or not
      * @param integer $position position on the list
      *
-     * @return CardInterface
+     * @return ChecklistInterface
      */
     public function setItem($name, $checked = null, $position = null);
 

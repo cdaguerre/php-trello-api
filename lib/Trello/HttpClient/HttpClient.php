@@ -2,7 +2,6 @@
 
 namespace Trello\HttpClient;
 
-use Trello\Exception\TwoFactorAuthenticationRequiredException;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\Request;
@@ -24,8 +23,13 @@ class HttpClient implements HttpClientInterface
         'base_url'    => 'https://api.trello.com/',
         'user_agent'  => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
         'timeout'     => 10,
-        'api_version' => 1
+        'api_version' => 1,
     );
+
+    /**
+     * @var ClientInterface
+     */
+    protected $client;
 
     protected $headers = array();
 
@@ -146,8 +150,6 @@ class HttpClient implements HttpClientInterface
             $response = $this->client->send($request);
         } catch (\LogicException $e) {
             throw new ErrorException($e->getMessage(), $e->getCode(), $e);
-        } catch (TwoFactorAuthenticationRequiredException $e) {
-            throw $e;
         } catch (\RuntimeException $e) {
             throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
@@ -164,7 +166,7 @@ class HttpClient implements HttpClientInterface
     public function authenticate($tokenOrLogin, $password = null, $method)
     {
         $this->addListener('request.before_send', array(
-            new AuthListener($tokenOrLogin, $password, $method), 'onRequestBeforeSend'
+            new AuthListener($tokenOrLogin, $password, $method), 'onRequestBeforeSend',
         ));
     }
 
@@ -186,7 +188,7 @@ class HttpClient implements HttpClientInterface
 
     protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
-        $path = $this->options['api_version'] . '/' . $path;
+        $path = $this->options['api_version'].'/'.$path;
 
         if ($httpMethod === 'GET' && $body) {
             $path .= (false === strpos($path, '?') ? '?' : '&');

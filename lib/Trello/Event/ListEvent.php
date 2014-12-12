@@ -9,16 +9,16 @@ class ListEvent extends AbstractEvent
     /**
      * @var CardlistInterface
      */
-    protected $cardlist;
+    protected $list;
 
     /**
      * Set cardlist
      *
-     * @param CardlistInterface $cardlist
+     * @param CardlistInterface $list
      */
-    public function setCardlist(CardlistInterface $cardlist)
+    public function setList(CardlistInterface $list)
     {
-        $this->cardlist = $cardlist;
+        $this->list = $list;
     }
 
     /**
@@ -26,8 +26,8 @@ class ListEvent extends AbstractEvent
      *
      * @return CardlistInterface
      */
-    public function getCardlist()
+    public function getList()
     {
-        return $this->cardlist;
+        return $this->list;
     }
 }

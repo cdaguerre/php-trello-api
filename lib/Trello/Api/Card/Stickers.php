@@ -48,10 +48,8 @@ class Stickers extends AbstractApi
      */
     public function show($id, $stickerId, $fields = 'all')
     {
-        $params['idSticker'] = $stickerId;
-
         $allowed = array('all', 'image', 'imageScaled', 'imageUrl', 'left', 'rotate', 'top', 'zIndex');
-        $fields = $this->validateFields($allowed, $fields);
+        $fields = $this->validateAllowedParameters($allowed, $fields, 'field');
 
         return $this->get($this->getPath($id).'/'.rawurlencode($stickerId), $fields);
     }
@@ -94,7 +92,7 @@ class Stickers extends AbstractApi
     public function create($id, array $params)
     {
         $required = array('image', 'left', 'top', 'zIndex');
-        $this->validateParams($required, $params);
+        $this->validateRequiredParameters($required, $params);
 
         return $this->post($this->getPath($id), $params);
     }

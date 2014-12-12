@@ -54,7 +54,7 @@ class Checklist extends AbstractApi
      */
     public function create(array $params = array())
     {
-        $this->validateParams(array('name', 'idCard'), $params);
+        $this->validateRequiredParameters(array('name', 'idCard'), $params);
 
         return $this->post($this->getPath(), $params);
     }

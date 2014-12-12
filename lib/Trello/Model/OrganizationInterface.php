@@ -73,7 +73,7 @@ interface OrganizationInterface extends ObjectInterface
      *
      * @param array $boardIds
      *
-     * @return MemberInterface
+     * @return OrganizationInterface
      */
     public function setBoardIds(array $boardIds);
 

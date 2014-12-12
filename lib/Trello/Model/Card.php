@@ -432,7 +432,7 @@ class Card extends AbstractObject implements CardInterface
         if (!$this->hasChecklist($checklist)) {
             throw new InvalidArgumentException(sprintf(
                 "Checklist %s is not on this card (%s), so you can't remove it.",
-                $checklist->getName(),
+                is_object($checklist) ? $checklist->getName() : $checklist,
                 $this->getName()
             ));
         }

@@ -14,7 +14,7 @@ class Items extends AbstractApi
 {
     protected $path = 'checklists/#id#/checkItems';
 
-    protected $fields = array(
+    public static $fields = array(
         'name',
         'nameData',
         'type',
@@ -71,7 +71,7 @@ class Items extends AbstractApi
      */
     public function update($id, $itemId, array $data)
     {
-        $this->validateParams(array('name', 'state'), $data);
+        $this->validateRequiredParameters(array('name', 'state'), $data);
 
         $this->remove($id, $itemId);
 

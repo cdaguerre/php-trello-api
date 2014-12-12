@@ -77,7 +77,7 @@ class Board extends AbstractApi
      */
     public function create(array $params = array())
     {
-        $this->validateParams(array('name'), $params);
+        $this->validateRequiredParameters(array('name'), $params);
 
         return $this->post($this->getPath(), $params);
     }

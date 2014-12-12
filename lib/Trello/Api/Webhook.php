@@ -26,7 +26,7 @@ class Webhook extends AbstractApi
         'description',
         'idModel',
         'callbackURL',
-        'active'
+        'active',
     );
 
     /**
@@ -53,7 +53,7 @@ class Webhook extends AbstractApi
      */
     public function create(array $params = array())
     {
-        $this->validateParams(array('callbackURL', 'idModel'), $params);
+        $this->validateRequiredParameters(array('callbackURL', 'idModel'), $params);
 
         return $this->post($this->getPath(), $params);
     }
@@ -69,7 +69,7 @@ class Webhook extends AbstractApi
      */
     public function update($id, array $params = array())
     {
-        $this->validateParams(array('callbackURL', 'idModel'), $params);
+        $this->validateRequiredParameters(array('callbackURL', 'idModel'), $params);
 
         return $this->put($this->getPath().'/'.rawurlencode($id), $params);
     }

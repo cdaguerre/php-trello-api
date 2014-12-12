@@ -53,7 +53,7 @@ class Card extends AbstractApi
         'shortLink',
         'shortUrl',
         'subscribed',
-        'url'
+        'url',
     );
 
     /**
@@ -81,7 +81,7 @@ class Card extends AbstractApi
      */
     public function create(array $params = array())
     {
-        $this->validateParams(array('idList', 'name'), $params);
+        $this->validateRequiredParameters(array('idList', 'name'), $params);
 
         if (!array_key_exists('due', $params)) {
             $params['due'] = null;

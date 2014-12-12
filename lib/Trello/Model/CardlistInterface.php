@@ -9,7 +9,7 @@ interface CardlistInterface extends ObjectInterface
      *
      * @param string $name
      *
-     * @return CardInterface
+     * @return CardlistInterface
      */
     public function setName($name);
 
@@ -25,7 +25,7 @@ interface CardlistInterface extends ObjectInterface
      *
      * @param string $boardId
      *
-     * @return CardInterface
+     * @return CardlistInterface
      */
     public function setBoardId($boardId);
 
@@ -41,7 +41,7 @@ interface CardlistInterface extends ObjectInterface
      *
      * @param BoardInterface $board
      *
-     * @return CardInterface
+     * @return CardlistInterface
      */
     public function setBoard(BoardInterface $board);
 
@@ -57,7 +57,7 @@ interface CardlistInterface extends ObjectInterface
      *
      * @param string $pos
      *
-     * @return CardInterface
+     * @return CardlistInterface
      */
     public function setPosition($pos);
 
@@ -73,7 +73,7 @@ interface CardlistInterface extends ObjectInterface
      *
      * @param bool $closed
      *
-     * @return CardInterface
+     * @return CardlistInterface
      */
     public function setClosed($closed);
 
@@ -89,7 +89,7 @@ interface CardlistInterface extends ObjectInterface
      *
      * @param bool $subscribed
      *
-     * @return CardInterface
+     * @return CardlistInterface
      */
     public function setSubscribed($subscribed);
 

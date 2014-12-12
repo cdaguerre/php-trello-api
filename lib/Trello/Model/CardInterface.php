@@ -88,18 +88,18 @@ interface CardInterface extends ObjectInterface
     public function getPosition();
 
     /**
-     * Set dueDate
+     * Set due date
      *
-     * @param string $due
+     * @param \DateTime $due
      *
      * @return CardInterface
      */
     public function setDueDate(\DateTime $due);
 
     /**
-     * Get dueDate
+     * Get due date
      *
-     * @return string
+     * @return \DateTime
      */
     public function getDueDate();
 
@@ -302,18 +302,18 @@ interface CardInterface extends ObjectInterface
     public function removeChecklist($checklistOrName);
 
     /**
-     * Set memberIds
+     * Set member ids
      *
-     * @param string $memberIds
+     * @param array $memberIds
      *
      * @return CardInterface
      */
     public function setMemberIds(array $memberIds);
 
     /**
-     * Get memberIds
+     * Get member ids
      *
-     * @return string
+     * @return array
      */
     public function getMemberIds();
 
@@ -361,18 +361,18 @@ interface CardInterface extends ObjectInterface
     public function getMembers();
 
     /**
-     * Set membersVotedIds
+     * Set members voted ids
      *
-     * @param string $membersVotedIds
+     * @param array $membersVotedIds
      *
      * @return CardInterface
      */
     public function setMembersVotedIds(array $membersVotedIds);
 
     /**
-     * Get membersVotedIds
+     * Get members voted ids
      *
-     * @return string
+     * @return array
      */
     public function getMembersVotedIds();
 

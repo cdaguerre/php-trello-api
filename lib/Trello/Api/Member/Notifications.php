@@ -43,7 +43,7 @@ class Notifications extends AbstractApi
         $events = Events::all();
         $events[] = 'all';
 
-        $events = $this->validateFilters($events, $event);
+        $events = $this->validateAllowedParameters($events, $event, 'event');
 
         return $this->get($this->getPath($id).'/'.implode(',', $events));
     }

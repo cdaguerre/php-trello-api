@@ -65,13 +65,13 @@ class Client implements ClientInterface
         'timeout'     => 10,
         'api_limit'   => 5000,
         'api_version' => 1,
-        'cache_dir'   => null
+        'cache_dir'   => null,
     );
 
     /**
      * The Buzz instance used to communicate with Trello
      *
-     * @var HttpClient
+     * @var HttpClientInterface
      */
     private $httpClient;
 
