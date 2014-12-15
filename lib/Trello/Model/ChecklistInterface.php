@@ -71,7 +71,7 @@ interface ChecklistInterface extends ObjectInterface
     /**
      * Set card
      *
-     * @param CardInterface $cardId [description]
+     * @param CardInterface $card [description]
      *
      * @return ChecklistInterface
      */

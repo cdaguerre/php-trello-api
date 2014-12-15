@@ -256,7 +256,7 @@ class Client implements ClientInterface
     /**
      * Returns an array of valid API versions supported by this client.
      *
-     * @return array
+     * @return integer[]
      */
     public function getSupportedApiVersions()
     {

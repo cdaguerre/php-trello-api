@@ -16,7 +16,7 @@ interface ObjectInterface
     /**
      * Save the object through API
      *
-     * @return this
+     * @return AbstractObject
      *
      * @throws BadMethodCallException    If this method is not allowed by the API on the child object
      * @throws PermissionDeniedException If the client does not have sufficient privileges
@@ -26,7 +26,7 @@ interface ObjectInterface
     /**
      * Remove the object through API
      *
-     * @return this
+     * @return AbstractObject
      *
      * @throws BadMethodCallException    If this method is not allowed by the API on the child object
      * @throws PermissionDeniedException If the client does not have sufficient privileges
@@ -36,7 +36,7 @@ interface ObjectInterface
     /**
      * Refresh the object through API
      *
-     * @return this
+     * @return AbstractObject
      */
     public function refresh();
 
@@ -52,7 +52,7 @@ interface ObjectInterface
      *
      * @param array $data
      *
-     * @return this
+     * @return AbstractObject
      */
     public function setData(array $data);
 }

@@ -71,7 +71,6 @@ class Checklists extends AbstractApi
      * @link https://trello.com/docs/api/card/#get-1-cards-card-id-or-shortlink-checkitemstates
      *
      * @param string $id          the card's id or short link
-     * @param string $checklistId the checklist's id
      *
      * @return array
      */

@@ -3,7 +3,6 @@
 namespace Trello\HttpClient\Message;
 
 use Guzzle\Http\Message\Response;
-use Trello\Exception\ApiLimitExceedException;
 
 class ResponseMediator
 {

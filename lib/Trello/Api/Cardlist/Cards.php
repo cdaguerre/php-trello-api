@@ -49,7 +49,6 @@ class Cards extends AbstractApi
      * Create a card
      * @link https://trello.com/docs/api/list/#post-1-lists-idlist-cards
      *
-     * @param string $listId the id of the list the card should be created on
      * @param array  $params optional attributes
      *
      * @return array card info

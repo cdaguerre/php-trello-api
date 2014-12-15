@@ -354,6 +354,7 @@ class Card extends AbstractObject implements CardInterface
 
     /**
      * {@inheritdoc}
+     * @param string $name
      */
     public function getChecklist($name)
     {

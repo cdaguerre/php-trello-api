@@ -148,7 +148,7 @@ abstract class AbstractObject
     /**
      * Update the object through API
      *
-     * @return this
+     * @return AbstractObject
      */
     protected function update()
     {
@@ -162,7 +162,7 @@ abstract class AbstractObject
     /**
      * Create the object through API
      *
-     * @return this
+     * @return AbstractObject
      */
     protected function create()
     {

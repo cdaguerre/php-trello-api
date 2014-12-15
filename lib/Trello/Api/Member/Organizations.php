@@ -66,7 +66,6 @@ class Organizations extends AbstractApi
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-organizationsinvited-field
      *
      * @param string $id     the member's id or username
-     * @param array  $params optional parameters
      *
      * @return array
      */

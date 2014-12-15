@@ -278,7 +278,7 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Validate parameters array
      *
-     * @param array $required required properties (array keys)
+     * @param string[] $required required properties (array keys)
      * @param array $params   array to check for existence of the required keys
      *
      * @throws MissingArgumentException if a required parameter is missing
@@ -296,8 +296,9 @@ abstract class AbstractApi implements ApiInterface
      * Validate allowed parameters array
      * Checks whether the passed parameters are allowed
      *
-     * @param array        $allowed allowed properties
+     * @param string[]        $allowed allowed properties
      * @param array|string $params  array to check
+     * @param string $paramName
      *
      * @return array array of validated parameters
      *
@@ -327,10 +328,10 @@ abstract class AbstractApi implements ApiInterface
      * Validate that the params array includes at least one of
      * the keys in a given array
      *
-     * @param array $atLeastOneOf allowed properties
+     * @param string[] $atLeastOneOf allowed properties
      * @param array $params       array to check
      *
-     * @return true
+     * @return boolean
      *
      * @throws MissingArgumentException
      */

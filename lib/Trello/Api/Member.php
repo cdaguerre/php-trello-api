@@ -179,7 +179,6 @@ class Member extends AbstractApi
      * @link https://trello.com/docs/api/member/#put-1-members-idmember-or-avatar-avatar
      *
      * @param string $id     the member's id or avatar
-     * @param string $avatar the avatar
      *
      * @return array
      */

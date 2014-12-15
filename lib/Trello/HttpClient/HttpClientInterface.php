@@ -88,6 +88,7 @@ interface HttpClientInterface
      * @param mixed  $value The value
      *
      * @throws InvalidArgumentException
+     * @return void
      */
     public function setOption($name, $value);
 
@@ -95,6 +96,7 @@ interface HttpClientInterface
      * Set HTTP headers
      *
      * @param array $headers
+     * @return void
      */
     public function setHeaders(array $headers);
 
@@ -106,6 +108,7 @@ interface HttpClientInterface
      * @param null|string $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
+     * @return void
      */
     public function authenticate($tokenOrLogin, $password, $authMethod);
 }

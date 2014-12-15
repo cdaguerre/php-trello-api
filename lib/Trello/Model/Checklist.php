@@ -144,6 +144,7 @@ class Checklist extends AbstractObject implements ChecklistInterface
 
     /**
      * {@inheritdoc}
+     * @param string $nameOrId
      */
     public function hasItem($nameOrId)
     {

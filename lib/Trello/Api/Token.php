@@ -77,7 +77,6 @@ class Token extends AbstractApi
      * @link https://trello.com/docs/api/token/#get-1-tokens-token-member-field
      *
      * @param string $id     the token's id
-     * @param array  $params optional parameters
      *
      * @return array
      */

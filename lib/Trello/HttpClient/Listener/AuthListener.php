@@ -12,6 +12,11 @@ class AuthListener
     private $password;
     private $method;
 
+    /**
+     * @param string $tokenOrLogin
+     * @param string $password
+     * @param null|string $method
+     */
     public function __construct($tokenOrLogin, $password = null, $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;

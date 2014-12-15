@@ -5,7 +5,6 @@ namespace Trello\HttpClient\Listener;
 // use Trello\Exception\TwoFactorAuthenticationRequiredException;
 use Trello\HttpClient\Message\ResponseMediator;
 use Guzzle\Common\Event;
-use Guzzle\Http\Message\Response;
 // use Trello\Exception\ApiLimitExceedException;
 use Trello\Exception\ErrorException;
 use Trello\Exception\RuntimeException;

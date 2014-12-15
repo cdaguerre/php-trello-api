@@ -77,6 +77,9 @@ class HttpClient implements HttpClientInterface
         );
     }
 
+    /**
+     * @param string $eventName
+     */
     public function addListener($eventName, $listener)
     {
         $this->client->getEventDispatcher()->addListener($eventName, $listener);
@@ -186,6 +189,10 @@ class HttpClient implements HttpClientInterface
         return $this->lastResponse;
     }
 
+    /**
+     * @param string $httpMethod
+     * @param string $path
+     */
     protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
         $path = $this->options['api_version'].'/'.$path;
