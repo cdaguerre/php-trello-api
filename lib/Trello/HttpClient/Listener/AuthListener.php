@@ -69,7 +69,6 @@ class AuthListener
 
             default:
                 throw new RuntimeException(sprintf('%s not yet implemented', $this->method));
-                break;
         }
     }
 }
