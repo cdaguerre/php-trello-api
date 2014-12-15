@@ -277,6 +277,12 @@ final class Events
     const CARD_REMOVE_CHECKLIST               = 'removeChecklistFromCard';
 
     /**
+     * When an item is added to a checklist
+     * The event listener method receives a Trello\Event\CardChecklistEvent instance.
+     */
+    const CARD_CREATE_CHECKLIST_ITEM          = 'createCheckItem';
+
+    /**
      * When a checklist is removed from a card
      * The event listener method receives a Trello\Event\CardChecklistEvent instance.
      */

@@ -189,15 +189,17 @@ class Service extends Manager
                 $event->setAttachment($data['attachment']);
                 break;
             case Events::CARD_ADD_CHECKLIST:
+            case Events::CARD_CREATE_CHECKLIST_ITEM:
+            case Events::CARD_UPDATE_CHECKLIST_ITEM_STATE:
+                $event = new Event\CardChecklistEvent();
+                $event->setCard($this->getCard($data['card']['id']));
+                $event->setChecklist($this->getChecklist($data['checklist']['id']));
+                break;
             case Events::CARD_CREATE_CHECKLIST:
             case Events::CARD_UPDATE_CHECKLIST:
             case Events::CARD_REMOVE_CHECKLIST:
-            case Events::CARD_UPDATE_CHECKLIST_ITEM_STATE:
                 $event = new Event\CardChecklistEvent();
-                $cardId = isset($data['card']['id'])
-                    ? $data['card']['id']
-                    : $data['checklist']['cardTarget']['_id'];
-                $event->setCard($this->getCard($cardId));
+                $event->setCard($this->getCard($data['cardTarget']['_id']));
                 $event->setChecklist($this->getChecklist($data['checklist']['id']));
                 break;
             case Events::ORGANIZATION_CREATE:
