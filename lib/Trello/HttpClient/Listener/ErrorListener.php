@@ -2,10 +2,8 @@
 
 namespace Trello\HttpClient\Listener;
 
-// use Trello\Exception\TwoFactorAuthenticationRequiredException;
 use Trello\HttpClient\Message\ResponseMediator;
 use Guzzle\Common\Event;
-// use Trello\Exception\ApiLimitExceedException;
 use Trello\Exception\ErrorException;
 use Trello\Exception\RuntimeException;
 use Trello\Exception\PermissionDeniedException;
@@ -13,19 +11,6 @@ use Trello\Exception\ValidationFailedException;
 
 class ErrorListener
 {
-    /**
-     * @var array
-     */
-    private $options;
-
-    /**
-     * @param array $options
-     */
-    public function __construct(array $options)
-    {
-        $this->options = $options;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -36,20 +21,6 @@ class ErrorListener
         $response = $request->getResponse();
 
         if ($response->isClientError() || $response->isServerError()) {
-            // $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
-
-            // if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
-            //     throw new ApiLimitExceedException($this->options['api_limit']);
-            // }
-
-            // if (401 === $response->getStatusCode()) {
-            //     if ($response->hasHeader('X-GitHub-OTP') && 0 === strpos((string) $response->getHeader('X-GitHub-OTP'), 'required;')) {
-            //         $type = substr((string) $response->getHeader('X-GitHub-OTP'), 9);
-
-            //         throw new TwoFactorAuthenticationRequiredException($type);
-            //     }
-            // }
-
             $content = ResponseMediator::getContent($response);
 
             if (is_array($content) && isset($content['message'])) {

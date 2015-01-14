@@ -3,7 +3,6 @@
 namespace Trello\Api\Card;
 
 use Trello\Api\AbstractApi;
-use Trello\Api\Card;
 use Trello\Exception\InvalidArgumentException;
 
 /**

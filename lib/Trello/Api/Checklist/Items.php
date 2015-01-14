@@ -76,8 +76,6 @@ class Items extends AbstractApi
         $this->remove($id, $itemId);
 
         return $this->create($id, $data['name'], $data['state'], $data);
-
-        // return $this->put($this->getPath($id).'/'.rawurlencode($itemId), $data);
     }
 
     /**

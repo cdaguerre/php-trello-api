@@ -2,6 +2,8 @@
 
 namespace Trello\Model;
 
+use Trello\Exception\InvalidArgumentException;
+
 /**
  * @codeCoverageIgnore
  */
