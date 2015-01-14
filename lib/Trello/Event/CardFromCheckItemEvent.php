@@ -2,6 +2,6 @@
 
 namespace Trello\Event;
 
-class CardFromCheckItemEvent extends CardCheckItemEvent
+class CardFromCheckItemEvent extends CardEvent
 {
 }
