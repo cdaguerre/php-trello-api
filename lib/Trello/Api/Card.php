@@ -147,12 +147,7 @@ class Card extends AbstractApi
      */
     public function getBoardField($id, $field)
     {
-        if (!in_array($field, Board::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Board::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Board::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/board/'.rawurlencode($field));
     }
@@ -198,12 +193,7 @@ class Card extends AbstractApi
      */
     public function getListField($id, $field)
     {
-        if (!in_array($field, Cardlist::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Cardlist::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Cardlist::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/list/'.rawurlencode($field));
     }

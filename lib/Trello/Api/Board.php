@@ -191,12 +191,7 @@ class Board extends AbstractApi
      */
     public function getOrganizationField($id, $field)
     {
-        if (!in_array($field, Organization::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Organization::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Organization::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/organization/'.rawurlencode($field));
     }

@@ -82,12 +82,7 @@ class Token extends AbstractApi
      */
     public function getMemberField($id, $field)
     {
-        if (!in_array($field, Member::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Member::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Member::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/member/'.rawurlencode($field));
     }

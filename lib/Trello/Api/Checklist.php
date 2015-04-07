@@ -113,12 +113,7 @@ class Checklist extends AbstractApi
      */
     public function getBoardField($id, $field)
     {
-        if (!in_array($field, Board::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Board::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Board::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/board/'.rawurlencode($field));
     }

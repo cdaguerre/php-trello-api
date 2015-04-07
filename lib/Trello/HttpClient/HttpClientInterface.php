@@ -5,11 +5,6 @@ namespace Trello\HttpClient;
 use Trello\Exception\InvalidArgumentException;
 use Guzzle\Http\Message\Response;
 
-/**
- * Performs requests on GitHub API. API documentation should be self-explanatory.
- *
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 interface HttpClientInterface
 {
     /**
@@ -95,7 +90,7 @@ interface HttpClientInterface
     /**
      * Set HTTP headers
      *
-     * @param array $headers
+     * @param  array $headers
      * @return void
      */
     public function setHeaders(array $headers);
@@ -103,8 +98,8 @@ interface HttpClientInterface
     /**
      * Authenticate a user for all next requests
      *
-     * @param string      $tokenOrLogin GitHub private token/username/client ID
-     * @param null|string $password     GitHub password/secret (optionally can contain $authMethod)
+     * @param string      $tokenOrLogin Trello private token/username/client ID
+     * @param null|string $password     Trello password/secret (optionally can contain $authMethod)
      * @param null|string $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given

@@ -12,11 +12,6 @@ use Trello\HttpClient\Listener\AuthListener;
 use Trello\HttpClient\Listener\ErrorListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
- * Performs requests on GitHub API. API documentation should be self-explanatory.
- *
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 class HttpClient implements HttpClientInterface
 {
     protected $options = array(

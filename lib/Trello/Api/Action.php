@@ -98,12 +98,7 @@ class Action extends AbstractApi
      */
     public function getBoardField($id, $field)
     {
-        if (!in_array($field, Board::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Board::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Board::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/board/'.rawurlencode($field));
     }
@@ -135,12 +130,7 @@ class Action extends AbstractApi
      */
     public function getListField($id, $field)
     {
-        if (!in_array($field, Cardlist::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Cardlist::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Cardlist::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/list/'.rawurlencode($field));
     }
@@ -172,12 +162,7 @@ class Action extends AbstractApi
      */
     public function getCardField($id, $field)
     {
-        if (!in_array($field, Card::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Card::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Card::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/card/'.rawurlencode($field));
     }
@@ -209,12 +194,7 @@ class Action extends AbstractApi
      */
     public function getMemberField($id, $field)
     {
-        if (!in_array($field, Member::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Member::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Member::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/member/'.rawurlencode($field));
     }
@@ -246,12 +226,7 @@ class Action extends AbstractApi
      */
     public function getCreatorField($id, $field)
     {
-        if (!in_array($field, Member::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Member::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Member::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/memberCreator/'.rawurlencode($field));
     }
@@ -283,12 +258,7 @@ class Action extends AbstractApi
      */
     public function getOrganizationField($id, $field)
     {
-        if (!in_array($field, Organization::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Organization::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Organization::$fields, $field, 'field');
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/organization/'.rawurlencode($field));
     }

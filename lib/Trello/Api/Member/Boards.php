@@ -73,12 +73,7 @@ class Boards extends AbstractApi
      */
     public function invitedToField($id, $field)
     {
-        if (!in_array($field, Board::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s".',
-                implode(", ", Board::$fields)
-            ));
-        }
+        $this->validateAllowedParameters(Board::$fields, $field, 'field');
 
         return $this->get($this->getPath($id).'Invited/'.rawurlencode($field));
     }

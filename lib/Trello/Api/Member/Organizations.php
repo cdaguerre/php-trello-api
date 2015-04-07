@@ -71,13 +71,7 @@ class Organizations extends AbstractApi
      */
     public function invitedToField($id, $field)
     {
-        if (!in_array($field, Organization::$fields)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "field" parameter must be one of "%s". "%s" given.',
-                implode(", ", Organization::$fields),
-                $field
-            ));
-        }
+        $this->validateAllowedParameters(Organization::$fields, $field, 'field');
 
         return $this->get($this->getPath($id).'Invited/'.rawurlencode($field));
     }
