@@ -260,6 +260,8 @@ abstract class AbstractApi implements ApiInterface
                     $parameters[$name.'/'.$subName] = $subParameter;
                 }
                 unset($parameters[$name]);
+            } elseif ($parameter instanceof DateTime) {
+                $parameters[$name] = $parameter->format('Y-m-d H:i:s');
             }
         }
 
