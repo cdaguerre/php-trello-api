@@ -7,6 +7,7 @@ use Trello\HttpClient\Message\ResponseMediator;
 use Trello\Exception\InvalidArgumentException;
 use Trello\Exception\BadMethodCallException;
 use Trello\Exception\MissingArgumentException;
+use \DateTime;
 
 /**
  * Abstract class for Api classes
@@ -260,6 +261,8 @@ abstract class AbstractApi implements ApiInterface
                     $parameters[$name.'/'.$subName] = $subParameter;
                 }
                 unset($parameters[$name]);
+            } elseif ($parameter instanceof DateTime) {
+                $parameters[$name] = $parameter->format('Y-m-d H:i:s');
             }
         }
 
