@@ -262,7 +262,7 @@ abstract class AbstractApi implements ApiInterface
                 }
                 unset($parameters[$name]);
             } elseif ($parameter instanceof DateTime) {
-                $parameters[$name] = $parameter->format('Y-m-d H:i:s');
+                $parameters[$name] = $parameter->format($parameter::ATOM);
             }
         }
 
