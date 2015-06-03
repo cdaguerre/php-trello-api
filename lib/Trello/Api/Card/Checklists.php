@@ -13,7 +13,7 @@ use Trello\Exception\MissingArgumentException;
  */
 class Checklists extends AbstractApi
 {
-    protected $path = 'cards/#id#/checklist';
+    protected $path = 'cards/#id#/checklists';
 
     /**
      * Get checklists related to a given card
