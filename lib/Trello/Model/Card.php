@@ -127,7 +127,7 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function setDueDate(\DateTime $due)
+    public function setDueDate(\DateTime $due = null)
     {
         $this->data['due'] = $due;
 
@@ -146,16 +146,6 @@ class Card extends AbstractObject implements CardInterface
         return new \DateTime($this->data['due']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeDueDate()
-    {
-        $this->data['due'] = null;
-
-        return $this;
-    }
-    
     /**
      * {@inheritdoc}
      */

@@ -94,7 +94,7 @@ interface CardInterface extends ObjectInterface
      *
      * @return CardInterface
      */
-    public function setDueDate(\DateTime $due);
+    public function setDueDate(\DateTime $due = null);
 
     /**
      * Get due date
@@ -103,13 +103,6 @@ interface CardInterface extends ObjectInterface
      */
     public function getDueDate();
 
-    /**
-     * Remove the due date
-     * 
-     * @return CardInterface
-     */
-    public function removeDueDate();
-    
     /**
      * Set email
      *
