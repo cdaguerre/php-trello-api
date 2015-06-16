@@ -104,6 +104,13 @@ interface CardInterface extends ObjectInterface
     public function getDueDate();
 
     /**
+     * Remove the due date
+     * 
+     * @return CardInterface
+     */
+    public function removeDueDate();
+    
+    /**
      * Set email
      *
      * @param string $email

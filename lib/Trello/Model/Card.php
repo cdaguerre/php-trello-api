@@ -149,6 +149,16 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
+    public function removeDueDate()
+    {
+        $this->data['due'] = null;
+
+        return $this;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function setEmail($email)
     {
         $this->data['email'] = $email;
