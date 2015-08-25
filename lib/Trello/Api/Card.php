@@ -101,7 +101,7 @@ class Card extends AbstractApi
 
     public function createCheckListItem($cardId, $checkListId, $params = Array()){
         
-        $this->validateRequiredParameters(array('idCheckList', 'name'), $params);
+        $this->validateRequiredParameters(array('idChecklist', 'name'), $params);
 
         return $this->post($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem', $params);
     }
