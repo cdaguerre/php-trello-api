@@ -88,6 +88,24 @@ class Card extends AbstractApi
 
         return $this->post($this->getPath(), $params);
     }
+    
+       /**
+     * Create a checklist Item
+     * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
+     *
+     * @param string $cardId id of the card the item is added to
+     * @param string $checkListId id of the checklist the item is added to  
+     * @param array  $params optional attributes
+     *
+     * @return array card info
+     */
+
+    public function createCheckListItem($cardId, $checkListId, $params = Array()){
+        
+        $this->validateRequiredParameters(array('idCheckList', 'name'), $params);
+
+        return $this->post($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem', $params);
+    }
 
     /**
      * Update a card
