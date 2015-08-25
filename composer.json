@@ -2,7 +2,7 @@
     "name": "cdaguerre/php-trello-api",
     "type": "library",
     "description": "Trello API v1 client-adjusted",
-    "homepage": "https://github.com/rtvisser/php-trello-api",
+    "homepage": "https://github.com/cdaguerre/php-trello-api",
     "keywords": ["trello"],
     "license": "MIT",
     "authors": [
