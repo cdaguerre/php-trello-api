@@ -9,7 +9,6 @@ use Trello\Exception\InvalidArgumentException;
  * @link https://trello.com/docs/api/card
  *
  * Unimplemented:
- * updated by Reinder
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-name
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-pos
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
