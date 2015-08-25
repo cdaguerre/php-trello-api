@@ -9,6 +9,7 @@ use Trello\Exception\InvalidArgumentException;
  * @link https://trello.com/docs/api/card
  *
  * Unimplemented:
+ * updated by Reinder
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-name
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-pos
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
@@ -281,6 +282,21 @@ class Card extends AbstractApi
     public function setSubscribed($id, $subscribed)
     {
         return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', array('value' => $subscribed));
+    }
+
+
+    /**
+     * Set a given card's memberId state
+     * @link tbd
+     *
+     * @param string $id         the list's id
+     * @param bool   $memberId comma seperated list of responsible members
+     *
+     * @return array list info
+     */
+    public function setIdMembers($id, $idMembers)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/idMembers', array('value' => $idMembers));
     }
 
     /**
