@@ -285,17 +285,65 @@ class Card extends AbstractApi
 
 
     /**
-     * Set a given card's memberId state
+     * Set a given card's memberId
      * @link tbd
      *
      * @param string $id         the list's id
-     * @param bool   $memberId comma seperated list of responsible members
+     * @param string   $memberId comma seperated list of responsible members
      *
      * @return array list info
      */
     public function setIdMembers($id, $idMembers)
     {
         return $this->put($this->getPath().'/'.rawurlencode($id).'/idMembers', array('value' => $idMembers));
+    }
+    
+/**
+     * Set a given checklist item name
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-name
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param string   $name new name value
+     *
+     * @return array list info
+     */
+    public function setCheckListItemName($cardId,$checkListId,$itemId, $name)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/name', array('value' => $name));
+    }
+
+    /**
+     * Set a given checklist item position
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-pos
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param string   $name new position value
+     *
+     * @return array list info
+     */
+    public function setCheckListItemPosition($cardId,$checkListId,$itemId, $position)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/pos', array('value' => $position));
+    }
+
+    /**
+     * Set a given checklist item complete state
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param bool   $complete new complete value, defaults to true
+     *
+     * @return array list info
+     */
+    public function setCheckListItemState($cardId,$checkListId,$itemId, $complete = true)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/state', array('value' => $complete));
     }
 
     /**
