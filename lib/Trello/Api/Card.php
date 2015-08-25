@@ -9,9 +9,6 @@ use Trello\Exception\InvalidArgumentException;
  * @link https://trello.com/docs/api/card
  *
  * Unimplemented:
- * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-name
- * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-pos
- * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklistcurrent-checkitem-idcheckitem
  * - https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
  * - https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-converttocard
@@ -331,7 +328,7 @@ class Card extends AbstractApi
     }
 
     /**
-     * Set a given checklist item complete state
+     * Set a given checklist item closed state
      * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
      *
      * @param string $cardId the cards's id
@@ -341,7 +338,7 @@ class Card extends AbstractApi
      *
      * @return array list info
      */
-    public function setCheckListItemState($cardId,$checkListId,$itemId, $complete = true)
+    public function setCheckListItemClosed($cardId,$checkListId,$itemId, $complete = true)
     {
         return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/state', array('value' => $complete));
     }
