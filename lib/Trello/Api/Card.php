@@ -303,7 +303,7 @@ class Card extends AbstractApi
      * @link tbd
      *
      * @param string $id         the list's id
-     * @param string   $memberId comma seperated list of responsible members
+     * @param string $idMembers comma seperated list of responsible members
      *
      * @return array list info
      */
@@ -335,7 +335,7 @@ class Card extends AbstractApi
      * @param string $cardId the cards's id
      * @param string $checkListId the checklist's id
      * @param string $itemId the item's id
-     * @param string   $name new position value
+     * @param string $position new position value
      *
      * @return array list info
      */
@@ -359,6 +359,23 @@ class Card extends AbstractApi
     {
         return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/state', array('value' => $complete));
     }
+
+    /**
+     * Update checklist item by parameter array
+     * @link https://trello.com/docs/api/card/index.html#put-1-cards-card-id-or-shortlink-checklist-idchecklistcurrent-checkitem-idcheckitem
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param array $params item attributes to update
+     *
+     * @return array list info
+     */
+    public function updateCheckListItem($cardId,$checkListId,$itemId, $params = array())
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId), $params);
+    }
+    
 
     /**
      * Actions API
