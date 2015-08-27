@@ -87,6 +87,20 @@ class Checklist extends AbstractApi
     }
 
     /**
+     * Remove a listitem from a checklist
+     * @link https://trello.com/docs/api/checklist/index.html#delete-1-checklists-idchecklist-checkitems-idcheckitem
+     *
+     * @param string $checkListId the checklist's id
+     * @param string $listItemId the listItem id
+     *
+     * @return array
+     */
+    public function removeListItem($checkListId, $listItemId)
+    {
+        return $this->delete($this->getPath().'/'.rawurlencode($checkListId).'/checkItems/'.rawuurlencode($listItemId));
+    }
+    
+    /**
      * Get the board of a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-board
      *
