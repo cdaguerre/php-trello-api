@@ -97,7 +97,7 @@ class Checklist extends AbstractApi
      */
     public function removeListItem($checkListId, $listItemId)
     {
-        return $this->delete($this->getPath().'/'.rawurlencode($checkListId).'/checkItems/'.rawuurlencode($listItemId));
+        return $this->delete($this->getPath().'/'.rawurlencode($checkListId).'/checkItems/'.rawurlencode($listItemId));
     }
     
     /**
