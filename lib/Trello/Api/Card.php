@@ -176,7 +176,7 @@ class Card extends AbstractApi
      */
     public function getCheckItemStates($id){
 
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/checkItemStates', array('value' => 'all'));
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/checkItemStates', array('value' => 'all'));
     }
     
     /**
