@@ -179,6 +179,17 @@ class Card extends AbstractApi
         return $this->get($this->getPath().'/'.rawurlencode($id).'/checkItemStates', array('value' => 'all'));
     }
     
+     /**
+     * Get the members;
+     * @link https://trello.com/docs/api/card/#get-1-cards-card-id-or-shortlink-members
+     *
+     * @param string $id the card's id or short link
+     *
+     * @return array list info
+     */
+    public function getMembers($id){
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/members', array('value' => 'all'));
+    }
     /**
      * Set a given card's list
      * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-idlist
