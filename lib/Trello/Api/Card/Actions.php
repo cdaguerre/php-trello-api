@@ -53,7 +53,7 @@ class Actions extends AbstractApi
      */
     public function removeComment($id, $commentId)
     {
-        return $this->delete($this->getPath($id).rawurlencode($commentId).'/comments');
+        return $this->delete($this->getPath($id).'/'.rawurlencode($commentId).'/comments');
     }
     
     /**
@@ -67,7 +67,7 @@ class Actions extends AbstractApi
      */
     public function updateComment($id, $commentId, $text)
     {
-        return $this->put($this->getPath($id).rawurlencode($commentId).'/comments', array('text' => $text));
+        return $this->put($this->getPath($id).'/'.rawurlencode($commentId).'/comments', array('text' => $text));
     }
     
 }
