@@ -58,7 +58,7 @@ class Actions extends AbstractApi
     
     /**
      * Update comment to a given card
-     * @link undocumented
+     * @link https://trello.com/docs/api/card/index.html#put-1-cards-card-id-or-shortlink-actions-idaction-comments
      *
      * @param string $id        the card's id or short link
      * @param string $commentId the comment's id
