@@ -55,4 +55,19 @@ class Actions extends AbstractApi
     {
         return $this->delete($this->getPath($id).rawurlencode($commentId).'/comments');
     }
+    
+    /**
+     * Update comment to a given card
+     * @link undocumented
+     *
+     * @param string $id        the card's id or short link
+     * @param string $commentId the comment's id
+     * @param string $text the new comment text
+     * @return array
+     */
+    public function updateComment($id, $commentId, $text)
+    {
+        return $this->put($this->getPath($id).rawurlencode($commentId).'/comments', array('text' => $text));
+    }
+    
 }
