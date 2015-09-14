@@ -29,6 +29,20 @@ class Actions extends AbstractApi
     }
 
     /**
+     * Get comments related to a given card
+     * NOTE: ONDOCUMENTED TEST
+     *
+     * @param string $id     the card's id or short link
+     * @param array  $params optional parameters
+     *
+     * @return array
+     */
+    public function getComments($id $params)
+    {
+        return $this->get($this->getPath($id).'/comments', $params);
+    }
+    
+    /**
      * Add comment to a given card
      * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-actions-comments
      *
