@@ -27,20 +27,6 @@ class Actions extends AbstractApi
     {
         return $this->get($this->getPath($id), $params);
     }
-
-    /**
-     * Get comments related to a given card
-     * NOTE: ONDOCUMENTED TEST
-     *
-     * @param string $id     the card's id or short link
-     * @param array  $params optional parameters
-     *
-     * @return array
-     */
-    public function getComments($id $params)
-    {
-        return $this->get($this->getPath($id).'/comments', $params);
-    }
     
     /**
      * Add comment to a given card
