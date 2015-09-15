@@ -38,21 +38,12 @@ class Labels extends AbstractApi
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-labels-idlabel
      *
      * @param string $id    the board's id
-     * @param string $color the label's color
+     * @param string $color the label's color or ID
      *
      * @return array
      */
     public function show($id, $color)
     {
-        $colors = array('blue', 'green', 'orange', 'purple', 'red', 'yellow');
-
-        if (!in_array($color, $colors)) {
-            throw new InvalidArgumentException(sprintf(
-                'The "color" parameter must be one of "%s".',
-                implode(", ", $colors)
-            ));
-        }
-
         return $this->get($this->getPath($id).'/'.rawurlencode($color));
     }
 
