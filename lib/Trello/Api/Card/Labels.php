@@ -14,6 +14,21 @@ use Trello\Exception\InvalidArgumentException;
 class Labels extends AbstractApi
 {
     protected $path = 'cards/#id#/labels';
+    
+    protected $colors = array(
+        'all',
+        'green',
+        'yellow',
+        'orange',
+        'red',
+        'purple',
+        'blue',
+        'sky',
+        'lime',
+        'pink',
+        'black',
+        'null'
+    );
 
     /**
      * Set a given card's labels
@@ -29,7 +44,7 @@ class Labels extends AbstractApi
     public function set($id, array $labels)
     {
         foreach ($labels as $label) {
-            if (!in_array($label, array('all', 'green', 'yellow', 'orange', 'red', 'purple', 'blue'))) {
+            if (!in_array($label, $this->colors)) {
                 throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
             }
         }
@@ -52,7 +67,7 @@ class Labels extends AbstractApi
      */
     public function remove($id, $label)
     {
-        if (!in_array($label, array('green', 'yellow', 'orange', 'red', 'purple', 'blue'))) {
+        if (!in_array($label, $this->colors)) {
             throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
         }
 
