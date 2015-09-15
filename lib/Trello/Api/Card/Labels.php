@@ -53,6 +53,32 @@ class Labels extends AbstractApi
 
         return $this->put($this->getPath($id), array('value' => $labels));
     }
+    
+    /**
+     * Add a label to a given card
+     * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-labels
+     *
+     * @param string $id     the card's id or short link
+     * @param string $color  the label's color
+     * @param string $name   the label's name (optional)
+     *
+     * @return array label info
+     *
+     * @throws InvalidArgumentException If a label does not exist
+     */
+    public function add($id, $color, $name = null)
+    {
+        if (!in_array($color, $this->colors)) {
+            throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $color));
+        }
+
+        $args = array(
+            'color' => $color,
+            'name' => $name
+        );
+
+        return $this->post($this->getPath($id), $args);
+    }
 
     /**
      * Remove a given label from a given card
