@@ -170,7 +170,7 @@ class Service extends Manager
             case Events::CARD_REMOVE_MEMBER:
                 $event = new Event\CardMemberEvent();
                 $event->setCard($this->getCard($data['card']['id']));
-                $event->setMember($this->getMember($data['member']['id']));
+                $event->setMember($this->getMember($data['idMember']));
                 break;
             case Events::CARD_COMMENT:
             case Events::CARD_COPY_COMMENT:
