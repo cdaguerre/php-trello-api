@@ -13,30 +13,22 @@ use Trello\Exception\InvalidArgumentException;
  */
 class Labels extends AbstractApi
 {
-    protected $path = 'cards/#id#/labels';
+    protected $path = 'cards/#id#/idLabels';
 
     /**
      * Set a given card's labels
      * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-labels
      *
      * @param string $id     the card's id or short link
-     * @param array  $labels the labels
+     * @param string $label  the label's id
      *
      * @return array card info
      *
      * @throws InvalidArgumentException If a label does not exist
      */
-    public function set($id, array $labels)
+    public function set($id, $label)
     {
-        foreach ($labels as $label) {
-            if (!in_array($label, array('all', 'green', 'yellow', 'orange', 'red', 'purple', 'blue'))) {
-                throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
-            }
-        }
-
-        $labels = implode(',', $labels);
-
-        return $this->put($this->getPath($id), array('value' => $labels));
+        return $this->post($this->getPath($id), array('value' => $label));
     }
 
     /**
@@ -44,7 +36,7 @@ class Labels extends AbstractApi
      * @link https://trello.com/docs/api/card/#delete-1-cards-card-id-or-shortlink-labels-color
      *
      * @param string $id    the card's id or short link
-     * @param string $label the label to remove
+     * @param string $label the label's id to remove
      *
      * @return array card info
      *
@@ -52,10 +44,6 @@ class Labels extends AbstractApi
      */
     public function remove($id, $label)
     {
-        if (!in_array($label, array('green', 'yellow', 'orange', 'red', 'purple', 'blue'))) {
-            throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
-        }
-
         return $this->delete($this->getPath($id).'/'.rawurlencode($label));
     }
 }
