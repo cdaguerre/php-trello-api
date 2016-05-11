@@ -11,8 +11,9 @@ php:
 sudo: false
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source --dev
+  - if [ "$TRAVIS_PHP_VERSION" == "5.3.3" ]; then composer config disable-tls true; fi
+  - composer self-update
+  - composer install --no-interaction --prefer-source --dev
 
 script:
   - mkdir -p build/logs
