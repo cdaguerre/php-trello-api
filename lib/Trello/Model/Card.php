@@ -707,7 +707,16 @@ class Card extends AbstractObject implements CardInterface
      */
     public function hasLabel($color)
     {
-        return in_array($color, $this->getLabelColors());
+        if(!isset($this->data['labels'])){
+            $this->data['labels'] = array();
+        }
+
+        foreach($this->getLabelColors() as $labelColor){
+            if($labelColor['color'] == $color)
+                return true;
+        }
+
+        return false;
     }
 
     /**
@@ -715,17 +724,16 @@ class Card extends AbstractObject implements CardInterface
      */
     public function addLabel($color)
     {
-        if (isset($this->data['labels']) && $this->hasLabel($color)) {
+        if ($this->hasLabel($color)) {
+            echo "hasLabel" . PHP_EOL;
             throw new InvalidArgumentException(sprintf(
                 'Card %s already has the %s label.',
                 $this->getName(),
                 $color
             ));
-        }elseif(!isset($this->data['labels'])){
-            $this->data['labels'] = array();
         }
 
-        $this->data['labels'][] = $color;
+        $this->data['labels'][] = array('color' => $color);
 
         return $this;
     }
