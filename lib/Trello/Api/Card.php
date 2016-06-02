@@ -88,6 +88,9 @@ class Card extends AbstractApi
         if (!array_key_exists('urlSource', $params)) {
             $params['urlSource'] = null;
         }
+        if(array_key_exists('labels', $params) && count($params['labels'])){
+            $params['labels'] = implode(',', $params['labels']);
+        }
 
         return $this->post($this->getPath(), $params);
     }
