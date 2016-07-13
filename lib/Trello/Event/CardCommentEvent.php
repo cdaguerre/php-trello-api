@@ -2,29 +2,27 @@
 
 namespace Trello\Event;
 
-use Trello\Model\CommentInterface;
-
 class CardCommentEvent extends CardEvent
 {
     /**
-     * @var CommentInterface
+     * @var string
      */
     protected $comment;
 
     /**
      * Set comment
      *
-     * @param CommentInterface $comment
+     * @param string $text
      */
-    public function setComment(CommentInterface $comment)
+    public function setComment($text)
     {
-        $this->comment = $comment;
+        $this->comment = $text;
     }
 
     /**
      * Get comment
      *
-     * @return CommentInterface
+     * @return string
      */
     public function getComment()
     {
