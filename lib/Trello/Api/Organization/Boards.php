@@ -3,14 +3,10 @@
 namespace Trello\Api\Organization;
 
 use Trello\Api\AbstractApi;
-use Trello\Api\Board;
-use Trello\Api\Member\Board\Backgrounds;
-use Trello\Api\Member\Board\Stars;
-use Trello\Exception\InvalidArgumentException;
 
 /**
- * Trello Member Boards API
- * @link https://trello.com/docs/api/member
+ * Trello Organization Boards API
+ * @link https://trello.com/docs/api/organization
  *
  * Fully implemented.
  */
@@ -19,8 +15,8 @@ class Boards extends AbstractApi
     protected $path = 'organization/#id#/boards';
 
     /**
-     * Get boads related to a given member
-     * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-boards
+     * Get boads related to a given organization
+     * @link https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name-boards
      *
      * @param string $id     the organization's id or username
      * @param array  $params optional parameters
@@ -33,8 +29,8 @@ class Boards extends AbstractApi
     }
 
     /**
-     * Filter boards related to a given member
-     * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-boards-filter
+     * Filter boards related to a given organization
+     * @link https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name-boards-filter
      *
      * @param string       $id     the board's id
      * @param string|array $filter array of / one of 'all', none', 'open', 'closed', 'all'
