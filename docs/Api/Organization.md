@@ -6,3 +6,7 @@ Trello Organization API
 $api->organizations()->show(string $id, array $params)
 ```
 
+### Boards API
+```php
+$api->members()->boards()
+```
