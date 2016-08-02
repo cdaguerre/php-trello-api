@@ -16,7 +16,7 @@ use Trello\Exception\InvalidArgumentException;
  */
 class Boards extends AbstractApi
 {
-    protected $path = 'organization/#id#/boards';
+    protected $path = 'organizations/#id#/boards';
 
     /**
      * Get boads related to a given member

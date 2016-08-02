@@ -55,12 +55,22 @@ class Organization extends AbstractApi
     }
 
     /**
-     * Boards API
+     * Organization Boards API
      *
      * @return Organization\Boards
      */
     public function boards()
     {
         return new Organization\Boards($this->client);
+    }
+
+    /**
+     * Organization Members API
+     *
+     * @return Organization\Members
+     */
+    public function members()
+    {
+        return new Organization\Members($this->client);
     }
 }

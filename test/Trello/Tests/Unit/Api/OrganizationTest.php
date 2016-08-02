@@ -23,6 +23,24 @@ class OrganizationTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('54744b094fef0c7d704ca379'));
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetBoardsApiObject()
+    {
+        $api = $this->getApiMock();
+        $this->assertInstanceOf('Trello\Api\Organization\Boards', $api->boards());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetMembersApiObject()
+    {
+        $api = $this->getApiMock();
+        $this->assertInstanceOf('Trello\Api\Organization\Boards', $api->members());
+    }
+
     protected function getApiClass()
     {
         return 'Trello\Api\Organization';
