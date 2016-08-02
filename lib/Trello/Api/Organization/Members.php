@@ -48,6 +48,6 @@ class Members extends AbstractApi
         $allowed = array('none', 'normal', 'admins', 'owners', 'all');
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filters));
     }
 }

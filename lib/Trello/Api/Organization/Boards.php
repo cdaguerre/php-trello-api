@@ -46,6 +46,6 @@ class Boards extends AbstractApi
         $allowed = array('all', 'members', 'organization', 'public', 'open', 'closed', 'pinned', 'unpinned', 'starred');
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filters));
     }
 }

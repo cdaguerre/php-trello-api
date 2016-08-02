@@ -35,7 +35,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/admins')
+            ->with($this->getPath() . '/admins')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class MembersTest extends TestCase
      */
     public function shouldFilterMembersWithArrayArgument()
     {
-        $filter = array('admins','owners');
+        $filter = array('admins', 'owners');
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/admins,owners')
+            ->with($this->getPath() . '/admins,owners')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId, $filter));

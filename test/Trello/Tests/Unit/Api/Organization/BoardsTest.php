@@ -35,7 +35,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue($defaultFilter));
 
         $this->assertEquals($defaultFilter, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open')
+            ->with($this->getPath() . '/open')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class BoardsTest extends TestCase
      */
     public function shouldFilterBoardsWithArrayArgument()
     {
-        $filter = array('open','closed');
+        $filter = array('open', 'closed');
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open,closed')
+            ->with($this->getPath() . '/open,closed')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));

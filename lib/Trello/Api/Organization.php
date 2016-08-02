@@ -51,7 +51,7 @@ class Organization extends AbstractApi
      */
     public function show($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
 
     /**
