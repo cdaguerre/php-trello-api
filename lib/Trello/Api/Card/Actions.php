@@ -53,6 +53,6 @@ class Actions extends AbstractApi
      */
     public function removeComment($id, $commentId)
     {
-        return $this->delete($this->getPath($id).'/comments/'.rawurlencode($commentId));
+        return $this->delete($this->getPath($id).'/'.rawurlencode($commentId).'/comments');
     }
 }
