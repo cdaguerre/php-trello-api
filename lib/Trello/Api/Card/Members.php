@@ -46,7 +46,8 @@ class Members extends AbstractApi
 
         $members = implode(',', $members);
 
-        return $this->put($this->getPath($id), array('value' => $members));
+        $path = str_replace('/members', '/idMembers', $this->getPath($id));
+        return $this->put($path, array('value' => $members));
     }
 
     /**
@@ -60,7 +61,8 @@ class Members extends AbstractApi
      */
     public function add($id, $memberId)
     {
-        return $this->post($this->getPath($id), array('value' => $memberId));
+        $path = str_replace('/members', '/idMembers', $this->getPath($id));
+        return $this->post($path, array('value' => $memberId));
     }
 
     /**
