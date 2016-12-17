@@ -180,7 +180,10 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a = b');
         $headers    = array('c' => 'd');
 
-        $message = $this->getMock('Guzzle\Http\Message\Response', array(), array(200));
+        $message = $this->getMockBuilder('Guzzle\Http\Message\Response')
+            ->setConstructorArgs(array(200))
+            ->setMethods(array('getBody'))
+            ->getMock();
         $message->expects($this->once())
             ->method('getBody')
             ->will($this->returnValue('Just raw context'));
@@ -199,17 +202,18 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     protected function getBrowserMock(array $methods = array())
     {
-        $mock = $this->getMock(
-            'Guzzle\Http\Client',
-            array_merge(
-                array('send', 'createRequest'),
-                $methods
-            )
-        );
+        $mockMethods = array('send', 'createRequest') + $methods;
+        $mock = $this->getMockBuilder( 'Guzzle\Http\Client')
+            ->setMethods($mockMethods)
+            ->getMock();
+
+        $requestMock = $this->getMockBuilder('Guzzle\Http\Message\Request')
+            ->setConstructorArgs(array('GET', 'some'))
+            ->getMock();
 
         $mock->expects($this->any())
             ->method('createRequest')
-            ->will($this->returnValue($this->getMock('Guzzle\Http\Message\Request', array(), array('GET', 'some'))));
+            ->will($this->returnValue($requestMock));
 
         return $mock;
     }
