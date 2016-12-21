@@ -5,6 +5,9 @@ use Guzzle\Http\Message\Request;
 use Trello\Client;
 use Trello\HttpClient\Listener\AuthListener;
 
+/**
+ * @TODO Create fixtures with real use cases of the API
+ */
 class AuthListenerTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -27,8 +30,6 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->never())
             ->method('addHeader');
         $request->expects($this->never())
-            ->method('fromUrl');
-        $request->expects($this->never())
             ->method('getUrl');
         $listener = new AuthListener('test', 'pass', null);
         $listener->onRequestBeforeSend($this->getEventMock($request));
@@ -43,8 +44,6 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $request->expects($this->never())
             ->method('addHeader');
-        $request->expects($this->never())
-            ->method('fromUrl');
         $request->expects($this->never())
             ->method('getUrl');
         $listener = new AuthListener('login', 'somepassphrase', Client::AUTH_HTTP_PASSWORD);
@@ -99,7 +98,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
         $request = new Request('GET', '/res');
         $listener = new AuthListener('test', null, Client::AUTH_URL_TOKEN);
         $listener->onRequestBeforeSend($this->getEventMock($request));
-        $this->assertEquals('/res?access_token=test', $request->getUrl());
+        $this->assertEquals('/res?token=test', $request->getUrl());
     }
 
     /**
@@ -110,7 +109,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
         $request = new Request('GET', '/res');
         $listener = new AuthListener('clientId', 'clientSecret', Client::AUTH_URL_CLIENT_ID);
         $listener->onRequestBeforeSend($this->getEventMock($request));
-        $this->assertEquals('/res?client_id=clientId&client_secret=clientSecret', $request->getUrl());
+        $this->assertEquals('/res?key=clientId&token=clientSecret', $request->getUrl());
     }
 
     private function getEventMock($request = null)
