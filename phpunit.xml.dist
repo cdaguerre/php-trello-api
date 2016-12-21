@@ -19,16 +19,7 @@
 		<testsuite name="unit">
 			<directory>./test/Trello/Tests/Unit/</directory>
 		</testsuite>
-		<testsuite name="functional">
-			<directory>./test/Trello/Tests/Functional/</directory>
-		</testsuite>
 	</testsuites>
-
-	<groups>
-		<exclude>
-			<group>functional</group>
-		</exclude>
-	</groups>
 
 	<filter>
 		<whitelist>
