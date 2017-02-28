@@ -103,6 +103,14 @@ class Card extends AbstractApi
      */
     public function update($id, array $params = array())
     {
+        // If the due date is set, but is empty, remove it from the fields that are sent in the request.
+        // This prevents Trello from adding a "X set this card to be due Invalid date" comment.
+        foreach($params as $param_name => $param_value) {
+            if($param_name == 'due' && empty($param_value)) {
+                unset($params[$param_name]);
+            }
+        }
+
         return $this->put($this->getPath().'/'.rawurlencode($id), $params);
     }
 
