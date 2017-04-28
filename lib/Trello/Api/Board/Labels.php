@@ -74,7 +74,7 @@ class Labels extends AbstractApi
              'name' => $name
          );
         
-        return $this->post($this->getPath($id).'/'.rawurlencode($color), $params);
+        return $this->post($this->getPath($id), $params);
     }
     
     /**
