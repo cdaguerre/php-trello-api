@@ -17,7 +17,7 @@ class HttpClient implements HttpClientInterface
     protected $options = array(
         'base_url'    => 'https://api.trello.com/',
         'user_agent'  => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
-        'timeout'     => 10,
+        'timeout'     => 50,
         'api_version' => 1,
     );
 
