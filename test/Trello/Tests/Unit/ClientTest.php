@@ -178,6 +178,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             $methods
         );
 
-        return $this->getMock('Trello\HttpClient\HttpClientInterface', $methods);
+        return $this->getMockBuilder('Trello\HttpClient\HttpClientInterface')
+            ->setMethods($methods)
+            ->getMock();
     }
 }
