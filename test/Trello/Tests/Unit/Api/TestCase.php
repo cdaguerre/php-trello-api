@@ -6,6 +6,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     protected $fakeId = '5461efc60872da1eca5bf45c';
     protected $fakeParentId = '5461efc60872da1eca5bf45d';
+    protected $apiPath = null;
 
     abstract protected function getApiClass();
 

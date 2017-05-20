@@ -9,7 +9,7 @@ use Trello\Tests\Unit\Api\TestCase;
  */
 class MembersTest extends TestCase
 {
-    protected $apiPath = 'organization/#id#/members';
+    protected $apiPath = 'organizations/#id#/members';
 
     /**
      * @test

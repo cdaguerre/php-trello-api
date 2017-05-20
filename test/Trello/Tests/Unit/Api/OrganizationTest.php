@@ -38,7 +38,7 @@ class OrganizationTest extends TestCase
     public function shouldGetMembersApiObject()
     {
         $api = $this->getApiMock();
-        $this->assertInstanceOf('Trello\Api\Organization\Boards', $api->members());
+        $this->assertInstanceOf('Trello\Api\Organization\Members', $api->members());
     }
 
     protected function getApiClass()
