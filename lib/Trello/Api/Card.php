@@ -426,7 +426,7 @@ class Card extends AbstractApi
      */
     public function updateCheckItem($id, $checkItemId, array $updateFields = array())
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/'.rawurlencode($checkItemId).'/checkItem', $updateFields);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/checkItem/'.rawurlencode($checkItemId), $updateFields);
     }
     
     /**
