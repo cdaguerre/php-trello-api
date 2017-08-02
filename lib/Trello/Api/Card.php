@@ -188,7 +188,7 @@ class Card extends AbstractApi
      *
      * @return array checklist info
      */
-    public function getCheckLists($id, array $fields = array('fields'=>'all'){
+    public function getCheckLists($id, array $fields = array('fields'=>'all')){
 
         return $this->get($this->getPath().'/'.rawurlencode($id).'/checklists', $fields);
         
