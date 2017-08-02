@@ -400,6 +400,48 @@ class Card extends AbstractApi
         return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId), $params);
     }
     
+    /**
+     * Get checkitem from a given card
+     * @link https://trello.readme.io/v1.0/reference#cardsidcheckitemidcheckitem-2
+     *
+     * @param string $id        the card's id or short link
+     * @param string $checkItemId the check item id
+     * @param array $params the parameter array to retrieve, default is to retrieve all fields
+     *
+     * @return array
+     */
+    public function getCheckItem($id, $checkItemId, array $params = array('fields'=> 'all'))
+    {
+        return $this->get($this->getPath($id).'/checkItem/'.rawurlencode($checkItemId), $params);
+    }
+
+    /**
+     * Update checkItem for  a given card
+     * @link https://trello.readme.io/v1.0/reference#cardsidcheckitemidcheckitem-1
+     *
+     * @param string $id        the card's id or short link
+     * @param string $checkItemId the check item id
+     * @param array $updateFields the fields that should be updated
+     * @return array
+     */
+    public function updateCheckItem($id, $checkItemId, array $updateFields = array())
+    {
+        return $this->put($this->getPath($id).'/'.rawurlencode($checkItemId).'/checkItem', $updateFields);
+    }
+    
+    /**
+     * Remove checkitem from a given card
+     * @link https://trello.readme.io/v1.0/reference#cardsidcheckitemidcheckitem-2
+     *
+     * @param string $id        the card's id or short link
+     * @param string $checkItemId the checklist item id
+     *
+     * @return array
+     */
+    public function removeCheckItem($id, $checkItemId)
+    {
+        return $this->delete($this->getPath($id).'/checkItem/'.rawurlencode($checkItemId));
+    }
 
     /**
      * Actions API
