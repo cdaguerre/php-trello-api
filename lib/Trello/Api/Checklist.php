@@ -107,21 +107,28 @@ class Checklist extends AbstractApi
      *
      * @param string $checkListId the checklist's id
      * @param string $listItemId (optional) the listItem id
-     * @param array $fields (options) the fi
+     * @param array $fields (options) the fields to retrieve
      *
      * @return array
      */
-    public function getListItems($checkListId, $listItemId = null, array $fields = array('fields' => 'all')
+    public function getListItems($checkListId, array $fields = array('fields' => 'all'))
     {
-        if($listItemId == null){
-            
-            return $this->get($this->getPath().'/'.rawurlencode($checkListId).'/checkItems', $fields);
-    
-        }else{
-            
-            return $this->get($this->getPath().'/'.rawurlencode($checkListId).'/checkItems/'.rawurlencode($listItemId), $fields);
-         
-        }
+        return $this->get($this->getPath().'/'.rawurlencode($checkListId).'/checkItems', $fields);
+    }
+                  
+    /**
+     * get a specific checklist item from a checklist
+     * @link https://trello.readme.io/v1.0/reference#checklistsidcardscheckitems
+     *
+     * @param string $checkListId the checklist's id
+     * @param string $listItemId the listItem id
+     * @param array $fields (options) the fields to retrieve
+     *
+     * @return array
+     */
+    public function getListItem($checkListId, $listItemId, array $fields = array('fields' => 'all'))
+    {
+        return $this->get($this->getPath().'/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($listItemId), $fields);
     }
                                  
     /**
