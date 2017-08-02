@@ -179,6 +179,21 @@ class Card extends AbstractApi
         return $this->get($this->getPath().'/'.rawurlencode($id).'/checkItemStates', array('value' => 'all'));
     }
     
+    /**
+     * Get the checklists, for now will return the full list of checkitem states;
+     * @link https://trello.readme.io/v1.0/reference#cardsidchecklists
+     *
+     * @param string $id     the card's id or short link
+     * @param array $fields (optional) an array with the requested fields, all by default
+     *
+     * @return array checklist info
+     */
+    public function getCheckLists($id, array $fields = array('fields'=>'all'){
+
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/checklists', $fields);
+        
+    }
+    
      /**
      * Get the members;
      * @link https://trello.com/docs/api/card/#get-1-cards-card-id-or-shortlink-members
