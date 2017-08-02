@@ -412,7 +412,7 @@ class Card extends AbstractApi
      */
     public function getCheckItem($id, $checkItemId, array $params = array('fields'=> 'all'))
     {
-        return $this->get($this->getPath($id).'/checkItem/'.rawurlencode($checkItemId), $params);
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/checkItem/'.rawurlencode($checkItemId), $params);
     }
 
     /**
@@ -426,7 +426,7 @@ class Card extends AbstractApi
      */
     public function updateCheckItem($id, $checkItemId, array $updateFields = array())
     {
-        return $this->put($this->getPath($id).'/'.rawurlencode($checkItemId).'/checkItem', $updateFields);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/'.rawurlencode($checkItemId).'/checkItem', $updateFields);
     }
     
     /**
@@ -440,7 +440,7 @@ class Card extends AbstractApi
      */
     public function removeCheckItem($id, $checkItemId)
     {
-        return $this->delete($this->getPath($id).'/checkItem/'.rawurlencode($checkItemId));
+        return $this->delete($this->getPath().'/'.rawurlencode($id).'/checkItem/'.rawurlencode($checkItemId));
     }
 
     /**
