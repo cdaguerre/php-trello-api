@@ -94,7 +94,7 @@ class Actions extends AbstractApi
      * @param array $updateFields the fields that should be updated
      * @return array
      */
-    public function updateComment($id, $commentId, array $updateFields = array())
+    public function updateCheckItem($id, $commentId, array $updateFields = array())
     {
         return $this->put($this->getPath($id).'/'.rawurlencode($commentId).'/comments', $updateFields);
     }
