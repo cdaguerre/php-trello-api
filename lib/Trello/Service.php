@@ -91,6 +91,8 @@ class Service extends Manager
     {
         if (!$request) {
             $request = Request::createFromGlobals();
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace($data);
         }
 
         if (!$this->isTrelloWebhook($request) || !$action = $request->get('action')) {
