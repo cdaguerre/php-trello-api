@@ -97,6 +97,15 @@ interface CardInterface extends ObjectInterface
     public function setDueDate(\DateTime $due = null);
 
     /**
+     * Set due date
+     *
+     * @param boolean $completed
+     *
+     * @return CardInterface
+     */
+    public function setDueComplete($completed);
+
+    /**
      * Get due date
      *
      * @return \DateTime
