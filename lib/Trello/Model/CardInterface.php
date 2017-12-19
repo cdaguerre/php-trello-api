@@ -113,6 +113,13 @@ interface CardInterface extends ObjectInterface
     public function getDueDate();
 
     /**
+     * Get due complete
+     *
+     * @return boolean
+     */
+    public function getDueComplete();
+
+    /**
      * Set email
      *
      * @param string $email

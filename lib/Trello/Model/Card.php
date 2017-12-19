@@ -137,6 +137,18 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
+    public function getDueDate()
+    {
+        if ($this->data['due'] instanceof \DateTime) {
+            return $this->data['due'];
+        }
+
+        return new \DateTime($this->data['due']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setDueComplete($completed)
     {
         $this->data['dueComplete'] = $completed;
@@ -147,13 +159,9 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function getDueDate()
+    public function getDueComplete()
     {
-        if ($this->data['due'] instanceof \DateTime) {
-            return $this->data['due'];
-        }
-
-        return new \DateTime($this->data['due']);
+        return $this->data['dueComplete'];
     }
 
     /**
