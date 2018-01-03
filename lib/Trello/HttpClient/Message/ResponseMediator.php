@@ -2,13 +2,14 @@
 
 namespace Trello\HttpClient\Message;
 
-use Guzzle\Http\Message\Response;
+
+use GuzzleHttp\Psr7\Response;
 
 class ResponseMediator
 {
     public static function getContent(Response $response)
     {
-        $body    = $response->getBody(true);
+        $body    = $response->getBody()->getContents();
 
         $content = json_decode($body, true);
 
