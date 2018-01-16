@@ -27,7 +27,7 @@ class Boards extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id = "me", array $params = array())
     {
         return $this->get($this->getPath($id), $params);
     }
