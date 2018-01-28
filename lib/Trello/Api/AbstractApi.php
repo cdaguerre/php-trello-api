@@ -254,13 +254,17 @@ abstract class AbstractApi implements ApiInterface
             if (is_bool($parameter)) {
                 $parameters[$name] = $parameter ? 'true' : 'false';
             } elseif (is_array($parameter)) {
+                $commaSeparatedParameters = '';
                 foreach ($parameter as $subName => $subParameter) {
                     if (is_bool($subParameter)) {
                         $subParameter = $subParameter ? 'true' : 'false';
                     }
-                    $parameters[$name.'/'.$subName] = $subParameter;
+                    if($commaSeparatedParameters != ''){
+                        $commaSeparatedParameters .= ',';
+                    }
+                    $commaSeparatedParameters .= $subParameter;
                 }
-                unset($parameters[$name]);
+                $parameters[$name] = $commaSeparatedParameters;
             } elseif ($parameter instanceof DateTime) {
                 $parameters[$name] = $parameter->format($parameter::ATOM);
             }
