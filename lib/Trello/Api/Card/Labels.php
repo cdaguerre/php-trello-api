@@ -29,7 +29,7 @@ class Labels extends AbstractApi
     public function set($id, array $labels)
     {
         foreach ($labels as $label) {
-            if (!in_array($label, array('all', 'green', 'yellow', 'orange', 'red', 'purple', 'blue'))) {
+            if (!in_array($label, array('all', 'green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black'))) {
                 throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
             }
         }
@@ -52,7 +52,7 @@ class Labels extends AbstractApi
      */
     public function remove($id, $label)
     {
-        if (!in_array($label, array('green', 'yellow', 'orange', 'red', 'purple', 'blue'))) {
+        if (!in_array($label, array('green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black'))) {
             throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
         }
 
