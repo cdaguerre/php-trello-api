@@ -51,6 +51,26 @@ class Organization extends AbstractApi
      */
     public function show($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
+    }
+
+    /**
+     * Organization Boards API
+     *
+     * @return Organization\Boards
+     */
+    public function boards()
+    {
+        return new Organization\Boards($this->client);
+    }
+
+    /**
+     * Organization Members API
+     *
+     * @return Organization\Members
+     */
+    public function members()
+    {
+        return new Organization\Members($this->client);
     }
 }
