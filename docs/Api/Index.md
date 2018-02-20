@@ -2,7 +2,6 @@ API Index
 =========
 
 * [Action](Action.md)
-* [ApiInterface](ApiInterface.md)
 * [Board](Board.md)
     * [Actions](Board/Actions.md)
     * [Cardlists](Board/Cardlists.md)
