@@ -2,10 +2,10 @@
 
 namespace Trello\HttpClient;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
+use Guzzle\Http\Client as GuzzleClient;
+use Guzzle\Http\ClientInterface;
+use Guzzle\Http\Message\Request;
+use Guzzle\Http\Message\Response;
 use Trello\Exception\ErrorException;
 use Trello\Exception\RuntimeException;
 use Trello\HttpClient\Listener\AuthListener;
