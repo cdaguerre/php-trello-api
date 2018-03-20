@@ -3,7 +3,7 @@
 namespace Trello\HttpClient;
 
 use Trello\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Message\Response;
 
 interface HttpClientInterface
 {
