@@ -3,7 +3,7 @@
 namespace Trello\HttpClient\Listener;
 
 use Trello\HttpClient\Message\ResponseMediator;
-use Guzzle\Common\Event;
+use GuzzleHttp\Event;
 use Trello\Exception\ErrorException;
 use Trello\Exception\RuntimeException;
 use Trello\Exception\PermissionDeniedException;
