@@ -2,7 +2,7 @@
 
 namespace Trello\HttpClient\Listener;
 
-use Guzzle\Common\Event;
+use GuzzleHttp\Event;
 use Trello\Client;
 use Trello\Exception\RuntimeException;
 
