@@ -2,7 +2,7 @@
 
 namespace Trello\HttpClient\Message;
 
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Message\Response;
 
 class ResponseMediator
 {
