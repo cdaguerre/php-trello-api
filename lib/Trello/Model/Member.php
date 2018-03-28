@@ -16,6 +16,14 @@ class Member extends AbstractObject implements MemberInterface
     );
 
     /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->data['id'];
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function setAvatarHash($avatarHash)
