@@ -109,4 +109,3 @@ class Labels extends AbstractApi
         return $this->post('boards/'.rawurlencode($id).'/labels/', array('name' => $name, 'color' => $color));
     }
 }
-}
