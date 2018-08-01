@@ -237,9 +237,6 @@ interface BoardInterface extends ObjectInterface
     /**
      * Set label names
      *
-     * @param array $labelNames an array of 'color' => 'label name'
-     *                          existing colors are: 'green', 'yellow', 'orange', 'red', 'purple', 'blue'
-     *
      * @return BoardInterface
      */
     public function setLabelNames(array $labelNames);
@@ -250,6 +247,21 @@ interface BoardInterface extends ObjectInterface
      * @return array
      */
     public function getLabelNames();
+
+    /**
+     * Get labels
+     *
+     * @return array
+     */
+    public function getLabels();
+
+    /**
+     * Get label
+     *
+     * @return LabelInterface
+     */
+    public function getLabel($name, $color);
+
 
     /**
      * Set power ups

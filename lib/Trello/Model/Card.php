@@ -687,6 +687,9 @@ class Card extends AbstractObject implements CardInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLabelIds()
     {
         return $this->data['idLabels'];
@@ -708,6 +711,9 @@ class Card extends AbstractObject implements CardInterface
         return in_array($label->getId(), $this->data['idLabels']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addLabel(LabelInterface $label)
     {
         $this->data['idLabels'][] = $label->getId();

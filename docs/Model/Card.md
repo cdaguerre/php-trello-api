@@ -281,24 +281,24 @@ setLabels(array $labels)
 getLabels()
 ```
 
-### Get the colors of labels associated to this card
+### Get the ids of labels associated to this card
 ```php
-getLabelColors()
+getLabelIds()
 ```
 
-### Does the card have the label of which the color is $color?
+### Does the card have the label?
 ```php
-hasLabel($color)
+hasLabel(LabelInterface $label)
 ```
 
-### Add the label of color $color
+### Add the label $label
 ```php
-addLabel($color)
+addLabel(LabelInterface $label)
 ```
 
-### Remove the label of color $color
+### Remove the label $label
 ```php
-removeLabel($color)
+removeLabel(LabelInterface $label)
 ```
 
 ### Set Badges
