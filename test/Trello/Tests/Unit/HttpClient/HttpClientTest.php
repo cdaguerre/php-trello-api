@@ -226,7 +226,7 @@ class TestHttpClient extends HttpClient
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function request($path, $body, $httpMethod = 'GET', array $headers = array(), array $options = array())
+    public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
         $request = $this->client->createRequest($httpMethod, $path);
 
