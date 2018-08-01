@@ -19,6 +19,7 @@ class Board extends AbstractObject implements BoardInterface
         'membersInvited'           => 'all',
         'memberships'              => 'all',
         'lists'                    => 'all',
+        'labels'                   => 'all',
     );
 
     /**
@@ -305,6 +306,36 @@ class Board extends AbstractObject implements BoardInterface
     public function getLabelNames()
     {
         return $this->data['labelNames'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLabels()
+    {
+        $labels = array();
+
+        foreach ($this->data['labels'] as $data) {
+            $labels[$data['id']] = new Label($this->client, $data['id']);
+        }
+
+        return $labels;
+    }
+
+    public function getLabel($name, $color)
+    {
+        foreach ($this->data['labels'] as $data) {
+            if ($data['name'] === $name && $data['color'] === $color) {
+                return new Label($this->client, $data['id']);
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf(
+            'There is no list with name "%s" and color "%s" on this board ("%s")',
+            $name,
+            $color,
+            $this->getName()
+        ));
     }
 
     /**
