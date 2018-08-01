@@ -161,8 +161,9 @@ class Service extends Manager
             case Events::CARD_EMAIL:
             case Events::CARD_ADD_LABEL:
             case Events::CARD_REMOVE_LABEL:
-                $event = new Event\CardEvent();
+                $event = new Event\CardLabelEvent();
                 $event->setCard($this->getCard($data['card']['id']));
+                $event->setLabel($this->getLabel($data['label']['id']));
                 break;
             case Events::CARD_COPY:
                 $event = new Event\CardCopyEvent();
@@ -235,7 +236,6 @@ class Service extends Manager
                     serialize($data)
                 ));
         }
-
         $event->setRequestData($data);
 
         $this->dispatcher->dispatch($eventName, $event);
