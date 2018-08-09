@@ -558,4 +558,22 @@ interface CardInterface extends ObjectInterface
      * @return CardInterface
      */
     public function removeComment($commentId);
+
+    /**
+     * Set id of card source
+     *
+     * @param string $id            id of the card to copy
+     *
+     * @return CardInterface
+     */
+    public function setIdCardSource($id);
+
+    /**
+     * Set what to keep from card source
+     *
+     * @param string|array $keep    which properties to copy
+     *
+     * @return CardInterface
+     */
+    public function setKeepFromSource($keep);
 }
