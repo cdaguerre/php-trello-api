@@ -790,6 +790,26 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
+    public function setIdCardSource($id)
+    {
+        $this->data['idCardSource'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setKeepFromSource($keep)
+    {
+        $this->data['keepFromSource'] = $keep;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function preSave()
     {
         foreach ($this->newChecklists as $checklist) {
