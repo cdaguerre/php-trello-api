@@ -211,13 +211,11 @@ abstract class AbstractApi implements ApiInterface
                 $parameters[$name] = $parameter ? 'true' : 'false';
             }
         }
-
         $response = $this->client->getHttpClient()->put(
             $path,
             $this->createParametersBody($parameters),
             $requestHeaders
         );
-
         return ResponseMediator::getContent($response);
     }
 
@@ -258,9 +256,7 @@ abstract class AbstractApi implements ApiInterface
                     if (is_bool($subParameter)) {
                         $subParameter = $subParameter ? 'true' : 'false';
                     }
-                    $parameters[$name.'/'.$subName] = $subParameter;
                 }
-                unset($parameters[$name]);
             } elseif ($parameter instanceof DateTime) {
                 $parameters[$name] = $parameter->format($parameter::ATOM);
             }

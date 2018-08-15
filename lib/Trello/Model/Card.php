@@ -23,12 +23,14 @@ class Card extends AbstractObject implements CardInterface
         'attachments'     => true,
         'checklists'      => 'all',
         'checkItemStates' => true,
+        'labels'          => true,
         'actions'         => Events::CARD_COMMENT,
     );
 
     protected $newChecklists = array();
     protected $newComments = array();
     protected $commentsToBeRemoved = array();
+    protected $newAttachments = array();
 
     /**
      * {@inheritdoc}
@@ -640,6 +642,21 @@ class Card extends AbstractObject implements CardInterface
         return $members;
     }
 
+    public function addAttachment($url, $name = '')
+    {
+        foreach ($this->data['attachments'] as $existing) {
+            if ($existing['url'] === $url && $existing['name'] === $name) {
+                return $this;
+            }
+        }
+        $this->newAttachments[] = [
+            'url' => $url,
+            'name' => $name
+        ];
+
+        return $this;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -681,9 +698,17 @@ class Card extends AbstractObject implements CardInterface
      */
     public function setLabels(array $labels)
     {
-        $this->data['labels'] = $labels;
+        $this->data['idLabels'] = $labels;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLabelIds()
+    {
+        return $this->data['idLabels'];
     }
 
     /**
@@ -697,58 +722,30 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function getLabelColors()
+    public function hasLabel(LabelInterface $label)
     {
-        return array_map(function ($label) {
-            return $label['color'];
-        }, $this->data['labels']);
+        return in_array($label->getId(), $this->data['idLabels']);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasLabel($color)
+    public function addLabel(LabelInterface $label)
     {
-        return in_array($color, $this->getLabelColors());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addLabel($color)
-    {
-        if ($this->hasLabel($color)) {
-            throw new InvalidArgumentException(sprintf(
-                'Card %s already has the %s label.',
-                $this->getName(),
-                $color
-            ));
-        }
-
-        $this->data['labels'][] = array('color' => $color);
-
+        $this->data['idLabels'][] = $label->getId();
         return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeLabel($color)
+    public function removeLabel(LabelInterface $label)
     {
-        if (!$this->hasLabel($color)) {
-            throw new InvalidArgumentException(sprintf(
-                "Can't remove the %s label because card %s doesn't have it.",
-                $color,
-                $this->getName()
-            ));
-        }
-
-        foreach ($this->data['labels'] as $key => $label) {
-            if ($label['color'] === $color) {
-                unset($this->data['labels'][$key]);
+        foreach ($this->data['idLabels'] as $key => $id) {
+            if ($id === $label->getId()) {
+                unset($this->data['idLabels'][$key]);
             }
         }
-
         return $this;
     }
 
@@ -809,6 +806,26 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
+    public function setIdCardSource($id)
+    {
+        $this->data['idCardSource'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setKeepFromSource($keep)
+    {
+        $this->data['keepFromSource'] = $keep;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function preSave()
     {
         foreach ($this->newChecklists as $checklist) {
@@ -830,6 +847,11 @@ class Card extends AbstractObject implements CardInterface
         foreach ($this->commentsToBeRemoved as $key => $commentId) {
             $this->api->actions()->removeComment($this->id, $commentId);
             unset($this->commentsToBeRemoved[$key]);
+        }
+
+        foreach ($this->newAttachments as $key => $attachment) {
+            $this->api->attachments()->create($this->id, $attachment);
+            unset($this->newAttachments[$key]);
         }
     }
 }

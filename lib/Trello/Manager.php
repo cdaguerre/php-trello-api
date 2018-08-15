@@ -68,6 +68,18 @@ class Manager
     }
 
     /**
+     * Get label by id or create a new one
+     *
+     * @param string $id the label's id
+     *
+     * @return Model\LabelInterface
+     */
+    public function getLabel($id = null)
+    {
+        return new Model\Label($this->client, $id);
+    }
+
+    /**
      * Get checklist by id or create a new one
      *
      * @param string $id the checklist's id
