@@ -202,13 +202,13 @@ final class Events
 
     /**
      * When a new label is added to a card
-     * The event listener method receives a Trello\Event\CardEvent instance.
+     * The event listener method receives a Trello\Event\CardLabelEvent instance.
      */
     const CARD_ADD_LABEL                      = 'addLabelToCard';
 
     /**
      * When a new label is removed from a card
-     * The event listener method receives a Trello\Event\CardEvent instance.
+     * The event listener method receives a Trello\Event\CardLabelEvent instance.
      */
     const CARD_REMOVE_LABEL                   = 'removeLabelFromCard';
 

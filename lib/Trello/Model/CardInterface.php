@@ -472,7 +472,7 @@ interface CardInterface extends ObjectInterface
      *
      * @return array
      */
-    public function getLabelColors();
+    public function getLabelIds();
 
     /**
      * Does the card have the label of which the color is $color?
@@ -481,7 +481,7 @@ interface CardInterface extends ObjectInterface
      *
      * @return bool
      */
-    public function hasLabel($color);
+    public function hasLabel(LabelInterface $label);
 
     /**
      * Add the label of color $color
@@ -490,7 +490,7 @@ interface CardInterface extends ObjectInterface
      *
      * @return CardInterface
      */
-    public function addLabel($color);
+    public function addLabel(LabelInterface $label);
 
     /**
      * Remove the label of color $color
@@ -499,7 +499,7 @@ interface CardInterface extends ObjectInterface
      *
      * @return CardInterface
      */
-    public function removeLabel($color);
+    public function removeLabel(LabelInterface $label);
 
     /**
      * Set Badges

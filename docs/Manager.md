@@ -26,6 +26,11 @@ getList(string $id)
 getCard(string $id)
 ```
 
+### Get label by id or create a new one
+```php
+getLabel(string $id)
+```
+
 ### Get checklist by id or create a new one
 ```php
 getChecklist(string $id)

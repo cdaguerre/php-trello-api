@@ -151,6 +151,16 @@ setLabelNames(array $labelNames)
 getLabelNames()
 ```
 
+### Get labels
+```php
+getLabels()
+```
+
+### Get label that has name $name and color $color
+```php
+getLabel($name, $color)
+```
+
 ### Set power ups
 ```php
 setPowerUps(array $powerUps)
