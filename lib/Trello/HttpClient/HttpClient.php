@@ -326,13 +326,25 @@ class HttpClient implements HttpClientInterface
                             'key'   => $tokenOrLogin,
                             'token' => $password
                         ];
+                        $originalQueryString = $request->getUri()->getQuery();
+                        $originalQuery = [];
+                        parse_str($originalQueryString, $originalQuery);
+                        $query = array_merge($originalQuery, $query);
 
                         $query = http_build_query($query);
                         $request = $request->withUri($request->getUri()->withQuery($query));
                         break;
 
                     case Client::AUTH_URL_TOKEN:
-                        $query = ['token' => $tokenOrLogin, 'key' => $password];
+                        $query = [
+                            'token' => $tokenOrLogin,
+                            'key' => $password
+                        ];
+                        $originalQueryString = $request->getUri()->getQuery();
+                        $originalQuery = [];
+                        parse_str($originalQueryString, $originalQuery);
+                        $query = array_merge($originalQuery, $query);
+
                         $query = http_build_query($query);
                         $request = $request->withUri($request->getUri()->withQuery($query));
                         break;
