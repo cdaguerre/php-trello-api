@@ -840,6 +840,16 @@ class Card extends AbstractObject implements CardInterface
      */
     protected function postSave()
     {
+        $this->updateComments();
+    }
+
+    /**
+     * Posts new and removes old comments from the card.
+     *
+     * @param bool $forceRefresh
+     */
+    public function updateComments($forceRefresh = true)
+    {
         foreach ($this->newComments as $key => $text) {
             $this->api->actions()->addComment($this->id, $text);
             unset($this->newComments[$key]);
@@ -849,5 +859,10 @@ class Card extends AbstractObject implements CardInterface
             $this->api->actions()->removeComment($this->id, $commentId);
             unset($this->commentsToBeRemoved[$key]);
         }
+
+        if ($forceRefresh) {
+            $this->refresh();
+        }
     }
+
 }
