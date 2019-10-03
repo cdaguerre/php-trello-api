@@ -336,4 +336,14 @@ class Board extends AbstractApi
     {
         return new Board\PowerUps($this->client);
     }
+
+    /**
+     * Board CustomFields API
+     *
+     * @return Board\CustomFields
+     */
+    public function customFields()
+    {
+        return new Board\CustomFields($this->client);
+    }
 }
