@@ -47,6 +47,25 @@ class Members extends AbstractApi
     {
         return $this->delete($this->getPath($id).'/'.$memberId);
     }
+    
+    /**
+     * Add a given member from a given board
+     * @link https://trello.com/docs/api/board/#get-1-boards-board-id-members
+     *
+     * @param string $id       the board's id
+     * @param string $memberId the member's id
+     *
+     * @return array
+     */
+    public function add($id, $memberId,  $role = 'normal')
+    {
+        $params = array(
+            'idMember'    => $memberId,
+            'type'     => $role,
+        );
+        
+        return $this->put($this->getPath($id).'/'.$memberId, $params);
+    }
 
     /**
      * Filter members related to a given board

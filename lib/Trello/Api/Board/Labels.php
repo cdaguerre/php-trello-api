@@ -57,6 +57,27 @@ class Labels extends AbstractApi
     }
 
     /**
+     * Add a label related to a given board
+     * @link https://developers.trello.com/advanced-reference/board#post-1-boards-board-id-labels
+     *
+     * @param string $id    the board's id
+     * @param string $color the label's color
+     * @param string $name  the label's name
+     *
+     * @return array
+     */
+    public function add($id, $color, $name)
+    {
+       
+         $params = array(
+             'color' => $color,
+             'name' => $name
+         );
+        
+        return $this->post($this->getPath($id), $params);
+    }
+    
+    /**
      * Set a label's name on a given board and for a given color
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-labelnames-blue
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-labelnames-green

@@ -27,7 +27,7 @@ class Actions extends AbstractApi
     {
         return $this->get($this->getPath($id), $params);
     }
-
+    
     /**
      * Add comment to a given card
      * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-actions-comments
@@ -53,6 +53,20 @@ class Actions extends AbstractApi
      */
     public function removeComment($id, $commentId)
     {
-        return $this->delete($this->getPath($id).'/comments/'.rawurlencode($commentId));
+        return $this->delete($this->getPath($id).'/'.rawurlencode($commentId).'/comments');
+    }
+    
+    /**
+     * Update comment to a given card
+     * @link https://trello.com/docs/api/card/index.html#put-1-cards-card-id-or-shortlink-actions-idaction-comments
+     *
+     * @param string $id        the card's id or short link
+     * @param string $commentId the comment's id
+     * @param string $text the new comment text
+     * @return array
+     */
+    public function updateComment($id, $commentId, $text)
+    {
+        return $this->put($this->getPath($id).'/'.rawurlencode($commentId).'/comments', array('text' => $text));
     }
 }

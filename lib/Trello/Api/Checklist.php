@@ -85,7 +85,52 @@ class Checklist extends AbstractApi
     {
         return $this->delete($this->getPath().'/'.rawurlencode($id));
     }
-
+    
+    /**
+     * Remove a listitem from a checklist
+     * @link https://trello.com/docs/api/checklist/index.html#delete-1-checklists-idchecklist-checkitems-idcheckitem
+     *
+     * @param string $checkListId the checklist's id
+     * @param string $listItemId the listItem id
+     *
+     * @return array
+     */
+    public function removeListItem($checkListId, $listItemId)
+    {
+        return $this->delete($this->getPath().'/'.rawurlencode($checkListId).'/checkItems/'.rawurlencode($listItemId));
+    }
+    
+    
+    /**
+     * get checklist items from a checklist
+     * @link https://trello.readme.io/v1.0/reference#checklistsidcardscheckitems
+     *
+     * @param string $checkListId the checklist's id
+     * @param string $listItemId (optional) the listItem id
+     * @param array $fields (options) the fields to retrieve
+     *
+     * @return array
+     */
+    public function getListItems($checkListId, array $fields = array('fields' => 'all'))
+    {
+        return $this->get($this->getPath().'/'.rawurlencode($checkListId).'/checkItems', $fields);
+    }
+                  
+    /**
+     * get a specific checklist item from a checklist
+     * @link https://trello.readme.io/v1.0/reference#checklistsidcardscheckitems
+     *
+     * @param string $checkListId the checklist's id
+     * @param string $listItemId the listItem id
+     * @param array $fields (options) the fields to retrieve
+     *
+     * @return array
+     */
+    public function getListItem($checkListId, $listItemId, array $fields = array('fields' => 'all'))
+    {
+        return $this->get($this->getPath().'/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($listItemId), $fields);
+    }
+                                 
     /**
      * Get the board of a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-board

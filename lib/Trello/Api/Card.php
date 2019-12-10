@@ -9,11 +9,7 @@ use Trello\Exception\InvalidArgumentException;
  * @link https://trello.com/docs/api/card
  *
  * Unimplemented:
- * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-name
- * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-pos
- * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
  * - https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklistcurrent-checkitem-idcheckitem
- * - https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
  * - https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-converttocard
  * - https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-markassociatednotificationsread
  */
@@ -91,6 +87,24 @@ class Card extends AbstractApi
 
         return $this->post($this->getPath(), $params);
     }
+    
+       /**
+     * Create a checklist Item
+     * @link https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem
+     *
+     * @param string $cardId id of the card the item is added to
+     * @param string $checkListId id of the checklist the item is added to  
+     * @param array  $params optional attributes
+     *
+     * @return array card info
+     */
+
+    public function createCheckListItem($cardId, $checkListId, $params = Array()){
+        
+        $this->validateRequiredParameters(array('idChecklist', 'name'), $params);
+
+        return $this->post($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem', $params);
+    }
 
     /**
      * Update a card
@@ -152,6 +166,45 @@ class Card extends AbstractApi
         return $this->get($this->getPath().'/'.rawurlencode($id).'/board/'.rawurlencode($field));
     }
 
+    /**
+     * Get the checkitemstates, for now will return the full list of checkitem states;
+     * @link https://trello.com/docs/api/card/index.html#get-1-cards-card-id-or-shortlink-checkitemstates
+     *
+     * @param string $id     the card's id or short link
+     *
+     * @return array list info
+     */
+    public function getCheckItemStates($id){
+
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/checkItemStates', array('value' => 'all'));
+    }
+    
+    /**
+     * Get the checklists, for now will return the full list of checkitem states;
+     * @link https://trello.readme.io/v1.0/reference#cardsidchecklists
+     *
+     * @param string $id     the card's id or short link
+     * @param array $fields (optional) an array with the requested fields, all by default
+     *
+     * @return array checklist info
+     */
+    public function getCheckLists($id, array $fields = array('fields'=>'all')){
+
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/checklists', $fields);
+        
+    }
+    
+     /**
+     * Get the members;
+     * @link https://trello.com/docs/api/card/#get-1-cards-card-id-or-shortlink-members
+     *
+     * @param string $id the card's id or short link
+     *
+     * @return array list info
+     */
+    public function getMembers($id){
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/members', array('value' => 'all'));
+    }
     /**
      * Set a given card's list
      * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-idlist
@@ -283,6 +336,128 @@ class Card extends AbstractApi
         return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', array('value' => $subscribed));
     }
 
+
+    /**
+     * Set a given card's memberId
+     * @link tbd
+     *
+     * @param string $id         the list's id
+     * @param string $idMembers comma seperated list of responsible members
+     *
+     * @return array list info
+     */
+    public function setIdMembers($id, $idMembers)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/idMembers', array('value' => $idMembers));
+    }
+    
+/**
+     * Set a given checklist item name
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-name
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param string   $name new name value
+     *
+     * @return array list info
+     */
+    public function setCheckListItemName($cardId,$checkListId,$itemId, $name)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/name', array('value' => $name));
+    }
+
+    /**
+     * Set a given checklist item position
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-pos
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param string $position new position value
+     *
+     * @return array list info
+     */
+    public function setCheckListItemPosition($cardId,$checkListId,$itemId, $position)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/pos', array('value' => $position));
+    }
+
+    /**
+     * Set a given checklist item closed state
+     * @link https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-checklist-idchecklist-checkitem-idcheckitem-state
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param bool   $complete new complete value, defaults to true
+     *
+     * @return array list info
+     */
+    public function setCheckListItemClosed($cardId,$checkListId,$itemId, $complete = true)
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId).'/state', array('value' => $complete));
+    }
+
+    /**
+     * Update checklist item by parameter array
+     * @link https://trello.com/docs/api/card/index.html#put-1-cards-card-id-or-shortlink-checklist-idchecklistcurrent-checkitem-idcheckitem
+     *
+     * @param string $cardId the cards's id
+     * @param string $checkListId the checklist's id
+     * @param string $itemId the item's id
+     * @param array $params item attributes to update
+     *
+     * @return array list info
+     */
+    public function updateCheckListItem($cardId,$checkListId,$itemId, $params = array())
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($cardId).'/checklist/'.rawurlencode($checkListId).'/checkItem/'.rawurlencode($itemId), $params);
+    }
+    
+    /**
+     * Get checkitem from a given card
+     * @link https://trello.readme.io/v1.0/reference#cardsidcheckitemidcheckitem-2
+     *
+     * @param string $id        the card's id or short link
+     * @param string $checkItemId the check item id
+     * @param array $params the parameter array to retrieve, default is to retrieve all fields
+     *
+     * @return array
+     */
+    public function getCheckItem($id, $checkItemId, array $params = array('fields'=> 'all'))
+    {
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/checkItem/'.rawurlencode($checkItemId), $params);
+    }
+
+    /**
+     * Update checkItem for  a given card
+     * @link https://trello.readme.io/v1.0/reference#cardsidcheckitemidcheckitem-1
+     *
+     * @param string $id        the card's id or short link
+     * @param string $checkItemId the check item id
+     * @param array $updateFields the fields that should be updated
+     * @return array
+     */
+    public function updateCheckItem($id, $checkItemId, array $updateFields = array())
+    {
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/checkItem/'.rawurlencode($checkItemId), $updateFields);
+    }
+    
+    /**
+     * Remove checkitem from a given card
+     * @link https://trello.readme.io/v1.0/reference#cardsidcheckitemidcheckitem-2
+     *
+     * @param string $id        the card's id or short link
+     * @param string $checkItemId the checklist item id
+     *
+     * @return array
+     */
+    public function removeCheckItem($id, $checkItemId)
+    {
+        return $this->delete($this->getPath().'/'.rawurlencode($id).'/checkItem/'.rawurlencode($checkItemId));
+    }
+
     /**
      * Actions API
      *
@@ -341,5 +516,15 @@ class Card extends AbstractApi
     public function stickers()
     {
         return new Card\Stickers($this->client);
+    }
+
+    /**
+     * CustomFieldItems API
+     *
+     * @return Card\CustomFieldItems
+     */
+    public function customFieldItems()
+    {
+        return new Card\CustomFieldItems($this->client);
     }
 }
