@@ -33,4 +33,24 @@ class CustomFieldItems extends AbstractApi
 
         return array_key_exists('customFieldItems', $data) ? $data['customFieldItems'] : array();
     }
+
+    /**
+     * Update a given custom field value on a given card
+     * @link https://developers.trello.com/docs/getting-started-custom-fields#section-setting-updating-customfielditems
+     *
+     * @param string $id            the card's id or short link
+     * @param string $customFieldId the card's id or short link
+     * @param array  $value        the member's id
+     *
+     * @return array
+     */
+    public function update($id, $customFieldId, $value = array())
+    {
+        $path = $this->getPath($id) . 'customField/' . rawurldecode($customFieldId) . '/item';
+
+        return $this->put(
+            $path,
+            $value
+        );
+    }
 }
