@@ -74,15 +74,16 @@ class HttpClient implements HttpClientInterface
 
     /**
      * @param string $eventName
+     * @param callable $listener
      */
     public function addListener($eventName, $listener)
     {
-        $this->client->getEventDispatcher()->addListener($eventName, $listener);
+        $this->client->getEmitter()->on($eventName, $listener);
     }
 
     public function addSubscriber(EventSubscriberInterface $subscriber)
     {
-        $this->client->addSubscriber($subscriber);
+        $this->client->getEmitter()->attach($subscriber);
     }
 
     /**
@@ -161,7 +162,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function authenticate($tokenOrLogin, $password = null, $method)
+    public function authenticate($tokenOrLogin, $password, $method)
     {
         $this->addListener('request.before_send', array(
             new AuthListener($tokenOrLogin, $password, $method),

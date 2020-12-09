@@ -17,10 +17,10 @@ class AuthListener
      * @param string $password
      * @param null|string $method
      */
-    public function __construct($tokenOrLogin, $password = null, $method)
+    public function __construct($tokenOrLogin, $password, $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;
-        $this->password = $password;
+        $this->password = $password ?: null;
         $this->method = $method;
     }
 
