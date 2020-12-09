@@ -21,7 +21,7 @@ class Organization extends AbstractApi
      * @link https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'name',
         'displayName',
         'desc',
@@ -38,19 +38,19 @@ class Organization extends AbstractApi
         'website',
         'logoHash',
         'premiumFeatures'
-    );
+    ];
 
     /**
      * Find an organization by id
      * @link https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name
      *
-     * @param string $id     the organization's id
-     * @param array  $params optional attributes
+     * @param string $id the organization's id
+     * @param array $params optional attributes
      *
      * @return array
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
 }

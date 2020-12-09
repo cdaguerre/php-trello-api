@@ -12,7 +12,7 @@ class OrganizationTest extends TestCase
      */
     public function shouldShowOrganization()
     {
-        $expectedArray = array('id' => '54744b094fef0c7d704ca379');
+        $expectedArray = ['id' => '54744b094fef0c7d704ca379'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

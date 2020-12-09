@@ -15,12 +15,12 @@ class MemberTest extends TestCase
      */
     public function shouldShowMember()
     {
-        $expectedArray = array('id' => $this->fakeMemberId);
+        $expectedArray = ['id' => $this->fakeMemberId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeMemberId)
+            ->with($this->apiPath . '/' . $this->fakeMemberId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeMemberId));
@@ -31,12 +31,12 @@ class MemberTest extends TestCase
      */
     public function shouldUpdateMember()
     {
-        $expectedArray = array('id' => $this->fakeMemberId);
+        $expectedArray = ['id' => $this->fakeMemberId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeMemberId)
+            ->with($this->apiPath . '/' . $this->fakeMemberId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeMemberId, $expectedArray));
@@ -47,12 +47,12 @@ class MemberTest extends TestCase
      */
     public function shouldGetDeltas()
     {
-        $expectedArray = array('id' => $this->fakeMemberId);
+        $expectedArray = ['id' => $this->fakeMemberId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/deltas')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/deltas')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->getDeltas($this->fakeMemberId));
@@ -68,7 +68,7 @@ class MemberTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/username')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/username')
             ->will($this->returnValue($username));
 
         $this->assertEquals($username, $api->setUsername($this->fakeMemberId, $username));
@@ -84,7 +84,7 @@ class MemberTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/bio')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/bio')
             ->will($this->returnValue($bio));
 
         $this->assertEquals($bio, $api->setBio($this->fakeMemberId, $bio));
@@ -100,7 +100,7 @@ class MemberTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/avatar')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/avatar')
             ->will($this->returnValue($avatar));
 
         $this->assertEquals($avatar, $api->setAvatar($this->fakeMemberId, $avatar));
@@ -116,7 +116,7 @@ class MemberTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/avatarSource')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/avatarSource')
             ->will($this->returnValue($avatarSource));
 
         $this->assertEquals($avatarSource, $api->setAvatarSource($this->fakeMemberId, $avatarSource));
@@ -132,7 +132,7 @@ class MemberTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/initials')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/initials')
             ->will($this->returnValue($initials));
 
         $this->assertEquals($initials, $api->setInitials($this->fakeMemberId, $initials));
@@ -148,7 +148,7 @@ class MemberTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeMemberId.'/fullName')
+            ->with($this->apiPath . '/' . $this->fakeMemberId . '/fullName')
             ->will($this->returnValue($fullName));
 
         $this->assertEquals($fullName, $api->setFullName($this->fakeMemberId, $fullName));

@@ -13,7 +13,7 @@ class MyPreferencesTest extends TestCase
 
     /**
      * @test
-     */    
+     */
     public function notImplementedYet()
     {
         $this->markTestSkipped(

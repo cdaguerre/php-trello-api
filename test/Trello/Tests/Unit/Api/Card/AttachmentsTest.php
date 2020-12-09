@@ -33,7 +33,7 @@ class AttachmentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->show($this->fakeParentId, $this->fakeId));
@@ -45,7 +45,7 @@ class AttachmentsTest extends TestCase
      */
     public function shouldCreateAttachment()
     {
-        $data = array('url' => 'http://www.test.com/image.jpg');
+        $data = ['url' => 'http://www.test.com/image.jpg'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -62,7 +62,7 @@ class AttachmentsTest extends TestCase
      */
     public function shouldNotCreateAttachmentWhenParamsIncomplete()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -79,7 +79,7 @@ class AttachmentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->remove($this->fakeParentId, $this->fakeId));
@@ -93,7 +93,7 @@ class AttachmentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('cards/'.$this->fakeParentId.'/idAttachmentCover')
+            ->with('cards/' . $this->fakeParentId . '/idAttachmentCover')
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->setAsCover($this->fakeParentId, $this->fakeId));

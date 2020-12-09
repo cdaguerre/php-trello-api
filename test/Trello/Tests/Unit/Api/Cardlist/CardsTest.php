@@ -35,7 +35,7 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue($defaultFilter));
 
         $this->assertEquals($defaultFilter, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open')
+            ->with($this->getPath() . '/open')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class CardsTest extends TestCase
      */
     public function shouldFilterCardsWithArrayArgument()
     {
-        $filter = array('open','closed');
+        $filter = ['open', 'closed'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open,closed')
+            ->with($this->getPath() . '/open,closed')
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->filter($this->fakeParentId, $filter));
@@ -97,7 +97,7 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('lists/'.$this->fakeId.'/archiveAllCards')
+            ->with('lists/' . $this->fakeId . '/archiveAllCards')
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->archiveAll($this->fakeId));
@@ -114,7 +114,7 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('lists/'.$this->fakeId.'/moveAllCards')
+            ->with('lists/' . $this->fakeId . '/moveAllCards')
             ->will($this->returnValue($destId));
 
         $this->assertEquals($destId, $api->moveAll($this->fakeId, $boardId, $destId));

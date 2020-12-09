@@ -14,12 +14,12 @@ class NotificationTest extends TestCase
      */
     public function shouldShowNotification()
     {
-        $expectedArray = array('id' => $this->fakeId);
+        $expectedArray = ['id' => $this->fakeId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('notifications/'.$this->fakeId)
+            ->with('notifications/' . $this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeId));
@@ -30,12 +30,12 @@ class NotificationTest extends TestCase
      */
     public function shouldUpdateNotification()
     {
-        $expectedArray = array('id' => $this->fakeId);
+        $expectedArray = ['id' => $this->fakeId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('notifications/'.$this->fakeId)
+            ->with('notifications/' . $this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeId, $expectedArray));
@@ -46,12 +46,12 @@ class NotificationTest extends TestCase
      */
     public function shouldSetUnread()
     {
-        $expectedArray = array('id' => $this->fakeId);
+        $expectedArray = ['id' => $this->fakeId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('notifications/'.$this->fakeId.'/unread')
+            ->with('notifications/' . $this->fakeId . '/unread')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->setUnread($this->fakeId, true));
@@ -62,7 +62,7 @@ class NotificationTest extends TestCase
      */
     public function shouldSetAllRead()
     {
-        $expectedArray = array();
+        $expectedArray = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -78,12 +78,12 @@ class NotificationTest extends TestCase
      */
     public function shouldGetEntities()
     {
-        $expectedArray = array();
+        $expectedArray = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('notifications/'.$this->fakeId.'/entities')
+            ->with('notifications/' . $this->fakeId . '/entities')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->getEntities($this->fakeId));
@@ -97,7 +97,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/board')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/board')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getBoard($this->fakeParentId));
@@ -111,7 +111,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/board/name')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/board/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getBoardField($this->fakeParentId, 'name'));
@@ -138,7 +138,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/list')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/list')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getList($this->fakeParentId));
@@ -152,7 +152,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/list/name')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/list/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getListField($this->fakeParentId, 'name'));
@@ -179,7 +179,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/card')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/card')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getCard($this->fakeParentId));
@@ -193,7 +193,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/card/name')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/card/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getCardField($this->fakeParentId, 'name'));
@@ -220,7 +220,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/member')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/member')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getMember($this->fakeParentId));
@@ -234,7 +234,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/member/bio')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/member/bio')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getMemberField($this->fakeParentId, 'bio'));
@@ -261,7 +261,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/memberCreator')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/memberCreator')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getCreator($this->fakeParentId));
@@ -275,7 +275,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/memberCreator/bio')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/memberCreator/bio')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getCreatorField($this->fakeParentId, 'bio'));
@@ -302,7 +302,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/organization')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/organization')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getOrganization($this->fakeParentId));
@@ -316,7 +316,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeParentId.'/organization/name')
+            ->with($this->apiPath . '/' . $this->fakeParentId . '/organization/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getOrganizationField($this->fakeParentId, 'name'));

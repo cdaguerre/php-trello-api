@@ -2,7 +2,7 @@
 
 namespace Trello\HttpClient\Listener;
 
-use Guzzle\Common\Event;
+use GuzzleHttp\Event\AbstractRequestEvent as Event;
 use Trello\Client;
 use Trello\Exception\RuntimeException;
 
@@ -17,10 +17,10 @@ class AuthListener
      * @param string $password
      * @param null|string $method
      */
-    public function __construct($tokenOrLogin, $password = null, $method)
+    public function __construct($tokenOrLogin, $password, $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;
-        $this->password = $password;
+        $this->password = $password ?: null;
         $this->method = $method;
     }
 
@@ -35,7 +35,7 @@ class AuthListener
             case Client::AUTH_HTTP_PASSWORD:
                 $event['request']->setHeader(
                     'Authorization',
-                    sprintf('Basic %s', base64_encode($this->tokenOrLogin.':'.$this->password))
+                    sprintf('Basic %s', base64_encode($this->tokenOrLogin . ':' . $this->password))
                 );
                 break;
 
@@ -49,10 +49,10 @@ class AuthListener
             case Client::AUTH_URL_CLIENT_ID:
                 $url = $event['request']->getUrl();
 
-                $parameters = array(
-                    'key'   => $this->tokenOrLogin,
+                $parameters = [
+                    'key' => $this->tokenOrLogin,
                     'token' => $this->password,
-                );
+                ];
 
                 $url .= (false === strpos($url, '?') ? '?' : '&');
                 $url .= utf8_encode(http_build_query($parameters, '', '&'));
@@ -64,7 +64,7 @@ class AuthListener
                 $url = $event['request']->getUrl();
                 $url .= (false === strpos($url, '?') ? '?' : '&');
                 $url .= utf8_encode(http_build_query(
-                    array('token' => $this->tokenOrLogin, 'key' => $this->password),
+                    ['token' => $this->tokenOrLogin, 'key' => $this->password],
                     '',
                     '&'
                 ));

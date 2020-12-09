@@ -1,4 +1,5 @@
 <?php
+
 namespace Trello\Tests\HttpClient;
 
 use Trello\HttpClient\Listener\ErrorListener;
@@ -13,7 +14,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassIfResponseNotHaveErrorStatus()
     {
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
         $response->expects($this->once())
@@ -63,7 +64,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response = $this->createResponseMock(
             self::RESPONSE_IS_CLIENT_ERROR,
             404,
-            json_encode(array('message' => 'test'))
+            json_encode(['message' => 'test'])
         );
 
         $listener = new ErrorListener;
@@ -79,7 +80,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response = $this->createResponseMock(
             self::RESPONSE_IS_CLIENT_ERROR,
             400,
-            json_encode(array('message' => 'test'))
+            json_encode(['message' => 'test'])
         );
 
         $listener = new ErrorListener;
@@ -93,17 +94,17 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhen422IsSentWithErrorCode($errorCode)
     {
-        $content = json_encode(array(
+        $content = json_encode([
             'message' => 'Validation Failed',
-            'errors'  => array(
-                array(
-                    'code'     => $errorCode,
-                    'field'    => 'test',
-                    'value'    => 'wrong',
+            'errors' => [
+                [
+                    'code' => $errorCode,
+                    'field' => 'test',
+                    'value' => 'wrong',
                     'resource' => 'fake'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
         $response = $this->createResponseMock(
             self::RESPONSE_IS_CLIENT_ERROR,
             422,
@@ -116,19 +117,19 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
 
     public function getErrorCodesProvider()
     {
-        return array(
-            array('missing'),
-            array('missing_field'),
-            array('invalid'),
-            array('already_exists'),
-        );
+        return [
+            ['missing'],
+            ['missing_field'],
+            ['invalid'],
+            ['already_exists'],
+        ];
     }
 
     private function getEventMock($response)
     {
-        $mock = $this->getMockBuilder('Guzzle\Common\Event')
+        $mock = $this->getMockBuilder('GuzzleHttp\Event\AbstractRequestEvent')
             ->getMock();
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
         $request->expects($this->any())
@@ -137,6 +138,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $mock->expects($this->any())
             ->method('offsetGet')
             ->will($this->returnValue($request));
+
         return $mock;
     }
 
@@ -144,8 +146,9 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $isClientError,
         $httpStatusCode,
         $responseBody = ''
-    ) {
-        $mock = $this->getMockBuilder('Guzzle\Http\Message\Response')
+    )
+    {
+        $mock = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
         $mock->expects($this->once())

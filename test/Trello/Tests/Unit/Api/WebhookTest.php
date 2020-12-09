@@ -15,12 +15,12 @@ class WebhookTest extends TestCase
      */
     public function shouldShowWebhook()
     {
-        $expectedArray = array('id' => $this->fakeId);
+        $expectedArray = ['id' => $this->fakeId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeId)
+            ->with($this->apiPath . '/' . $this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeId));
@@ -34,7 +34,7 @@ class WebhookTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->apiPath.'/'.$this->fakeId)
+            ->with($this->apiPath . '/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->remove($this->fakeId));
@@ -50,7 +50,7 @@ class WebhookTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeId.'/description')
+            ->with($this->apiPath . '/' . $this->fakeId . '/description')
             ->will($this->returnValue($description));
 
         $this->assertEquals($description, $api->setDescription($this->fakeId, $description));
@@ -66,7 +66,7 @@ class WebhookTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeId.'/callbackUrl')
+            ->with($this->apiPath . '/' . $this->fakeId . '/callbackUrl')
             ->will($this->returnValue($description));
 
         $this->assertEquals($description, $api->setCallbackUrl($this->fakeId, $description));
@@ -82,7 +82,7 @@ class WebhookTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeId.'/idModel')
+            ->with($this->apiPath . '/' . $this->fakeId . '/idModel')
             ->will($this->returnValue($modelId));
 
         $this->assertEquals($modelId, $api->setModel($this->fakeId, $modelId));
@@ -98,7 +98,7 @@ class WebhookTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeId.'/active')
+            ->with($this->apiPath . '/' . $this->fakeId . '/active')
             ->will($this->returnValue($status));
 
         $this->assertEquals($status, $api->setActive($this->fakeId, $status));
@@ -109,10 +109,10 @@ class WebhookTest extends TestCase
      */
     public function shouldCreateWebhook()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'callbackURL' => 'http://www.callback.com/',
             'idModel' => $this->fakeId('board')
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -129,9 +129,9 @@ class WebhookTest extends TestCase
      */
     public function shouldNotCreateWebhookWithoutCallbackUrl()
     {
-        $data = array(
+        $data = [
             'idModel' => $this->fakeId('board')
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -146,9 +146,9 @@ class WebhookTest extends TestCase
      */
     public function shouldNotCreateWebhookWithoutModelId()
     {
-        $data = array(
+        $data = [
             'callbackUrl' => 'http://www.callback.com/'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -162,15 +162,15 @@ class WebhookTest extends TestCase
      */
     public function shouldUpdateWebhook()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'callbackURL' => 'http://www.callback.com/',
             'idModel' => $this->fakeId('board')
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeId)
+            ->with($this->apiPath . '/' . $this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeId, $expectedArray));
@@ -182,9 +182,9 @@ class WebhookTest extends TestCase
      */
     public function shouldNotUpdateWebhookWithoutCallbackUrl()
     {
-        $data = array(
+        $data = [
             'idModel' => $this->fakeId('board')
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -199,9 +199,9 @@ class WebhookTest extends TestCase
      */
     public function shouldNotUpdateWebhookWithoutModelId()
     {
-        $data = array(
+        $data = [
             'callbackUrl' => 'http://www.callback.com/'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())

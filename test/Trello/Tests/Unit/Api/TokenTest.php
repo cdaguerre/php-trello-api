@@ -15,12 +15,12 @@ class TokenTest extends TestCase
      */
     public function shouldShowToken()
     {
-        $expectedArray = array('id' => $this->fakeId);
+        $expectedArray = ['id' => $this->fakeId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeId)
+            ->with($this->apiPath . '/' . $this->fakeId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeId));
@@ -34,7 +34,7 @@ class TokenTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->apiPath.'/'.$this->fakeId)
+            ->with($this->apiPath . '/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->remove($this->fakeId));
@@ -48,7 +48,7 @@ class TokenTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeId.'/member')
+            ->with($this->apiPath . '/' . $this->fakeId . '/member')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getMember($this->fakeId));
@@ -62,7 +62,7 @@ class TokenTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeId.'/member/fullName')
+            ->with($this->apiPath . '/' . $this->fakeId . '/member/fullName')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getMemberField($this->fakeId, 'fullName'));

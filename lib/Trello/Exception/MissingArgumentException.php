@@ -15,7 +15,7 @@ class MissingArgumentException extends ErrorException
     public function __construct($required, $code = 0, $previous = null)
     {
         if (is_string($required)) {
-            $required = array($required);
+            $required = [$required];
         }
 
         parent::__construct(sprintf('One or more of required ("%s") parameters are missing!', implode('", "', $required)), $code, $previous);

@@ -37,7 +37,7 @@ abstract class AbstractObject
      *
      * @var array
      */
-    protected $loadParams = array('fields' => 'all');
+    protected $loadParams = ['fields' => 'all'];
 
     /**
      * @var string
@@ -53,12 +53,12 @@ abstract class AbstractObject
      * Constructor.
      *
      * @param ClientInterface $client the Trello client
-     * @param string          $id     the id of the object
+     * @param string $id the id of the object
      */
     public function __construct(ClientInterface $client, $id = null)
     {
         $this->client = $client;
-        $this->api    = $client->api($this->apiName);
+        $this->api = $client->api($this->apiName);
 
         $this->fields = $this->api->getFields();
 
@@ -168,7 +168,7 @@ abstract class AbstractObject
     {
         $this->preCreate();
         $this->data = $this->api->create($this->data);
-        $this->id   = $this->data['id'];
+        $this->id = $this->data['id'];
         $this->postCreate();
 
         return $this;

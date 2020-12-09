@@ -9,11 +9,11 @@ class Organization extends AbstractObject implements OrganizationInterface
 {
     protected $apiName = 'organization';
 
-    protected $loadParams = array(
+    protected $loadParams = [
         'fields' => 'all',
         'members' => 'all',
         'membersInvited' => 'all',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -110,7 +110,7 @@ class Organization extends AbstractObject implements OrganizationInterface
      */
     public function getBoards()
     {
-        $boards = array();
+        $boards = [];
 
         foreach ($this->data['idBoards'] as $boardId) {
             $boards[] = new Board($this->client, $boardId);

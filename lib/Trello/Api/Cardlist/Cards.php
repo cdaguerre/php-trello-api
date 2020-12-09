@@ -18,12 +18,12 @@ class Cards extends AbstractApi
      * Get cards related to a given list
      * @link https://trello.com/docs/api/list/#get-1-lists-idlist-cards
      *
-     * @param string $id     the card's id or short link
-     * @param array  $params optional parameters
+     * @param string $id the card's id or short link
+     * @param array $params optional parameters
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -32,28 +32,28 @@ class Cards extends AbstractApi
      * Filter cards related to a given list
      * @link https://trello.com/docs/api/list/#get-1-lists-idlist-cards-filter
      *
-     * @param string $id     the list's id
-     * @param array  $filter one of 'none', 'open', 'closed', 'all'
+     * @param string $id the list's id
+     * @param array $filter one of 'none', 'open', 'closed', 'all'
      *
      * @return array
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('none', 'open', 'closed', 'all');
+        $allowed = ['none', 'open', 'closed', 'all'];
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filters));
     }
 
     /**
      * Create a card
      * @link https://trello.com/docs/api/list/#post-1-lists-idlist-cards
      *
-     * @param array  $params optional attributes
+     * @param array $params optional attributes
      *
      * @return array card info
      */
-    public function create($id, $name, array $params = array())
+    public function create($id, $name, array $params = [])
     {
         $params['idList'] = $id;
         $params['name'] = $name;
@@ -75,26 +75,26 @@ class Cards extends AbstractApi
      */
     public function archiveAll($id)
     {
-        return $this->post('lists/'.rawurlencode($id).'/archiveAllCards');
+        return $this->post('lists/' . rawurlencode($id) . '/archiveAllCards');
     }
 
     /**
      * Move all cards of a given list to another list
      * @link https://trello.com/docs/api/list/#post-1-lists-idlist-moveallcards
      *
-     * @param string $id         Id of the list to move
-     * @param string $boardId    id of the board that the cards should be moved to
+     * @param string $id Id of the list to move
+     * @param string $boardId id of the board that the cards should be moved to
      * @param string $destListId id of the list that the cards should be moved to
      *
      * @return array
      */
     public function moveAll($id, $boardId, $destListId)
     {
-        $data = array(
+        $data = [
             'idBoard' => $boardId,
             'idList' => $destListId,
-        );
+        ];
 
-        return $this->post('lists/'.rawurlencode($id).'/moveAllCards', $data);
+        return $this->post('lists/' . rawurlencode($id) . '/moveAllCards', $data);
     }
 }

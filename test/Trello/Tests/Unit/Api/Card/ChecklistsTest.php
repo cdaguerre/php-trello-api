@@ -19,7 +19,7 @@ class ChecklistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('cards/'.$this->fakeParentId.'/checklists')
+            ->with('cards/' . $this->fakeParentId . '/checklists')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->all($this->fakeParentId));
@@ -30,7 +30,7 @@ class ChecklistsTest extends TestCase
      */
     public function shouldCreateChecklist()
     {
-        $data = array('name' => 'Test checklist');
+        $data = ['name' => 'Test checklist'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -47,7 +47,7 @@ class ChecklistsTest extends TestCase
      */
     public function shouldNotCreateChecklistWithoutNameSourceChecklistIdOrValue()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -64,7 +64,7 @@ class ChecklistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->remove($this->fakeParentId, $this->fakeId));
@@ -78,7 +78,7 @@ class ChecklistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('cards/'.$this->fakeParentId.'/checkItemStates')
+            ->with('cards/' . $this->fakeParentId . '/checkItemStates')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->itemStates($this->fakeParentId));
@@ -89,12 +89,12 @@ class ChecklistsTest extends TestCase
      */
     public function shouldUpdateItem()
     {
-        $item = array('name' => 'Test', 'state' => true);
+        $item = ['name' => 'Test', 'state' => true];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId('checklist') . '/checkItem/' . $this->fakeId)
             ->will($this->returnValue($item));
 
         $this->assertEquals($item, $api->updateItem($this->fakeParentId, $this->fakeId('checklist'), $this->fakeId, $item));
@@ -105,12 +105,12 @@ class ChecklistsTest extends TestCase
      */
     public function shouldCreateItem()
     {
-        $item = array('name' => 'Test', 'state' => true);
+        $item = ['name' => 'Test', 'state' => true];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem')
+            ->with($this->getPath() . '/' . $this->fakeId('checklist') . '/checkItem')
             ->will($this->returnValue($item));
 
         $this->assertEquals($item, $api->createItem($this->fakeParentId, $this->fakeId('checklist'), $item));
@@ -124,7 +124,7 @@ class ChecklistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId('checklist') . '/checkItem/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->removeItem($this->fakeParentId, $this->fakeId('checklist'), $this->fakeId));
@@ -138,7 +138,7 @@ class ChecklistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem/'.$this->fakeId.'/convertToCard')
+            ->with($this->getPath() . '/' . $this->fakeId('checklist') . '/checkItem/' . $this->fakeId . '/convertToCard')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->convertItemToCard($this->fakeParentId, $this->fakeId('checklist'), $this->fakeId));

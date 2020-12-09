@@ -22,12 +22,12 @@ class Cards extends AbstractApi
      * Get cards related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-cards
      *
-     * @param string $id     the board's
-     * @param array  $params optional parameters
+     * @param string $id the board's
+     * @param array $params optional parameters
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -36,30 +36,30 @@ class Cards extends AbstractApi
      * Filter cards related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-cards-filter
      *
-     * @param string       $id     the board's id
+     * @param string $id the board's id
      * @param string|array $filter array of / one of 'all', 'visible', 'none', 'open', 'closed'
      *
      * @return array
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('all', 'visible', 'none', 'open', 'closed');
+        $allowed = ['all', 'visible', 'none', 'open', 'closed'];
         $filter = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filter));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filter));
     }
 
     /**
      * Get a card related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-cards-idcard
      *
-     * @param string $id     the board's id
+     * @param string $id the board's id
      * @param string $cardId the card's id
      *
      * @return array
      */
     public function show($id, $cardId)
     {
-        return $this->get($this->getPath($id).'/'.rawurlencode($cardId));
+        return $this->get($this->getPath($id) . '/' . rawurlencode($cardId));
     }
 }
