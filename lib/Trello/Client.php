@@ -159,12 +159,13 @@ class Client implements ClientInterface
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, [
-                self::AUTH_URL_TOKEN,
-                self::AUTH_URL_CLIENT_ID,
-                self::AUTH_HTTP_PASSWORD,
-                self::AUTH_HTTP_TOKEN
-            ])) {
+        $valid = [
+            self::AUTH_URL_TOKEN,
+            self::AUTH_URL_CLIENT_ID,
+            self::AUTH_HTTP_PASSWORD,
+            self::AUTH_HTTP_TOKEN
+        ];
+        if (null === $authMethod && in_array($password, $valid)) {
             $authMethod = $password;
             $password = null;
         }
