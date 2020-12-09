@@ -23,12 +23,12 @@ class Action extends AbstractApi
      * @link https://trello.com/docs/api/action/#get-1-actions-idaction-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'idMemberCreator',
         'data',
         'type',
         'date'
-    );
+    ];
 
     /**
      * Find an action by id
@@ -39,7 +39,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -53,7 +53,7 @@ class Action extends AbstractApi
      *
      * @return array list info
      */
-    public function update($id, array $params = array())
+    public function update($id, array $params = [])
     {
         return $this->put($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -80,7 +80,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function getBoard($id, array $params = array())
+    public function getBoard($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/board', $params);
     }
@@ -112,7 +112,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function getList($id, array $params = array())
+    public function getList($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/list', $params);
     }
@@ -144,7 +144,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function getCard($id, array $params = array())
+    public function getCard($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/card', $params);
     }
@@ -176,7 +176,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function getMember($id, array $params = array())
+    public function getMember($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/member', $params);
     }
@@ -208,7 +208,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function getCreator($id, array $params = array())
+    public function getCreator($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/memberCreator', $params);
     }
@@ -240,7 +240,7 @@ class Action extends AbstractApi
      *
      * @return array
      */
-    public function getOrganization($id, array $params = array())
+    public function getOrganization($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/organization', $params);
     }
@@ -274,6 +274,6 @@ class Action extends AbstractApi
      */
     public function setText($id, $text)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/text', array('value' => $text));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/text', ['value' => $text]);
     }
 }

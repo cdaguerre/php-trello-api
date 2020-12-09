@@ -28,7 +28,7 @@ class Labels extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -44,7 +44,7 @@ class Labels extends AbstractApi
      */
     public function show($id, $color)
     {
-        $colors = array('blue', 'green', 'orange', 'purple', 'red', 'yellow');
+        $colors = ['blue', 'green', 'orange', 'purple', 'red', 'yellow'];
 
         if (!in_array($color, $colors)) {
             throw new InvalidArgumentException(sprintf(
@@ -73,7 +73,7 @@ class Labels extends AbstractApi
      */
     public function setName($id, $color, $name)
     {
-        $colors = array('blue', 'green', 'orange', 'purple', 'red', 'yellow');
+        $colors = ['blue', 'green', 'orange', 'purple', 'red', 'yellow'];
 
         if (!in_array($color, $colors)) {
             throw new InvalidArgumentException(sprintf(
@@ -82,6 +82,6 @@ class Labels extends AbstractApi
             ));
         }
 
-        return $this->put('boards/' . rawurlencode($id) . '/labelNames/' . rawurlencode($color), array('value' => $name));
+        return $this->put('boards/' . rawurlencode($id) . '/labelNames/' . rawurlencode($color), ['value' => $name]);
     }
 }

@@ -21,13 +21,13 @@ class Token extends AbstractApi
      * @link https://trello.com/docs/api/token/#get-1-tokens-token-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'identifier',
         'idMember',
         'dateCreated',
         'dateExpires',
         'permissions'
-    );
+    ];
 
     /**
      * Find a token by id
@@ -38,7 +38,7 @@ class Token extends AbstractApi
      *
      * @return array
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -65,7 +65,7 @@ class Token extends AbstractApi
      *
      * @return array
      */
-    public function getMember($id, array $params = array())
+    public function getMember($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/member', $params);
     }

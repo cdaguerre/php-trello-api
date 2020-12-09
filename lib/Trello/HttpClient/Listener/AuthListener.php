@@ -49,10 +49,10 @@ class AuthListener
             case Client::AUTH_URL_CLIENT_ID:
                 $url = $event['request']->getUrl();
 
-                $parameters = array(
+                $parameters = [
                     'key' => $this->tokenOrLogin,
                     'token' => $this->password,
-                );
+                ];
 
                 $url .= (false === strpos($url, '?') ? '?' : '&');
                 $url .= utf8_encode(http_build_query($parameters, '', '&'));
@@ -64,7 +64,7 @@ class AuthListener
                 $url = $event['request']->getUrl();
                 $url .= (false === strpos($url, '?') ? '?' : '&');
                 $url .= utf8_encode(http_build_query(
-                    array('token' => $this->tokenOrLogin, 'key' => $this->password),
+                    ['token' => $this->tokenOrLogin, 'key' => $this->password],
                     '',
                     '&'
                 ));

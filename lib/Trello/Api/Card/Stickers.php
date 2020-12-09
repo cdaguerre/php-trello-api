@@ -23,7 +23,7 @@ class Stickers extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -48,7 +48,7 @@ class Stickers extends AbstractApi
      */
     public function show($id, $stickerId, $fields = 'all')
     {
-        $allowed = array('all', 'image', 'imageScaled', 'imageUrl', 'left', 'rotate', 'top', 'zIndex');
+        $allowed = ['all', 'image', 'imageScaled', 'imageUrl', 'left', 'rotate', 'top', 'zIndex'];
         $fields = $this->validateAllowedParameters($allowed, $fields, 'field');
 
         return $this->get($this->getPath($id) . '/' . rawurlencode($stickerId), $fields);
@@ -70,7 +70,7 @@ class Stickers extends AbstractApi
      */
     public function update($id, $stickerId, array $params)
     {
-        $oneOf = array('left', 'rotate', 'top', 'zIndex');
+        $oneOf = ['left', 'rotate', 'top', 'zIndex'];
         $this->validateAtLeastOneOf($oneOf, $params);
 
         return $this->put($this->getPath($id) . '/' . rawurlencode($stickerId), $params);
@@ -92,7 +92,7 @@ class Stickers extends AbstractApi
      */
     public function create($id, array $params)
     {
-        $required = array('image', 'left', 'top', 'zIndex');
+        $required = ['image', 'left', 'top', 'zIndex'];
         $this->validateRequiredParameters($required, $params);
 
         return $this->post($this->getPath($id), $params);

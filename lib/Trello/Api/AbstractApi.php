@@ -112,7 +112,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return mixed
      */
-    protected function get($path, array $parameters = array(), $requestHeaders = array())
+    protected function get($path, array $parameters = [], $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
 
@@ -128,11 +128,11 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return \GuzzleHttp\Message\Response
      */
-    protected function head($path, array $parameters = array(), $requestHeaders = array())
+    protected function head($path, array $parameters = [], $requestHeaders = [])
     {
-        $response = $this->client->getHttpClient()->request($path, null, 'HEAD', $requestHeaders, array(
+        $response = $this->client->getHttpClient()->request($path, null, 'HEAD', $requestHeaders, [
             'query' => $parameters,
-        ));
+        ]);
 
         return $response;
     }
@@ -146,7 +146,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return mixed
      */
-    protected function post($path, array $parameters = array(), $requestHeaders = array())
+    protected function post($path, array $parameters = [], $requestHeaders = [])
     {
         return $this->postRaw(
             $path,
@@ -164,7 +164,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return mixed
      */
-    protected function postRaw($path, $body, $requestHeaders = array())
+    protected function postRaw($path, $body, $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->post(
             $path,
@@ -184,7 +184,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return mixed
      */
-    protected function patch($path, array $parameters = array(), $requestHeaders = array())
+    protected function patch($path, array $parameters = [], $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->patch(
             $path,
@@ -204,7 +204,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return mixed
      */
-    protected function put($path, array $parameters = array(), $requestHeaders = array())
+    protected function put($path, array $parameters = [], $requestHeaders = [])
     {
         foreach ($parameters as $name => $parameter) {
             if (is_bool($parameter)) {
@@ -230,7 +230,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return mixed
      */
-    protected function delete($path, array $parameters = array(), $requestHeaders = array())
+    protected function delete($path, array $parameters = [], $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->delete(
             $path,
@@ -310,7 +310,7 @@ abstract class AbstractApi implements ApiInterface
     protected function validateAllowedParameters(array $allowed, $params, $paramName)
     {
         if (!is_array($params)) {
-            $params = array($params);
+            $params = [$params];
         }
 
         foreach ($params as $param) {

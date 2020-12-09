@@ -35,7 +35,7 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open')
+            ->with($this->getPath() . '/open')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class CardsTest extends TestCase
      */
     public function shouldFilterCardsWithArrayArgument()
     {
-        $filter = array('open','closed');
+        $filter = ['open', 'closed'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open,closed')
+            ->with($this->getPath() . '/open,closed')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId, $filter));

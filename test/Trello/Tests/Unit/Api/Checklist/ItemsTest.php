@@ -30,12 +30,12 @@ class ItemsTest extends TestCase
      */
     public function shouldUpdateItem()
     {
-        $expectedArray = array('name' => 'Test item', 'state' => 'complete');
+        $expectedArray = ['name' => 'Test item', 'state' => 'complete'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId);
+            ->with($this->getPath() . '/' . $this->fakeId);
         $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
@@ -52,7 +52,7 @@ class ItemsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->remove($this->fakeParentId, $this->fakeId));

@@ -22,12 +22,12 @@ class Webhook extends AbstractApi
      * @link https://trello.com/docs/api/webhook/#get-1-webhooks-idwebhook-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'description',
         'idModel',
         'callbackURL',
         'active',
-    );
+    ];
 
     /**
      * Find a webhook by id
@@ -38,7 +38,7 @@ class Webhook extends AbstractApi
      *
      * @return array
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -51,9 +51,9 @@ class Webhook extends AbstractApi
      *
      * @return array
      */
-    public function create(array $params = array())
+    public function create(array $params = [])
     {
-        $this->validateRequiredParameters(array('callbackURL', 'idModel'), $params);
+        $this->validateRequiredParameters(['callbackURL', 'idModel'], $params);
 
         return $this->post($this->getPath(), $params);
     }
@@ -67,9 +67,9 @@ class Webhook extends AbstractApi
      *
      * @return array
      */
-    public function update($id, array $params = array())
+    public function update($id, array $params = [])
     {
-        $this->validateRequiredParameters(array('callbackURL', 'idModel'), $params);
+        $this->validateRequiredParameters(['callbackURL', 'idModel'], $params);
 
         return $this->put($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -98,7 +98,7 @@ class Webhook extends AbstractApi
      */
     public function setCallbackUrl($id, $url)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/callbackUrl', array('value' => $url));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/callbackUrl', ['value' => $url]);
     }
 
     /**
@@ -112,7 +112,7 @@ class Webhook extends AbstractApi
      */
     public function setDescription($id, $description)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/description', array('value' => $description));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/description', ['value' => $description]);
     }
 
     /**
@@ -126,7 +126,7 @@ class Webhook extends AbstractApi
      */
     public function setModel($id, $modelId)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/idModel', array('value' => $modelId));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/idModel', ['value' => $modelId]);
     }
 
     /**
@@ -140,6 +140,6 @@ class Webhook extends AbstractApi
      */
     public function setActive($id, $active)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/active', array('value' => $active));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/active', ['value' => $active]);
     }
 }

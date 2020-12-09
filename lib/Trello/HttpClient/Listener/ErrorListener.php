@@ -44,7 +44,7 @@ class ErrorListener
             }
 
             if (422 == $response->getStatusCode() && isset($content['errors'])) {
-                $errors = array();
+                $errors = [];
                 foreach ($content['errors'] as $error) {
                     switch ($error['code']) {
                         case 'missing':

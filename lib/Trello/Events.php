@@ -368,7 +368,7 @@ final class Events
 
     public static function all()
     {
-        return array(
+        return [
             self::BOARD_CREATE,
             self::BOARD_UPDATE,
             self::BOARD_COPY,
@@ -422,6 +422,6 @@ final class Events
             self::MEMBER_UPDATE,
             self::POWERUP_ENABLE,
             self::POWERUP_DISABLE,
-        );
+        ];
     }
 }

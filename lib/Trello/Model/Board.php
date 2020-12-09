@@ -11,7 +11,7 @@ class Board extends AbstractObject implements BoardInterface
 {
     protected $apiName = 'board';
 
-    protected $loadParams = array(
+    protected $loadParams = [
         'fields' => 'all',
         'organization' => true,
         'organization_memberships' => 'all',
@@ -19,7 +19,7 @@ class Board extends AbstractObject implements BoardInterface
         'membersInvited' => 'all',
         'memberships' => 'all',
         'lists' => 'all',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -128,7 +128,7 @@ class Board extends AbstractObject implements BoardInterface
      */
     public function getLists()
     {
-        $lists = array();
+        $lists = [];
 
         foreach ($this->data['lists'] as $data) {
             $lists[$data['id']] = new Cardlist($this->client, $data['id']);

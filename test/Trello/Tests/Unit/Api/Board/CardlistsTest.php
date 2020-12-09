@@ -35,7 +35,7 @@ class CardlistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class CardlistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open')
+            ->with($this->getPath() . '/open')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class CardlistsTest extends TestCase
      */
     public function shouldFilterCardlistsWithArrayArgument()
     {
-        $filter = array('open','closed');
+        $filter = ['open', 'closed'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open,closed')
+            ->with($this->getPath() . '/open,closed')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->filter($this->fakeParentId, $filter));
@@ -78,7 +78,7 @@ class CardlistsTest extends TestCase
      */
     public function shouldCreateCardlist()
     {
-        $data = array('name' => 'Test list');
+        $data = ['name' => 'Test list'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -95,7 +95,7 @@ class CardlistsTest extends TestCase
      */
     public function shouldNotCreateCardlistWithoutName()
     {
-        $data = array('desc' => 'Test description');
+        $data = ['desc' => 'Test description'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())

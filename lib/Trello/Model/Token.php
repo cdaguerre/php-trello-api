@@ -9,10 +9,10 @@ class Token extends AbstractObject implements TokenInterface
 {
     protected $apiName = 'token';
 
-    protected $loadParams = array(
+    protected $loadParams = [
         'fields' => 'all',
         'webhooks' => true,
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -67,7 +67,7 @@ class Token extends AbstractObject implements TokenInterface
      */
     public function getWebhooks()
     {
-        $webhooks = array();
+        $webhooks = [];
 
         foreach ($this->data['webhooks'] as $webhook) {
             $webhooks[] = new Webhook($this->client, $webhook['id']);

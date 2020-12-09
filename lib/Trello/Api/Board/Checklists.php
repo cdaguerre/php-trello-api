@@ -27,7 +27,7 @@ class Checklists extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -43,7 +43,7 @@ class Checklists extends AbstractApi
      */
     public function create($id, array $params)
     {
-        $this->validateRequiredParameters(array('name'), $params);
+        $this->validateRequiredParameters(['name'], $params);
 
         return $this->post($this->getPath($id), $params);
     }

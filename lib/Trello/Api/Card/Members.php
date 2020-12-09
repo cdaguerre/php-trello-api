@@ -24,7 +24,7 @@ class Members extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -46,7 +46,7 @@ class Members extends AbstractApi
 
         $members = implode(',', $members);
 
-        return $this->put($this->getPath($id), array('value' => $members));
+        return $this->put($this->getPath($id), ['value' => $members]);
     }
 
     /**
@@ -60,7 +60,7 @@ class Members extends AbstractApi
      */
     public function add($id, $memberId)
     {
-        return $this->post($this->getPath($id), array('value' => $memberId));
+        return $this->post($this->getPath($id), ['value' => $memberId]);
     }
 
     /**
@@ -88,7 +88,7 @@ class Members extends AbstractApi
      */
     public function addVote($id, $memberId)
     {
-        return $this->post($this->getPath($id) . '/membersVoted', array('value' => $memberId));
+        return $this->post($this->getPath($id) . '/membersVoted', ['value' => $memberId]);
     }
 
     /**

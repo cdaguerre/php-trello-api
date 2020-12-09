@@ -14,19 +14,19 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class HttpClient implements HttpClientInterface
 {
-    protected $options = array(
+    protected $options = [
         'base_url' => 'https://api.trello.com/',
         'user_agent' => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
         'timeout' => 10,
         'api_version' => 1,
-    );
+    ];
 
     /**
      * @var ClientInterface
      */
     protected $client;
 
-    protected $headers = array();
+    protected $headers = [];
 
     private $lastResponse;
     private $lastRequest;
@@ -35,13 +35,13 @@ class HttpClient implements HttpClientInterface
      * @param array $options
      * @param ClientInterface $client
      */
-    public function __construct(array $options = array(), ClientInterface $client = null)
+    public function __construct(array $options = [], ClientInterface $client = null)
     {
         $this->options = array_merge($this->options, $options);
         $client = $client ?: new GuzzleClient($this->options);
         $this->client = $client;
 
-        $this->addListener('request.error', array(new ErrorListener(), 'onRequestError'));
+        $this->addListener('request.error', [new ErrorListener(), 'onRequestError']);
         $this->clearHeaders();
     }
 
@@ -66,10 +66,10 @@ class HttpClient implements HttpClientInterface
      */
     public function clearHeaders()
     {
-        $this->headers = array(
+        $this->headers = [
             'Accept' => sprintf('application/vnd.orcid.%s+json', $this->options['api_version']),
             'User-Agent' => sprintf('%s', $this->options['user_agent']),
-        );
+        ];
     }
 
     /**
@@ -89,7 +89,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function get($path, array $parameters = array(), array $headers = array())
+    public function get($path, array $parameters = [], array $headers = [])
     {
         return $this->request($path, $parameters, 'GET', $headers);
     }
@@ -97,7 +97,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function post($path, $body = null, array $headers = array())
+    public function post($path, $body = null, array $headers = [])
     {
         if (!isset($headers['Content-Type'])) {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -109,7 +109,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function patch($path, $body = null, array $headers = array())
+    public function patch($path, $body = null, array $headers = [])
     {
         if (!isset($headers['Content-Type'])) {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -121,7 +121,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function delete($path, $body = null, array $headers = array())
+    public function delete($path, $body = null, array $headers = [])
     {
         return $this->request($path, $body, 'DELETE', $headers);
     }
@@ -129,7 +129,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function put($path, $body, array $headers = array())
+    public function put($path, $body, array $headers = [])
     {
         if (!isset($headers['Content-Type'])) {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -141,7 +141,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
+    public function request($path, $body = null, $httpMethod = 'GET', array $headers = [], array $options = [])
     {
         $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
 
@@ -164,10 +164,10 @@ class HttpClient implements HttpClientInterface
      */
     public function authenticate($tokenOrLogin, $password, $method)
     {
-        $this->addListener('request.before_send', array(
+        $this->addListener('request.before_send', [
             new AuthListener($tokenOrLogin, $password, $method),
             'onRequestBeforeSend',
-        ));
+        ]);
     }
 
     /**
@@ -192,7 +192,7 @@ class HttpClient implements HttpClientInterface
      *
      * @return Request|\GuzzleHttp\Message\RequestInterface
      */
-    protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
+    protected function createRequest($httpMethod, $path, $body = null, array $headers = [], array $options = [])
     {
         $path = $this->options['api_version'] . '/' . $path;
 

@@ -24,7 +24,7 @@ class Organizations extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -40,7 +40,7 @@ class Organizations extends AbstractApi
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('all', 'none', 'members', 'public');
+        $allowed = ['all', 'none', 'members', 'public'];
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
         return $this->get($this->getPath($id) . '/' . implode(',', $filters));
@@ -55,7 +55,7 @@ class Organizations extends AbstractApi
      *
      * @return array
      */
-    public function invitedTo($id, array $params = array())
+    public function invitedTo($id, array $params = [])
     {
         return $this->get($this->getPath($id) . 'Invited', $params);
     }

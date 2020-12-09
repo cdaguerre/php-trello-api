@@ -26,7 +26,7 @@ class Boards extends AbstractApi
      *
      * @return array
      */
-    public function all($id = "me", array $params = array())
+    public function all($id = "me", array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -42,7 +42,7 @@ class Boards extends AbstractApi
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('all', 'members', 'organization', 'public', 'open', 'closed', 'pinned', 'unpinned', 'starred');
+        $allowed = ['all', 'members', 'organization', 'public', 'open', 'closed', 'pinned', 'unpinned', 'starred'];
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
         return $this->get($this->getPath($id) . '/' . implode(',', $filters));
@@ -57,7 +57,7 @@ class Boards extends AbstractApi
      *
      * @return array
      */
-    public function invitedTo($id, array $params = array())
+    public function invitedTo($id, array $params = [])
     {
         return $this->get($this->getPath($id) . 'Invited', $params);
     }
@@ -88,7 +88,7 @@ class Boards extends AbstractApi
      */
     public function pin($id, $boardId)
     {
-        return $this->post('members/' . rawurlencode($id) . '/idBoardsPinned', array('value' => $boardId));
+        return $this->post('members/' . rawurlencode($id) . '/idBoardsPinned', ['value' => $boardId]);
     }
 
     /**

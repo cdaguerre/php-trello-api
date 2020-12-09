@@ -23,13 +23,13 @@ class Notification extends AbstractApi
      * @link https://trello.com/docs/api/notification/#get-1-notifications-idnotification-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'unread',
         'type',
         'date',
         'data',
         'idMemberCreator',
-    );
+    ];
 
     /**
      * Find a notification by id
@@ -40,7 +40,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -70,7 +70,7 @@ class Notification extends AbstractApi
      */
     public function setUnread($id, $status)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/unread', array('value' => $status));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/unread', ['value' => $status]);
     }
 
     /**
@@ -93,7 +93,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getEntities($id, array $params = array())
+    public function getEntities($id, array $params = [])
     {
         return $this->get($this->path . '/' . rawurlencode($id) . '/entities', $params);
     }
@@ -107,7 +107,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getBoard($id, array $params = array())
+    public function getBoard($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/board', $params);
     }
@@ -139,7 +139,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getList($id, array $params = array())
+    public function getList($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/list', $params);
     }
@@ -171,7 +171,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getCard($id, array $params = array())
+    public function getCard($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/card', $params);
     }
@@ -203,7 +203,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getMember($id, array $params = array())
+    public function getMember($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/member', $params);
     }
@@ -235,7 +235,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getCreator($id, array $params = array())
+    public function getCreator($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/memberCreator', $params);
     }
@@ -267,7 +267,7 @@ class Notification extends AbstractApi
      *
      * @return array
      */
-    public function getOrganization($id, array $params = array())
+    public function getOrganization($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/organization', $params);
     }

@@ -14,13 +14,13 @@ class Items extends AbstractApi
 {
     protected $path = 'checklists/#id#/checkItems';
 
-    public static $fields = array(
+    public static $fields = [
         'name',
         'nameData',
         'type',
         'pos',
         'state',
-    );
+    ];
 
     /**
      * Get items related to a given checklist
@@ -31,7 +31,7 @@ class Items extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -47,7 +47,7 @@ class Items extends AbstractApi
      *
      * @return array
      */
-    public function create($id, $name, $checked = false, array $data = array())
+    public function create($id, $name, $checked = false, array $data = [])
     {
         $data['checked'] = $checked;
         $data['name'] = $name;
@@ -71,7 +71,7 @@ class Items extends AbstractApi
      */
     public function update($id, $itemId, array $data)
     {
-        $this->validateRequiredParameters(array('name', 'state'), $data);
+        $this->validateRequiredParameters(['name', 'state'], $data);
 
         $this->remove($id, $itemId);
 

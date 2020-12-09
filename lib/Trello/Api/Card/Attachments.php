@@ -23,7 +23,7 @@ class Attachments extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -39,7 +39,7 @@ class Attachments extends AbstractApi
      */
     public function create($id, array $params)
     {
-        $atLeastOneOf = array('url', 'file');
+        $atLeastOneOf = ['url', 'file'];
         $this->validateAtLeastOneOf($atLeastOneOf, $params);
 
         return $this->post($this->getPath($id), $params);
@@ -84,6 +84,6 @@ class Attachments extends AbstractApi
      */
     public function setAsCover($id, $attachmentId)
     {
-        return $this->put('cards/' . rawurlencode($id) . '/idAttachmentCover', array('value' => $attachmentId));
+        return $this->put('cards/' . rawurlencode($id) . '/idAttachmentCover', ['value' => $attachmentId]);
     }
 }

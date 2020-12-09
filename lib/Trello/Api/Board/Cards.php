@@ -27,7 +27,7 @@ class Cards extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -43,7 +43,7 @@ class Cards extends AbstractApi
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('all', 'visible', 'none', 'open', 'closed');
+        $allowed = ['all', 'visible', 'none', 'open', 'closed'];
         $filter = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
         return $this->get($this->getPath($id) . '/' . implode(',', $filter));

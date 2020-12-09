@@ -37,7 +37,7 @@ abstract class AbstractObject
      *
      * @var array
      */
-    protected $loadParams = array('fields' => 'all');
+    protected $loadParams = ['fields' => 'all'];
 
     /**
      * @var string

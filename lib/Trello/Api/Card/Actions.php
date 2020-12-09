@@ -23,7 +23,7 @@ class Actions extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -39,7 +39,7 @@ class Actions extends AbstractApi
      */
     public function addComment($id, $text)
     {
-        return $this->post($this->getPath($id) . '/comments', array('text' => $text));
+        return $this->post($this->getPath($id) . '/comments', ['text' => $text]);
     }
 
     /**

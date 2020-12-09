@@ -29,7 +29,7 @@ class Members extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -59,7 +59,7 @@ class Members extends AbstractApi
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('none', 'normal', 'admins', 'owners', 'all');
+        $allowed = ['none', 'normal', 'admins', 'owners', 'all'];
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
         return $this->get($this->getPath($id) . '/' . implode(',', $filters));
@@ -75,7 +75,7 @@ class Members extends AbstractApi
      *
      * @return array
      */
-    public function cards($id, $memberId, array $params = array())
+    public function cards($id, $memberId, array $params = [])
     {
         return $this->get($this->getPath($id) . '/' . rawurlencode($memberId) . '/cards', $params);
     }
@@ -93,7 +93,7 @@ class Members extends AbstractApi
      */
     public function invite($id, $email, $fullName, $role = 'normal')
     {
-        $roles = array('normal', 'observer', 'admin');
+        $roles = ['normal', 'observer', 'admin'];
 
         if (!in_array($role, $roles)) {
             throw new InvalidArgumentException(sprintf(
@@ -102,11 +102,11 @@ class Members extends AbstractApi
             ));
         }
 
-        $params = array(
+        $params = [
             'email' => $email,
             'fullName' => $fullName,
             'type' => $role,
-        );
+        ];
 
         return $this->put($this->getPath($id), $params);
     }
@@ -120,7 +120,7 @@ class Members extends AbstractApi
      *
      * @return array
      */
-    public function getInvitedMembers($id, array $params = array())
+    public function getInvitedMembers($id, array $params = [])
     {
         return $this->get($this->getPath($id) . 'Invited', $params);
     }
@@ -152,7 +152,7 @@ class Members extends AbstractApi
      */
     public function setRole($id, $memberOrOrganization, $role)
     {
-        $roles = array('normal', 'observer', 'admin');
+        $roles = ['normal', 'observer', 'admin'];
 
         if (!in_array($role, $roles)) {
             throw new InvalidArgumentException(sprintf(
@@ -161,10 +161,10 @@ class Members extends AbstractApi
             ));
         }
 
-        $params = array(
+        $params = [
             'idMember' => $memberOrOrganization,
             'type' => $role,
-        );
+        ];
 
         return $this->post($this->getPath($id) . '/' . rawurlencode($memberOrOrganization), $params);
     }

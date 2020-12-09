@@ -24,7 +24,7 @@ class Checklists extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get('cards/' . rawurlencode($id) . '/checklists', $params);
     }
@@ -46,7 +46,7 @@ class Checklists extends AbstractApi
      */
     public function create($id, array $params)
     {
-        $atLeastOneOf = array('value', 'name', 'idChecklistSource');
+        $atLeastOneOf = ['value', 'name', 'idChecklistSource'];
         $this->validateAtLeastOneOf($atLeastOneOf, $params);
 
         return $this->post($this->getPath($id), $params);
@@ -74,7 +74,7 @@ class Checklists extends AbstractApi
      *
      * @return array
      */
-    public function itemStates($id, array $params = array())
+    public function itemStates($id, array $params = [])
     {
         return $this->get('cards/' . rawurlencode($id) . '/checkItemStates', $params);
     }
@@ -109,7 +109,7 @@ class Checklists extends AbstractApi
      *
      * @return array
      */
-    public function createItem($id, $checklistId, $name, array $data = array())
+    public function createItem($id, $checklistId, $name, array $data = [])
     {
         $data['idChecklist'] = $checklistId;
         $data['name'] = $name;

@@ -23,13 +23,13 @@ class Cardlist extends AbstractApi
      * @link https://trello.com/docs/api/list/#get-1-lists-list-id-or-shortlink-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'name',
         'closed',
         'idBoard',
         'pos',
         'subscribed',
-    );
+    ];
 
     /**
      * Find a list by id
@@ -40,7 +40,7 @@ class Cardlist extends AbstractApi
      *
      * @return array list info
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -54,9 +54,9 @@ class Cardlist extends AbstractApi
      *
      * @return array
      */
-    public function create(array $params = array())
+    public function create(array $params = [])
     {
-        $this->validateRequiredParameters(array('name', 'idBoard'), $params);
+        $this->validateRequiredParameters(['name', 'idBoard'], $params);
 
         return $this->post($this->getPath(), $params);
     }
@@ -70,7 +70,7 @@ class Cardlist extends AbstractApi
      *
      * @return array list info
      */
-    public function update($id, array $params = array())
+    public function update($id, array $params = [])
     {
         return $this->put($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -86,7 +86,7 @@ class Cardlist extends AbstractApi
      */
     public function setBoard($id, $boardId)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/idBoard', array('value' => $boardId));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/idBoard', ['value' => $boardId]);
     }
 
     /**
@@ -98,7 +98,7 @@ class Cardlist extends AbstractApi
      *
      * @return array board info
      */
-    public function getBoard($id, array $params = array())
+    public function getBoard($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id) . '/board', $params);
     }
@@ -132,7 +132,7 @@ class Cardlist extends AbstractApi
      */
     public function setName($id, $name)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/name', array('value' => $name));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/name', ['value' => $name]);
     }
 
     /**
@@ -146,7 +146,7 @@ class Cardlist extends AbstractApi
      */
     public function setSubscribed($id, $subscribed)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/subscribed', array('value' => $subscribed));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/subscribed', ['value' => $subscribed]);
     }
 
     /**
@@ -160,7 +160,7 @@ class Cardlist extends AbstractApi
      */
     public function setClosed($id, $closed = true)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/closed', array('value' => $closed));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/closed', ['value' => $closed]);
     }
 
     /**
@@ -175,7 +175,7 @@ class Cardlist extends AbstractApi
      */
     public function setPosition($id, $position)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/pos', array('value' => $position));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/pos', ['value' => $position]);
     }
 
     /**

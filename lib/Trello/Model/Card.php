@@ -13,7 +13,7 @@ class Card extends AbstractObject implements CardInterface
 {
     protected $apiName = 'card';
 
-    protected $loadParams = array(
+    protected $loadParams = [
         'fields' => 'all',
         'board' => true,
         'list' => true,
@@ -24,11 +24,11 @@ class Card extends AbstractObject implements CardInterface
         'checklists' => 'all',
         'checkItemStates' => true,
         'actions' => Events::CARD_COMMENT,
-    );
+    ];
 
-    protected $newChecklists = array();
-    protected $newComments = array();
-    protected $commentsToBeRemoved = array();
+    protected $newChecklists = [];
+    protected $newComments = [];
+    protected $commentsToBeRemoved = [];
 
     /**
      * {@inheritdoc}
@@ -327,7 +327,7 @@ class Card extends AbstractObject implements CardInterface
      */
     public function setChecklists(array $checklists)
     {
-        $ids = array();
+        $ids = [];
 
         foreach ($checklists as $checklist) {
             $ids[] = $checklist->getId();
@@ -341,7 +341,7 @@ class Card extends AbstractObject implements CardInterface
      */
     public function getChecklists()
     {
-        $checklists = array();
+        $checklists = [];
 
         foreach ($this->getChecklistIds() as $id) {
             $checklists[] = new Checklist($this->client, $id);
@@ -523,7 +523,7 @@ class Card extends AbstractObject implements CardInterface
      */
     public function setMembers(array $members)
     {
-        $ids = array();
+        $ids = [];
 
         foreach ($members as $member) {
             $ids[] = $member->getId();
@@ -537,7 +537,7 @@ class Card extends AbstractObject implements CardInterface
      */
     public function getMembers()
     {
-        $members = array();
+        $members = [];
 
         foreach ($this->getMemberIds() as $id) {
             $members[] = new Member($this->client, $id);
@@ -617,7 +617,7 @@ class Card extends AbstractObject implements CardInterface
      */
     public function setMembersVoted(array $members)
     {
-        $ids = array();
+        $ids = [];
 
         foreach ($members as $member) {
             $ids[] = $member->getId();
@@ -631,7 +631,7 @@ class Card extends AbstractObject implements CardInterface
      */
     public function getMembersVoted()
     {
-        $members = array();
+        $members = [];
 
         foreach ($this->getMembersVotedIds() as $id) {
             $members[] = new Member($this->client, $id);
@@ -725,7 +725,7 @@ class Card extends AbstractObject implements CardInterface
             ));
         }
 
-        $this->data['labels'][] = array('color' => $color);
+        $this->data['labels'][] = ['color' => $color];
 
         return $this;
     }
@@ -781,7 +781,7 @@ class Card extends AbstractObject implements CardInterface
     /**
      * {@inheritdoc}
      */
-    public function getActions($params = array())
+    public function getActions($params = [])
     {
         return $this->api->actions()->all($this->id, $params);
     }

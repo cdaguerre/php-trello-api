@@ -23,7 +23,7 @@ class Webhooks extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -53,7 +53,7 @@ class Webhooks extends AbstractApi
      */
     public function create($id, array $params)
     {
-        $this->validateRequiredParameters(array('callbackURL', 'idModel'), $params);
+        $this->validateRequiredParameters(['callbackURL', 'idModel'], $params);
 
         return $this->post($this->getPath($id), $params);
     }
@@ -69,7 +69,7 @@ class Webhooks extends AbstractApi
      */
     public function update($id, array $params)
     {
-        $this->validateRequiredParameters(array('callbackURL', 'idModel'), $params);
+        $this->validateRequiredParameters(['callbackURL', 'idModel'], $params);
 
         return $this->put($this->getPath($id), $params);
     }

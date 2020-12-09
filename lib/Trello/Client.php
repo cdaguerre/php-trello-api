@@ -59,14 +59,14 @@ class Client implements ClientInterface
     /**
      * @var array
      */
-    private $options = array(
+    private $options = [
         'base_url' => 'https://api.trello.com/',
         'user_agent' => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
         'timeout' => 10,
         'api_limit' => 5000,
         'api_version' => 1,
         'cache_dir' => null,
-    );
+    ];
 
     /**
      * The Buzz instance used to communicate with Trello
@@ -159,12 +159,12 @@ class Client implements ClientInterface
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(
+        if (null === $authMethod && in_array($password, [
                 self::AUTH_URL_TOKEN,
                 self::AUTH_URL_CLIENT_ID,
                 self::AUTH_HTTP_PASSWORD,
                 self::AUTH_HTTP_TOKEN
-            ))) {
+            ])) {
             $authMethod = $password;
             $password = null;
         }
@@ -265,7 +265,7 @@ class Client implements ClientInterface
      */
     public function getSupportedApiVersions()
     {
-        return array(1);
+        return [1];
     }
 
     /**

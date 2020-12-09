@@ -1,4 +1,5 @@
 <?php
+
 namespace Trello\Tests\HttpClient;
 
 use GuzzleHttp\Message\Request;
@@ -55,7 +56,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetAuthBasicHeaderForAuthPassMethod()
     {
-        $expected = 'Basic '.base64_encode('login2:pass42323');
+        $expected = 'Basic ' . base64_encode('login2:pass42323');
         $request = $this->getMockBuilder('GuzzleHttp\Message\RequestInterface')
             ->getMock();
         $request->expects($this->once())
@@ -120,6 +121,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
                 ->method('offsetGet')
                 ->will($this->returnValue($request));
         }
+
         return $mock;
     }
 }

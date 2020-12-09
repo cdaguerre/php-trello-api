@@ -23,7 +23,7 @@ class Cards extends AbstractApi
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -39,7 +39,7 @@ class Cards extends AbstractApi
      */
     public function filter($id, $filter = 'all')
     {
-        $allowed = array('none', 'open', 'closed', 'all');
+        $allowed = ['none', 'open', 'closed', 'all'];
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
         return $this->get($this->getPath($id) . '/' . implode(',', $filters));
@@ -53,7 +53,7 @@ class Cards extends AbstractApi
      *
      * @return array card info
      */
-    public function create($id, $name, array $params = array())
+    public function create($id, $name, array $params = [])
     {
         $params['idList'] = $id;
         $params['name'] = $name;
@@ -90,10 +90,10 @@ class Cards extends AbstractApi
      */
     public function moveAll($id, $boardId, $destListId)
     {
-        $data = array(
+        $data = [
             'idBoard' => $boardId,
             'idList' => $destListId,
-        );
+        ];
 
         return $this->post('lists/' . rawurlencode($id) . '/moveAllCards', $data);
     }

@@ -32,7 +32,7 @@ class Member extends AbstractApi
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-field
      * @var array
      */
-    public static $fields = array(
+    public static $fields = [
         'avatarHash',
         'bio',
         'bioData',
@@ -59,7 +59,7 @@ class Member extends AbstractApi
         'trophies',
         'uploadedAvatarHash',
         'premiumFeatures'
-    );
+    ];
 
     /**
      * Find a member by id or username
@@ -70,7 +70,7 @@ class Member extends AbstractApi
      *
      * @return array list info
      */
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -85,7 +85,7 @@ class Member extends AbstractApi
      *
      * @return array list info
      */
-    public function update($id, array $params = array())
+    public function update($id, array $params = [])
     {
         return $this->put($this->getPath() . '/' . rawurlencode($id), $params);
     }
@@ -99,7 +99,7 @@ class Member extends AbstractApi
      *
      * @return array
      */
-    public function getDeltas($id, array $params = array())
+    public function getDeltas($id, array $params = [])
     {
         return $this->get($this->path . '/' . rawurlencode($id) . '/deltas', $params);
     }
@@ -115,7 +115,7 @@ class Member extends AbstractApi
      */
     public function setAvatarSource($id, $avatarSource)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/avatarSource', array('value' => $avatarSource));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/avatarSource', ['value' => $avatarSource]);
     }
 
     /**
@@ -129,7 +129,7 @@ class Member extends AbstractApi
      */
     public function setBio($id, $bio)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/bio', array('value' => $bio));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/bio', ['value' => $bio]);
     }
 
     /**
@@ -143,7 +143,7 @@ class Member extends AbstractApi
      */
     public function setFullName($id, $fullName)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/fullName', array('value' => $fullName));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/fullName', ['value' => $fullName]);
     }
 
     /**
@@ -157,7 +157,7 @@ class Member extends AbstractApi
      */
     public function setInitials($id, $initials)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/initials', array('value' => $initials));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/initials', ['value' => $initials]);
     }
 
     /**
@@ -171,7 +171,7 @@ class Member extends AbstractApi
      */
     public function setUsername($id, $username)
     {
-        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/username', array('value' => $username));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/username', ['value' => $username]);
     }
 
     /**
@@ -184,7 +184,7 @@ class Member extends AbstractApi
      */
     public function setAvatar($id, $file)
     {
-        return $this->post($this->getPath() . '/' . rawurlencode($id) . '/avatar', array('file' => $file));
+        return $this->post($this->getPath() . '/' . rawurlencode($id) . '/avatar', ['file' => $file]);
     }
 
     /**

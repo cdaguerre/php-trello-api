@@ -14,9 +14,9 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeAbleToPassOptionsToConstructor()
     {
-        $httpClient = new TestHttpClient(array(
+        $httpClient = new TestHttpClient([
             'timeout' => 33,
-        ), $this->getBrowserMock());
+        ], $this->getBrowserMock());
 
         $this->assertEquals(33, $httpClient->getOption('timeout'));
         $this->assertEquals(1, $httpClient->getOption('api_version'));
@@ -27,7 +27,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeAbleToSetOption()
     {
-        $httpClient = new TestHttpClient(array(), $this->getBrowserMock());
+        $httpClient = new TestHttpClient([], $this->getBrowserMock());
         $httpClient->setOption('timeout', 666);
 
         $this->assertEquals(666, $httpClient->getOption('timeout'));
@@ -43,7 +43,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $listeners = $client->getEventDispatcher()->getListeners('request.before_send');
         $this->assertCount(1, $listeners);
 
-        $httpClient = new TestHttpClient(array(), $client);
+        $httpClient = new TestHttpClient([], $client);
         $httpClient->authenticate($login, $password, $method);
 
         $listeners = $client->getEventDispatcher()->getListeners('request.before_send');
@@ -55,12 +55,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     public function getAuthenticationFullData()
     {
-        return array(
-            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
-            array('token', null, Client::AUTH_HTTP_TOKEN),
-            array('token', null, Client::AUTH_URL_TOKEN),
-            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
-        );
+        return [
+            ['login', 'password', Client::AUTH_HTTP_PASSWORD],
+            ['token', null, Client::AUTH_HTTP_TOKEN],
+            ['token', null, Client::AUTH_URL_TOKEN],
+            ['client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID],
+        ];
     }
 
     /**
@@ -68,13 +68,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoGETRequest()
     {
-        $path       = '/some/path';
-        $parameters = array('a' => 'b');
-        $headers    = array('c' => 'd');
+        $path = '/some/path';
+        $parameters = ['a' => 'b'];
+        $headers = ['c' => 'd'];
 
         $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $client);
+        $httpClient = new HttpClient([], $client);
         $httpClient->get($path, $parameters, $headers);
     }
 
@@ -117,13 +117,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoPATCHRequest()
     {
-        $path       = '/some/path';
-        $body       = 'a = b';
-        $headers    = array('c' => 'd');
+        $path = '/some/path';
+        $body = 'a = b';
+        $headers = ['c' => 'd'];
 
         $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $client);
+        $httpClient = new HttpClient([], $client);
         $httpClient->patch($path, $body, $headers);
     }
 
@@ -132,13 +132,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoDELETERequest()
     {
-        $path       = '/some/path';
-        $body       = 'a = b';
-        $headers    = array('c' => 'd');
+        $path = '/some/path';
+        $body = 'a = b';
+        $headers = ['c' => 'd'];
 
         $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $client);
+        $httpClient = new HttpClient([], $client);
         $httpClient->delete($path, $body, $headers);
     }
 
@@ -147,12 +147,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoPUTRequest()
     {
-        $path       = '/some/path';
-        $headers    = array('c' => 'd');
+        $path = '/some/path';
+        $headers = ['c' => 'd'];
 
         $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $client);
+        $httpClient = new HttpClient([], $client);
         $httpClient->put($path, $headers);
     }
 
@@ -161,13 +161,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoCustomRequest()
     {
-        $path       = '/some/path';
-        $body       = 'a = b';
-        $options    = array('c' => 'd');
+        $path = '/some/path';
+        $body = 'a = b';
+        $options = ['c' => 'd'];
 
         $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $client);
+        $httpClient = new HttpClient([], $client);
         $httpClient->request($path, $body, 'HEAD', $options);
     }
 
@@ -176,13 +176,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAllowToReturnRawContent()
     {
-        $path       = '/some/path';
-        $parameters = array('a = b');
-        $headers    = array('c' => 'd');
+        $path = '/some/path';
+        $parameters = ['a = b'];
+        $headers = ['c' => 'd'];
 
         $message = $this->getMockBuilder('GuzzleHttp\Message\Response')
-            ->setConstructorArgs(array(200))
-            ->setMethods(array('getBody'))
+            ->setConstructorArgs([200])
+            ->setMethods(['getBody'])
             ->getMock();
         $message->expects($this->once())
             ->method('getBody')
@@ -193,22 +193,22 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
             ->method('send')
             ->will($this->returnValue($message));
 
-        $httpClient = new TestHttpClient(array(), $client);
+        $httpClient = new TestHttpClient([], $client);
         $response = $httpClient->get($path, $parameters, $headers);
 
         $this->assertEquals("Just raw context", $response->getBody());
         $this->assertInstanceOf('GuzzleHttp\Message\MessageInterface', $response);
     }
 
-    protected function getBrowserMock(array $methods = array())
+    protected function getBrowserMock(array $methods = [])
     {
-        $mockMethods = array('send', 'createRequest') + $methods;
-        $mock = $this->getMockBuilder( 'GuzzleHttp\Client')
+        $mockMethods = ['send', 'createRequest'] + $methods;
+        $mock = $this->getMockBuilder('GuzzleHttp\Client')
             ->setMethods($mockMethods)
             ->getMock();
 
         $requestMock = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->setConstructorArgs(array('GET', 'some'))
+            ->setConstructorArgs(['GET', 'some'])
             ->getMock();
 
         $mock->expects($this->any())
@@ -226,7 +226,7 @@ class TestHttpClient extends HttpClient
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function request($path, $body, $httpMethod = 'GET', array $headers = array(), array $options = array())
+    public function request($path, $body, $httpMethod = 'GET', array $headers = [], array $options = [])
     {
         $request = $this->client->createRequest($httpMethod, $path);
 

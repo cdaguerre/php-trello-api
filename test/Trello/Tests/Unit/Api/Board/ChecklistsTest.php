@@ -30,7 +30,7 @@ class ChecklistsTest extends TestCase
      */
     public function shouldCreateChecklist()
     {
-        $data = array('name' => 'Test Checklist');
+        $data = ['name' => 'Test Checklist'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -47,7 +47,7 @@ class ChecklistsTest extends TestCase
      */
     public function shouldNotCreateChecklistWithoutName()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
