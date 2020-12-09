@@ -3,7 +3,7 @@
 namespace Trello\HttpClient\Listener;
 
 use Trello\HttpClient\Message\ResponseMediator;
-use Guzzle\Common\Event;
+use GuzzleHttp\Event\AbstractRequestEvent as Event;
 use Trello\Exception\ErrorException;
 use Trello\Exception\RuntimeException;
 use Trello\Exception\PermissionDeniedException;
@@ -20,7 +20,6 @@ class ErrorListener
      */
     public function onRequestError(Event $event)
     {
-        /** @var $request \Guzzle\Http\Message\Request */
         $request = $event['request'];
         $response = $request->getResponse();
 

@@ -110,7 +110,7 @@ abstract class AbstractApi implements ApiInterface
      * @param array  $parameters     GET parameters.
      * @param array  $requestHeaders Request Headers.
      *
-     * @return \Guzzle\Http\EntityBodyInterface|mixed|string
+     * @return mixed
      */
     protected function get($path, array $parameters = array(), $requestHeaders = array())
     {
@@ -126,7 +126,7 @@ abstract class AbstractApi implements ApiInterface
      * @param array  $parameters     HEAD parameters.
      * @param array  $requestHeaders Request headers.
      *
-     * @return \Guzzle\Http\Message\Response
+     * @return \GuzzleHttp\Message\Response
      */
     protected function head($path, array $parameters = array(), $requestHeaders = array())
     {
@@ -162,7 +162,7 @@ abstract class AbstractApi implements ApiInterface
      * @param mixed  $body           Request body.
      * @param array  $requestHeaders Request headers.
      *
-     * @return \Guzzle\Http\EntityBodyInterface|mixed|string
+     * @return mixed
      */
     protected function postRaw($path, $body, $requestHeaders = array())
     {

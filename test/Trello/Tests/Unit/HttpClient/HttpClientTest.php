@@ -4,8 +4,8 @@ namespace Trello\Tests\HttpClient;
 
 use Trello\Client;
 use Trello\HttpClient\HttpClient;
-use Guzzle\Http\Message\Response;
-use Guzzle\Http\Client as GuzzleClient;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Client as GuzzleClient;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -180,7 +180,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a = b');
         $headers    = array('c' => 'd');
 
-        $message = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $message = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->setConstructorArgs(array(200))
             ->setMethods(array('getBody'))
             ->getMock();
@@ -197,17 +197,17 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $response = $httpClient->get($path, $parameters, $headers);
 
         $this->assertEquals("Just raw context", $response->getBody());
-        $this->assertInstanceOf('Guzzle\Http\Message\MessageInterface', $response);
+        $this->assertInstanceOf('GuzzleHttp\Message\MessageInterface', $response);
     }
 
     protected function getBrowserMock(array $methods = array())
     {
         $mockMethods = array('send', 'createRequest') + $methods;
-        $mock = $this->getMockBuilder( 'Guzzle\Http\Client')
+        $mock = $this->getMockBuilder( 'GuzzleHttp\Client')
             ->setMethods($mockMethods)
             ->getMock();
 
-        $requestMock = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $requestMock = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->setConstructorArgs(array('GET', 'some'))
             ->getMock();
 

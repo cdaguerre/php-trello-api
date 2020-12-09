@@ -1,7 +1,7 @@
 <?php
 namespace Trello\Tests\HttpClient;
 
-use Guzzle\Http\Message\Request;
+use GuzzleHttp\Message\Request;
 use Trello\Client;
 use Trello\HttpClient\Listener\AuthListener;
 
@@ -25,7 +25,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoNothingForHaveNullMethod()
     {
-        $request = $this->getMockBuilder('Guzzle\Http\Message\RequestInterface')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\RequestInterface')
             ->getMock();
         $request->expects($this->never())
             ->method('addHeader');
@@ -40,7 +40,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoNothingForPostSend()
     {
-        $request = $this->getMockBuilder('Guzzle\Http\Message\RequestInterface')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\RequestInterface')
             ->getMock();
         $request->expects($this->never())
             ->method('addHeader');
@@ -56,7 +56,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
     public function shouldSetAuthBasicHeaderForAuthPassMethod()
     {
         $expected = 'Basic '.base64_encode('login2:pass42323');
-        $request = $this->getMockBuilder('Guzzle\Http\Message\RequestInterface')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\RequestInterface')
             ->getMock();
         $request->expects($this->once())
             ->method('setHeader')
@@ -76,7 +76,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
     public function shouldSetAuthTokenHeaderForAuthPassMethod()
     {
         $expected = 'token test';
-        $request = $this->getMockBuilder('Guzzle\Http\Message\RequestInterface')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\RequestInterface')
             ->getMock();
         $request->expects($this->once())
             ->method('setHeader')
@@ -114,7 +114,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
 
     private function getEventMock($request = null)
     {
-        $mock = $this->getMockBuilder('Guzzle\Common\Event')->getMock();
+        $mock = $this->getMockBuilder('GuzzleCommon\Event')->getMock();
         if ($request) {
             $mock->expects($this->any())
                 ->method('offsetGet')

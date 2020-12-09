@@ -21,7 +21,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function getApiMock()
     {
-        $httpClient = $this->getMockBuilder('Guzzle\Http\Client')
+        $httpClient = $this->getMockBuilder('GuzzleHttp\Client')
             ->setMethods(array('send'))
             ->getMock();
         $httpClient->expects($this->any())

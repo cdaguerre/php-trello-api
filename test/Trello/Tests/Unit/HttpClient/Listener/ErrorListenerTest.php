@@ -13,7 +13,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassIfResponseNotHaveErrorStatus()
     {
-        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $response = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
         $response->expects($this->once())
@@ -126,9 +126,9 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
 
     private function getEventMock($response)
     {
-        $mock = $this->getMockBuilder('Guzzle\Common\Event')
+        $mock = $this->getMockBuilder('GuzzleHttp\Event\AbstractRequestEvent')
             ->getMock();
-        $request = $this->getMockBuilder('Guzzle\Http\Message\Request')
+        $request = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->disableOriginalConstructor()
             ->getMock();
         $request->expects($this->any())
@@ -145,7 +145,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $httpStatusCode,
         $responseBody = ''
     ) {
-        $mock = $this->getMockBuilder('Guzzle\Http\Message\Response')
+        $mock = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->disableOriginalConstructor()
             ->getMock();
         $mock->expects($this->once())
