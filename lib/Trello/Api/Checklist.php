@@ -34,14 +34,14 @@ class Checklist extends AbstractApi
      * Find a list by id
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist
      *
-     * @param string $id     the checklist's id
-     * @param array  $params optional attributes
+     * @param string $id the checklist's id
+     * @param array $params optional attributes
      *
      * @return array list info
      */
     public function show($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
 
     /**
@@ -63,14 +63,14 @@ class Checklist extends AbstractApi
      * Update a checklist
      * @link https://trello.com/docs/api/checklist/#put-1-checklists-idchecklist
      *
-     * @param string $id     the list's id
-     * @param array  $params list attributes to update
+     * @param string $id the list's id
+     * @param array $params list attributes to update
      *
      * @return array list info
      */
     public function update($id, array $params = array())
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->put($this->getPath() . '/' . rawurlencode($id), $params);
     }
 
     /**
@@ -83,29 +83,29 @@ class Checklist extends AbstractApi
      */
     public function remove($id)
     {
-        return $this->delete($this->getPath().'/'.rawurlencode($id));
+        return $this->delete($this->getPath() . '/' . rawurlencode($id));
     }
 
     /**
      * Get the board of a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-board
      *
-     * @param string $id     the checklist's id
-     * @param array  $params optional parameters
+     * @param string $id the checklist's id
+     * @param array $params optional parameters
      *
      * @return array board info
      */
     public function getBoard($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id).'/board', $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id) . '/board', $params);
     }
 
     /**
      * Get the field of a board of a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-board-field
      *
-     * @param string $id    the checklist's id
-     * @param array  $field the name of the field
+     * @param string $id the checklist's id
+     * @param array $field the name of the field
      *
      * @return array board info
      *
@@ -115,42 +115,42 @@ class Checklist extends AbstractApi
     {
         $this->validateAllowedParameters(Board::$fields, $field, 'field');
 
-        return $this->get($this->getPath().'/'.rawurlencode($id).'/board/'.rawurlencode($field));
+        return $this->get($this->getPath() . '/' . rawurlencode($id) . '/board/' . rawurlencode($field));
     }
 
     /**
      * Set a given checklist's card
      * @link https://trello.com/docs/api/checklist/#put-1-checklists-idchecklist-idcard
      *
-     * @param string $id     the list's id
+     * @param string $id the list's id
      * @param string $cardId the card's id
      *
      * @return array
      */
     public function setCard($id, $cardId)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/idCard', array('value' => $cardId));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/idCard', array('value' => $cardId));
     }
 
     /**
      * Set a given checklist's name
      * @link https://trello.com/docs/api/checklist/#put-1-checklists-idchecklist-name
      *
-     * @param string $id   the checklist's id
+     * @param string $id the checklist's id
      * @param string $name the name
      *
      * @return array
      */
     public function setName($id, $name)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', array('value' => $name));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/name', array('value' => $name));
     }
 
     /**
      * Set a given checklist's position
      * @link https://trello.com/docs/api/checklist/#put-1-checklists-idchecklist-pos
      *
-     * @param string         $id       the list's id
+     * @param string $id the list's id
      * @param string|integer $position the position, eg. 'top', 'bottom'
      *                                 or a positive number
      *
@@ -158,7 +158,7 @@ class Checklist extends AbstractApi
      */
     public function setPosition($id, $position)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', array('value' => $position));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/pos', array('value' => $position));
     }
 
     /**

@@ -12,13 +12,13 @@ class Board extends AbstractObject implements BoardInterface
     protected $apiName = 'board';
 
     protected $loadParams = array(
-        'fields'                   => 'all',
-        'organization'             => true,
+        'fields' => 'all',
+        'organization' => true,
         'organization_memberships' => 'all',
-        'members'                  => 'all',
-        'membersInvited'           => 'all',
-        'memberships'              => 'all',
-        'lists'                    => 'all',
+        'members' => 'all',
+        'membersInvited' => 'all',
+        'memberships' => 'all',
+        'lists' => 'all',
     );
 
     /**

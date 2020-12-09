@@ -18,8 +18,8 @@ class Cards extends AbstractApi
      * Get cards related to a given list
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-cards
      *
-     * @param string $id     the member's id or username
-     * @param array  $params optional parameters
+     * @param string $id the member's id or username
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -32,8 +32,8 @@ class Cards extends AbstractApi
      * Filter cards related to a given list
      * @link https://trello.com/docs/api/list/#get-1-lists-idlist-cards-filter
      *
-     * @param string $id     the list's id
-     * @param array  $filter one of 'none', 'visible', 'open', 'closed', 'all'
+     * @param string $id the list's id
+     * @param array $filter one of 'none', 'visible', 'open', 'closed', 'all'
      *
      * @return array
      */
@@ -42,6 +42,6 @@ class Cards extends AbstractApi
         $allowed = array('none', 'visible', 'open', 'closed', 'all');
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filters));
     }
 }

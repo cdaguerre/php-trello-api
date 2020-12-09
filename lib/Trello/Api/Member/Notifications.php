@@ -19,8 +19,8 @@ class Notifications extends AbstractApi
      * Get notifications related to a given list
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-notifications
      *
-     * @param string $id     the member's id or username
-     * @param array  $params optional parameters
+     * @param string $id the member's id or username
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -33,8 +33,8 @@ class Notifications extends AbstractApi
      * Filter notifications related to a given member
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-notifications-filter
      *
-     * @param string $id    the member's id or username
-     * @param array  $event one of the events defined in \Trello\Events or 'all'
+     * @param string $id the member's id or username
+     * @param array $event one of the events defined in \Trello\Events or 'all'
      *
      * @return array
      */
@@ -45,6 +45,6 @@ class Notifications extends AbstractApi
 
         $events = $this->validateAllowedParameters($events, $event, 'event');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $events));
+        return $this->get($this->getPath($id) . '/' . implode(',', $events));
     }
 }

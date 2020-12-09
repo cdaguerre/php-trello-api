@@ -8,7 +8,7 @@ class ResponseMediator
 {
     public static function getContent(Response $response)
     {
-        $body    = $response->getBody();
+        $body = $response->getBody();
 
         $content = json_decode($body, true);
 

@@ -114,8 +114,8 @@ interface ChecklistInterface extends ObjectInterface
     /**
      * Set an item
      *
-     * @param string  $name     name of the item
-     * @param bool    $checked  whether it should be marked as completed or not
+     * @param string $name name of the item
+     * @param bool $checked whether it should be marked as completed or not
      * @param integer $position position on the list
      *
      * @return ChecklistInterface

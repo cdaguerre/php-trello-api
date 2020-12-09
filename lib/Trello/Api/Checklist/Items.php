@@ -26,8 +26,8 @@ class Items extends AbstractApi
      * Get items related to a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-checkitems
      *
-     * @param string $id     the card's id or short link
-     * @param array  $params optional parameters
+     * @param string $id the card's id or short link
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -40,10 +40,10 @@ class Items extends AbstractApi
      * Create an item in the given checklist
      * @link https://trello.com/docs/api/checklist/#post-1-checklists-idchecklist-checkitems
      *
-     * @param string $id      Id of the checklist
-     * @param string $name    Name of the item
-     * @param bool   $checked Check status
-     * @param array  $data    optional attributes
+     * @param string $id Id of the checklist
+     * @param string $name Name of the item
+     * @param bool $checked Check status
+     * @param array $data optional attributes
      *
      * @return array
      */
@@ -63,9 +63,9 @@ class Items extends AbstractApi
      * a dirty workaround which works by deleting the item
      * and recreating it.
      *
-     * @param string $id     Id of the checklist
+     * @param string $id Id of the checklist
      * @param string $itemId the id of the item to update
-     * @param array  $data   check item data
+     * @param array $data check item data
      *
      * @return array
      */
@@ -82,13 +82,13 @@ class Items extends AbstractApi
      * Remove an item from checklist
      * @link https://trello.com/docs/api/checklist/#delete-1-checklists-idchecklist-checkitems-idcheckitem
      *
-     * @param string $id     the id of the checklist the item should be removed from
+     * @param string $id the id of the checklist the item should be removed from
      * @param string $itemId the id of the item to delete
      *
      * @return array card info
      */
     public function remove($id, $itemId)
     {
-        return $this->delete($this->getPath($id).'/'.rawurlencode($itemId));
+        return $this->delete($this->getPath($id) . '/' . rawurlencode($itemId));
     }
 }

@@ -14,16 +14,16 @@ class Card extends AbstractObject implements CardInterface
     protected $apiName = 'card';
 
     protected $loadParams = array(
-        'fields'          => 'all',
-        'board'           => true,
-        'list'            => true,
-        'stickers'        => true,
-        'members'         => true,
-        'membersVoted'    => true,
-        'attachments'     => true,
-        'checklists'      => 'all',
+        'fields' => 'all',
+        'board' => true,
+        'list' => true,
+        'stickers' => true,
+        'members' => true,
+        'membersVoted' => true,
+        'attachments' => true,
+        'checklists' => 'all',
         'checkItemStates' => true,
-        'actions'         => Events::CARD_COMMENT,
+        'actions' => Events::CARD_COMMENT,
     );
 
     protected $newChecklists = array();

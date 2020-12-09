@@ -2,8 +2,6 @@
 
 namespace Trello\Api;
 
-use Trello\Exception\InvalidArgumentException;
-
 /**
  * Trello Board API
  * @package PHP Trello API
@@ -57,14 +55,14 @@ class Board extends AbstractApi
      * Find a board by id
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id
      *
-     * @param string $id     the board's id
-     * @param array  $params optional attributes
+     * @param string $id the board's id
+     * @param array $params optional attributes
      *
      * @return array board info
      */
     public function show($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
 
     /**
@@ -86,105 +84,105 @@ class Board extends AbstractApi
      * Update a board
      * @link https://trello.com/docs/api/board/#put-1-boards
      *
-     * @param string $id     the board's id
-     * @param array  $params board attributes to update
+     * @param string $id the board's id
+     * @param array $params board attributes to update
      *
      * @return array
      */
     public function update($id, array $params = array())
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id), $params);
+        return $this->put($this->getPath() . '/' . rawurlencode($id), $params);
     }
 
     /**
      * Set a given board's name
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-name
      *
-     * @param string $id   the board's id
+     * @param string $id the board's id
      * @param string $name the name
      *
      * @return array
      */
     public function setName($id, $name)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', array('value' => $name));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/name', array('value' => $name));
     }
 
     /**
      * Set a given board's description
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-desc
      *
-     * @param string $id          the board's id
+     * @param string $id the board's id
      * @param string $description the description
      *
      * @return array
      */
     public function setDescription($id, $description)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/desc', array('value' => $description));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/desc', array('value' => $description));
     }
 
     /**
      * Set a given board's state
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-closed
      *
-     * @param string $id     the board's id
-     * @param bool   $closed whether the board should be closed or not
+     * @param string $id the board's id
+     * @param bool $closed whether the board should be closed or not
      *
      * @return array
      */
     public function setClosed($id, $closed = true)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/closed', array('value' => $closed));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/closed', array('value' => $closed));
     }
 
     /**
      * Set a given board's subscription state
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-subscribed
      *
-     * @param string $id         the board's id
-     * @param bool   $subscribed whether to subscribe to the board or not
+     * @param string $id the board's id
+     * @param bool $subscribed whether to subscribe to the board or not
      *
      * @return array
      */
     public function setSubscribed($id, $subscribed = true)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', array('value' => $subscribed));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/subscribed', array('value' => $subscribed));
     }
 
     /**
      * Set a given board's organization
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-organization
      *
-     * @param string $id             the board's id
+     * @param string $id the board's id
      * @param string $organizationId the organization's id
      *
      * @return array
      */
     public function setOrganization($id, $organizationId)
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/idOrganization/'.rawurlencode($organizationId));
+        return $this->put($this->getPath() . '/' . rawurlencode($id) . '/idOrganization/' . rawurlencode($organizationId));
     }
 
     /**
      * Get a given board's organization
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-organization
      *
-     * @param string $id     the board's id
-     * @param array  $params optional parameters
+     * @param string $id the board's id
+     * @param array $params optional parameters
      *
      * @return array
      */
     public function getOrganization($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id).'/organization', $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id) . '/organization', $params);
     }
 
     /**
      * Get the field of the organization of a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-organization-field
      *
-     * @param string $id    the board's id
+     * @param string $id the board's id
      * @param string $field the organization's field name
      *
      * @return array
@@ -193,35 +191,35 @@ class Board extends AbstractApi
     {
         $this->validateAllowedParameters(Organization::$fields, $field, 'field');
 
-        return $this->get($this->getPath().'/'.rawurlencode($id).'/organization/'.rawurlencode($field));
+        return $this->get($this->getPath() . '/' . rawurlencode($id) . '/organization/' . rawurlencode($field));
     }
 
     /**
      * Get a given board's stars
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-boardstars
      *
-     * @param string $id     the board's id
-     * @param array  $params optional parameters
+     * @param string $id the board's id
+     * @param array $params optional parameters
      *
      * @return array
      */
     public function getStars($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id).'/boardStars', $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id) . '/boardStars', $params);
     }
 
     /**
      * Get a given board's deltas
      * @link https://trello.com/docs/api/board/index.html#get-1-boards-board-id-deltas
      *
-     * @param string $id     the board's id
-     * @param array  $params optional parameters
+     * @param string $id the board's id
+     * @param array $params optional parameters
      *
      * @return array
      */
     public function getDeltas($id, array $params = array())
     {
-        return $this->get($this->getPath().'/'.rawurlencode($id).'/deltas', $params);
+        return $this->get($this->getPath() . '/' . rawurlencode($id) . '/deltas', $params);
     }
 
     /**
@@ -234,7 +232,7 @@ class Board extends AbstractApi
      */
     public function setViewed($id)
     {
-        return $this->post($this->getPath().'/'.rawurlencode($id).'/markAsViewed');
+        return $this->post($this->getPath() . '/' . rawurlencode($id) . '/markAsViewed');
     }
 
     /**

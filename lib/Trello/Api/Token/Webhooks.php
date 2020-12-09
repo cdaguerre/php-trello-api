@@ -18,8 +18,8 @@ class Webhooks extends AbstractApi
      * Get webhooks related to a given token
      * @link https://trello.com/docs/api/token/#get-1-tokens-token-webhooks
      *
-     * @param string $id     the token's id
-     * @param array  $params optional parameters
+     * @param string $id the token's id
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -32,22 +32,22 @@ class Webhooks extends AbstractApi
      * Get a webhook
      * @link https://trello.com/docs/api/token/#get-1-tokens-token-webhooks-idwebhook
      *
-     * @param string $id        the token's id
+     * @param string $id the token's id
      * @param string $webhookId the webhook's id
      *
      * @return array
      */
     public function show($id, $webhookId)
     {
-        return $this->get($this->getPath($id).'/'.rawurlencode($webhookId));
+        return $this->get($this->getPath($id) . '/' . rawurlencode($webhookId));
     }
 
     /**
      * Create a webhook
      * @link https://trello.com/docs/api/token/#post-1-tokens-token-webhooks
      *
-     * @param string $id     the id of the token the webhook should be created on
-     * @param array  $params optional attributes
+     * @param string $id the id of the token the webhook should be created on
+     * @param array $params optional attributes
      *
      * @return array card info
      */
@@ -62,8 +62,8 @@ class Webhooks extends AbstractApi
      * Update a webhook
      * @link https://trello.com/docs/api/token/#put-1-tokens-token-webhooks
      *
-     * @param string $id     the id of the token the webhook is attached to
-     * @param array  $params optional attributes
+     * @param string $id the id of the token the webhook is attached to
+     * @param array $params optional attributes
      *
      * @return array card info
      */
@@ -78,13 +78,13 @@ class Webhooks extends AbstractApi
      * Remove a webhook
      * @link https://trello.com/docs/api/token/#delete-1-tokens-token-webhooks-idwebhook
      *
-     * @param string $id        the id of the token the webhook is attached to
+     * @param string $id the id of the token the webhook is attached to
      * @param string $webhookId id of the webhook to remove
      *
      * @return array card info
      */
     public function remove($id, $webhookId)
     {
-        return $this->delete($this->getPath($id).'/'.rawurlencode($webhookId));
+        return $this->delete($this->getPath($id) . '/' . rawurlencode($webhookId));
     }
 }

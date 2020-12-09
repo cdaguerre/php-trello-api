@@ -15,9 +15,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class HttpClient implements HttpClientInterface
 {
     protected $options = array(
-        'base_url'    => 'https://api.trello.com/',
-        'user_agent'  => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
-        'timeout'     => 10,
+        'base_url' => 'https://api.trello.com/',
+        'user_agent' => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
+        'timeout' => 10,
         'api_version' => 1,
     );
 
@@ -32,16 +32,16 @@ class HttpClient implements HttpClientInterface
     private $lastRequest;
 
     /**
-     * @param array           $options
+     * @param array $options
      * @param ClientInterface $client
      */
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $this->options = array_merge($this->options, $options);
-        $client = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
-        $this->client  = $client;
+        $client = $client ?: new GuzzleClient($this->options);
+        $this->client = $client;
 
-        $this->addListener('request.error', array(new ErrorListener($this->options), 'onRequestError'));
+        $this->addListener('request.error', array(new ErrorListener(), 'onRequestError'));
         $this->clearHeaders();
     }
 
@@ -152,7 +152,7 @@ class HttpClient implements HttpClientInterface
             throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->lastRequest  = $request;
+        $this->lastRequest = $request;
         $this->lastResponse = $response;
 
         return $response;
@@ -164,7 +164,8 @@ class HttpClient implements HttpClientInterface
     public function authenticate($tokenOrLogin, $password = null, $method)
     {
         $this->addListener('request.before_send', array(
-            new AuthListener($tokenOrLogin, $password, $method), 'onRequestBeforeSend',
+            new AuthListener($tokenOrLogin, $password, $method),
+            'onRequestBeforeSend',
         ));
     }
 
@@ -190,7 +191,7 @@ class HttpClient implements HttpClientInterface
      */
     protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
-        $path = $this->options['api_version'].'/'.$path;
+        $path = $this->options['api_version'] . '/' . $path;
 
         if ($httpMethod === 'GET' && $body) {
             $path .= (false === strpos($path, '?') ? '?' : '&');

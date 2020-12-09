@@ -18,8 +18,8 @@ class Cards extends AbstractApi
      * Get cards related to a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-cards
      *
-     * @param string $id     the checklist's id
-     * @param array  $params optional parameters
+     * @param string $id the checklist's id
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -32,8 +32,8 @@ class Cards extends AbstractApi
      * Filter cards related to a given checklist
      * @link https://trello.com/docs/api/checklist/#get-1-checklists-idchecklist-cards-filter
      *
-     * @param string $id     the checklist's id
-     * @param array  $filter one of 'none', 'open', 'closed', 'all'
+     * @param string $id the checklist's id
+     * @param array $filter one of 'none', 'open', 'closed', 'all'
      *
      * @return array
      */
@@ -42,6 +42,6 @@ class Cards extends AbstractApi
         $allowed = array('none', 'open', 'closed', 'all');
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filters));
     }
 }

@@ -4,7 +4,6 @@ namespace Trello\Api\Member;
 
 use Trello\Api\AbstractApi;
 use Trello\Api\Organization;
-use Trello\Exception\InvalidArgumentException;
 
 /**
  * Trello Member Organizations API
@@ -20,8 +19,8 @@ class Organizations extends AbstractApi
      * Get organizations related to a given member
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-organizations
      *
-     * @param string $id     the member's id or username
-     * @param array  $params optional parameters
+     * @param string $id the member's id or username
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -34,7 +33,7 @@ class Organizations extends AbstractApi
      * Filter organizations related to a given member
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-organizations-filter
      *
-     * @param string       $id     the organization's id
+     * @param string $id the organization's id
      * @param string|array $filter array of / one of 'all', 'none', 'members', 'public'
      *
      * @return array
@@ -44,28 +43,28 @@ class Organizations extends AbstractApi
         $allowed = array('all', 'none', 'members', 'public');
         $filters = $this->validateAllowedParameters($allowed, $filter, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id) . '/' . implode(',', $filters));
     }
 
     /**
      * Get organizations a given member is invited to
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-organizationsinvited
      *
-     * @param string $id     the member's id or username
-     * @param array  $params optional parameters
+     * @param string $id the member's id or username
+     * @param array $params optional parameters
      *
      * @return array
      */
     public function invitedTo($id, array $params = array())
     {
-        return $this->get($this->getPath($id).'Invited', $params);
+        return $this->get($this->getPath($id) . 'Invited', $params);
     }
 
     /**
      * Get a field of an organization a given member is invited to
      * @link https://trello.com/docs/api/member/#get-1-members-idmember-or-username-organizationsinvited-field
      *
-     * @param string $id     the member's id or username
+     * @param string $id the member's id or username
      *
      * @return array
      */
@@ -73,6 +72,6 @@ class Organizations extends AbstractApi
     {
         $this->validateAllowedParameters(Organization::$fields, $field, 'field');
 
-        return $this->get($this->getPath($id).'Invited/'.rawurlencode($field));
+        return $this->get($this->getPath($id) . 'Invited/' . rawurlencode($field));
     }
 }

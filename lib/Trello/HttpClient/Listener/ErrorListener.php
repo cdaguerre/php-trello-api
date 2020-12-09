@@ -47,30 +47,30 @@ class ErrorListener
                 $errors = array();
                 foreach ($content['errors'] as $error) {
                     switch ($error['code']) {
-                    case 'missing':
-                        $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
-                        break;
+                        case 'missing':
+                            $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
+                            break;
 
-                    case 'missing_field':
-                        $errors[] = sprintf('Field "%s" is missing, for resource "%s"', $error['field'], $error['resource']);
-                        break;
+                        case 'missing_field':
+                            $errors[] = sprintf('Field "%s" is missing, for resource "%s"', $error['field'], $error['resource']);
+                            break;
 
-                    case 'invalid':
-                        $errors[] = sprintf('Field "%s" is invalid, for resource "%s"', $error['field'], $error['resource']);
-                        break;
+                        case 'invalid':
+                            $errors[] = sprintf('Field "%s" is invalid, for resource "%s"', $error['field'], $error['resource']);
+                            break;
 
-                    case 'already_exists':
-                        $errors[] = sprintf('Field "%s" already exists, for resource "%s"', $error['field'], $error['resource']);
-                        break;
+                        case 'already_exists':
+                            $errors[] = sprintf('Field "%s" already exists, for resource "%s"', $error['field'], $error['resource']);
+                            break;
 
-                    default:
-                        $errors[] = $error['message'];
-                        break;
+                        default:
+                            $errors[] = $error['message'];
+                            break;
 
                     }
                 }
 
-                throw new ValidationFailedException('Validation Failed: '.implode(', ', $errors), 422);
+                throw new ValidationFailedException('Validation Failed: ' . implode(', ', $errors), 422);
             }
         }
 

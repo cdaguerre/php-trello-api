@@ -35,7 +35,7 @@ class AuthListener
             case Client::AUTH_HTTP_PASSWORD:
                 $event['request']->setHeader(
                     'Authorization',
-                    sprintf('Basic %s', base64_encode($this->tokenOrLogin.':'.$this->password))
+                    sprintf('Basic %s', base64_encode($this->tokenOrLogin . ':' . $this->password))
                 );
                 break;
 
@@ -50,7 +50,7 @@ class AuthListener
                 $url = $event['request']->getUrl();
 
                 $parameters = array(
-                    'key'   => $this->tokenOrLogin,
+                    'key' => $this->tokenOrLogin,
                     'token' => $this->password,
                 );
 

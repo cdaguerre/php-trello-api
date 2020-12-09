@@ -206,8 +206,8 @@ class Checklist extends AbstractObject implements ChecklistInterface
             }
         } else {
             $this->data['checkItems'][] = array(
-                'name'     => $nameOrId,
-                'state'    => $checked,
+                'name' => $nameOrId,
+                'state' => $checked,
                 'position' => $position,
             );
         }

@@ -23,8 +23,8 @@ class Labels extends AbstractApi
      * Get labels related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-labels
      *
-     * @param string $id     the board's
-     * @param array  $params optional parameters
+     * @param string $id the board's
+     * @param array $params optional parameters
      *
      * @return array
      */
@@ -37,7 +37,7 @@ class Labels extends AbstractApi
      * Get a label related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-labels-idlabel
      *
-     * @param string $id    the board's id
+     * @param string $id the board's id
      * @param string $color the label's color
      *
      * @return array
@@ -53,7 +53,7 @@ class Labels extends AbstractApi
             ));
         }
 
-        return $this->get($this->getPath($id).'/'.rawurlencode($color));
+        return $this->get($this->getPath($id) . '/' . rawurlencode($color));
     }
 
     /**
@@ -65,7 +65,7 @@ class Labels extends AbstractApi
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-labelnames-red
      * @link https://trello.com/docs/api/board/#put-1-boards-board-id-labelnames-yellow
      *
-     * @param string $id    the board's id
+     * @param string $id the board's id
      * @param string $color the label color to set the name of
      * @param string $name
      *
@@ -82,6 +82,6 @@ class Labels extends AbstractApi
             ));
         }
 
-        return $this->put('boards/'.rawurlencode($id).'/labelNames/'.rawurlencode($color), array('value' => $name));
+        return $this->put('boards/' . rawurlencode($id) . '/labelNames/' . rawurlencode($color), array('value' => $name));
     }
 }

@@ -18,8 +18,8 @@ class Actions extends AbstractApi
      * Get actions related to a given list
      * @link https://trello.com/docs/api/list/#get-1-lists-idlist-actions
      *
-     * @param string $id     the list's id
-     * @param array  $params optional parameters
+     * @param string $id the list's id
+     * @param array $params optional parameters
      *
      * @return array
      */

@@ -10,7 +10,7 @@ class Cardlist extends AbstractObject implements CardlistInterface
     protected $apiName = 'list';
 
     protected $loadParams = array(
-        'cards'  => 'all',
+        'cards' => 'all',
         'fields' => 'all',
     );
 
