@@ -189,6 +189,8 @@ class HttpClient implements HttpClientInterface
     /**
      * @param string $httpMethod
      * @param string $path
+     *
+     * @return Request|\GuzzleHttp\Message\RequestInterface
      */
     protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
@@ -199,12 +201,9 @@ class HttpClient implements HttpClientInterface
             $path .= utf8_encode(http_build_query($body, '', '&'));
         }
 
-        return $this->client->createRequest(
-            $httpMethod,
-            $path,
-            array_merge($this->headers, $headers),
-            $body,
-            $options
-        );
+        $options['body'] = $body;
+        $options['headers'] = array_merge($this->headers, $headers);
+
+        return $this->client->createRequest($httpMethod, $path, $options);
     }
 }
