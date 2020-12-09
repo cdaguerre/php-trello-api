@@ -1,14 +1,18 @@
 {
-	"name": "cdaguerre/php-trello-api",
+	"name": "matteocacciola/php-trello-api",
 	"type": "library",
 	"description": "Trello API v1 client",
-	"homepage": "https://github.com/cdaguerre/php-trello-api",
+	"homepage": "https://github.com/matteocacciola/php-trello-api",
 	"keywords": ["trello"],
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Christian Daguerre",
 			"email": "christian@daguer.re"
+		},
+                {
+			"name": "Matteo Cacciola",
+			"email": "matteo.cacciola@gmail.com"
 		}
 	],
 	"require": {
