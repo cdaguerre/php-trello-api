@@ -41,7 +41,7 @@ class HttpClient implements HttpClientInterface
         $client = $client ?: new GuzzleClient($this->options);
         $this->client = $client;
 
-        $this->addListener('request.error', [new ErrorListener(), 'onRequestError']);
+        $this->addListener('error', [new ErrorListener(), 'onRequestError']);
         $this->clearHeaders();
     }
 
@@ -164,7 +164,7 @@ class HttpClient implements HttpClientInterface
      */
     public function authenticate($tokenOrLogin, $password, $method)
     {
-        $this->addListener('request.before_send', [
+        $this->addListener('beforeSend', [
             new AuthListener($tokenOrLogin, $password, $method),
             'onRequestBeforeSend',
         ]);
