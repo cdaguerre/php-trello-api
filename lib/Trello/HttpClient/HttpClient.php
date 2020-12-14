@@ -4,13 +4,13 @@ namespace Trello\HttpClient;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Event\SubscriberInterface;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use Trello\Exception\ErrorException;
 use Trello\Exception\RuntimeException;
-use Trello\HttpClient\Listener\AuthListener;
-use Trello\HttpClient\Listener\ErrorListener;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Trello\HttpClient\Subscriber\AuthSubscriber;
+use Trello\HttpClient\Subscriber\ErrorSubscriber;
 
 class HttpClient implements HttpClientInterface
 {
@@ -41,7 +41,7 @@ class HttpClient implements HttpClientInterface
         $client = $client ?: new GuzzleClient($this->options);
         $this->client = $client;
 
-        $this->addListener('error', [new ErrorListener(), 'onRequestError']);
+        $this->addSubscriber(new ErrorSubscriber());
         $this->clearHeaders();
     }
 
@@ -81,7 +81,10 @@ class HttpClient implements HttpClientInterface
         $this->client->getEmitter()->on($eventName, $listener);
     }
 
-    public function addSubscriber(EventSubscriberInterface $subscriber)
+    /**
+     * @param SubscriberInterface $subscriber
+     */
+    public function addSubscriber(SubscriberInterface $subscriber)
     {
         $this->client->getEmitter()->attach($subscriber);
     }
@@ -164,10 +167,7 @@ class HttpClient implements HttpClientInterface
      */
     public function authenticate($tokenOrLogin, $password, $method)
     {
-        $this->addListener('beforeSend', [
-            new AuthListener($tokenOrLogin, $password, $method),
-            'onRequestBeforeSend',
-        ]);
+        $this->addSubscriber(new AuthSubscriber($tokenOrLogin, $password, $method));
     }
 
     /**
