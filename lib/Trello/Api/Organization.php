@@ -53,4 +53,32 @@ class Organization extends AbstractApi
     {
         return $this->get($this->getPath() . '/' . rawurlencode($id), $params);
     }
+
+    /**
+     * Get an organization's boards
+     * @link https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name-boards
+     *
+     * @param string $id     the organization's id
+     * @param array  $params optional attributes
+     *
+     * @return array
+     */
+    public function boards($id, array $params = array())
+    {
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/boards', $params);
+    }
+
+    /**
+     * Get an organization's members
+     * @link https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name-members
+     *
+     * @param string $id     the organization's id
+     * @param array  $params optional attributes
+     *
+     * @return array
+     */
+    public function members($id, array $params = array())
+    {
+        return $this->get($this->getPath().'/'.rawurlencode($id).'/members', $params);
+    }
 }
