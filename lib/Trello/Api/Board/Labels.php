@@ -84,4 +84,28 @@ class Labels extends AbstractApi
 
         return $this->put('boards/' . rawurlencode($id) . '/labelNames/' . rawurlencode($color), ['value' => $name]);
     }
+
+    /**
+     * Create a list on a given board
+     * @link https://trello.com/docs/api/board/#post-1-boards-board-id-lists
+     *
+     * @param string $id    the board's id
+     * @param string $color the label color to set the name of
+     * @param string $name
+     *
+     * @return array
+     */
+    public function create($id, $color, $name)
+    {
+        $colors = array('blue', 'green', 'orange', 'purple', 'red', 'yellow');
+
+        if (!in_array($color, $colors)) {
+            throw new InvalidArgumentException(sprintf(
+                'The "color" parameter must be one of "%s".',
+                implode(", ", $colors)
+            ));
+        }
+
+        return $this->post('boards/'.rawurlencode($id).'/labels/', array('name' => $name, 'color' => $color));
+    }
 }
