@@ -685,6 +685,16 @@ class Card extends AbstractObject implements CardInterface
 
         return $this;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setLabel($label)
+    {
+        $this->data['idLabels'] = $label;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
