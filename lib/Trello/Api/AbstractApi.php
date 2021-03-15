@@ -37,6 +37,28 @@ abstract class AbstractApi implements ApiInterface
     public static $fields;
 
     /**
+     * These are values that are being passed to Trello in our requests, that are not needed,
+     *  and are causing Trello to give a "Error parsing body: too many parameters" error.
+     * 
+     * @var array
+     */
+    protected $ignore_on_update_fields = [
+        'actions',
+        'board',
+        'list',
+        'attachments',
+        'idLabels',
+        'badges',
+        'checklists',
+        'stickers',
+        'labels',
+        'idChecklists',
+        'members',
+        'membersVoted',
+        'descData',
+    ];
+
+    /**
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -186,6 +208,8 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function patch($path, array $parameters = [], $requestHeaders = [])
     {
+        $parameters = $this->removeExcessParameters($parameters);
+
         $response = $this->client->getHttpClient()->patch(
             $path,
             $this->createParametersBody($parameters),
@@ -212,6 +236,8 @@ abstract class AbstractApi implements ApiInterface
             }
         }
 
+        $parameters = $this->removeExcessParameters($parameters);
+        
         $response = $this->client->getHttpClient()->put(
             $path,
             $this->createParametersBody($parameters),
@@ -350,5 +376,24 @@ abstract class AbstractApi implements ApiInterface
             'You need to provide at least one of the following parameters "%s".',
             implode('", "', $atLeastOneOf)
         ));
+    }
+
+    /**
+     * Remove our fields that don't need to be passed to Trello.
+     * This prevents trello from throwing a "Error parsing body: too many parameters" error
+     * on requests with a card that has a lot of content.
+     * 
+     * @param array $parameters
+     *
+     * @return array
+     */
+    protected function removeExcessParameters($parameters)
+    {
+        // Remove our fields that don't need to be passed to Trello.
+        foreach($this->ignore_on_update_fields as $ignored_field) {
+            unset($parameters[$ignored_field]);
+        }
+        
+        return $parameters;
     }
 }
