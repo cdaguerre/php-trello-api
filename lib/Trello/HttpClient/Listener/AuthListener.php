@@ -56,7 +56,6 @@ class AuthListener
 
                 $url .= (false === strpos($url, '?') ? '?' : '&');
                 $url .= utf8_encode(http_build_query($parameters, '', '&'));
-
                 $event['request']->setUrl($url);
                 break;
 
