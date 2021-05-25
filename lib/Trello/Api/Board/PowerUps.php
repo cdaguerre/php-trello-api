@@ -45,6 +45,6 @@ class PowerUps extends AbstractApi
      */
     public function enable($boardId, $powerUpId)
     {
-        return $this->put($this->getPath($boardId), array('idPlugin' => $powerUpId));
+        return $this->post($this->getPath($boardId), array('idPlugin' => $powerUpId));
     }
 }
