@@ -18,7 +18,7 @@ class PowerUps extends AbstractApi
      * Base path of board power ups api
      * @var string
      */
-    privated $path = 'boards/#id#/boardPlugins';
+    protected $path = 'boards/#id#/boardPlugins';
    
     
     /**
