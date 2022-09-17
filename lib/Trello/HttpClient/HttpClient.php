@@ -399,8 +399,7 @@ class HttpClient implements HttpClientInterface
             $httpMethod,
             $path,
             array_merge($this->headers, $headers),
-            utf8_encode(http_build_query($body, '', '&')),
-            $options
+            utf8_encode(http_build_query($body, '', '&'))
         );
     }
 }
