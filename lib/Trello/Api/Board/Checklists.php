@@ -22,12 +22,12 @@ class Checklists extends AbstractApi
      * Get cards related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-cards
      *
-     * @param string $id     the board's
-     * @param array  $params optional parameters
+     * @param string $id the board's
+     * @param array $params optional parameters
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
@@ -36,14 +36,14 @@ class Checklists extends AbstractApi
      * Add an checklist to a given board
      * @link https://trello.com/docs/api/board/#post-1-boards-board-id-checklists
      *
-     * @param string $id     the board's id
-     * @param array  $params optional parameters
+     * @param string $id the board's id
+     * @param array $params optional parameters
      *
      * @return array
      */
     public function create($id, array $params)
     {
-        $this->validateRequiredParameters(array('name'), $params);
+        $this->validateRequiredParameters(['name'], $params);
 
         return $this->post($this->getPath($id), $params);
     }

@@ -35,7 +35,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue($defaultFilter));
 
         $this->assertEquals($defaultFilter, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open')
+            ->with($this->getPath() . '/open')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class BoardsTest extends TestCase
      */
     public function shouldFilterBoardsWithArrayArgument()
     {
-        $filter = array('open','closed');
+        $filter = ['open', 'closed'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/open,closed')
+            ->with($this->getPath() . '/open,closed')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));
@@ -81,7 +81,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'Invited')
+            ->with($this->getPath() . 'Invited')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->invitedTo($this->fakeParentId));
@@ -95,7 +95,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'Invited/name')
+            ->with($this->getPath() . 'Invited/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->invitedToField($this->fakeParentId, 'name'));
@@ -122,7 +122,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('members/'.$this->fakeParentId.'/idBoardsPinned')
+            ->with('members/' . $this->fakeParentId . '/idBoardsPinned')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->pin($this->fakeParentId, $this->fakeId));
@@ -136,7 +136,7 @@ class BoardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('members/'.$this->fakeParentId.'/idBoardsPinned/'.$this->fakeId)
+            ->with('members/' . $this->fakeParentId . '/idBoardsPinned/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->unpin($this->fakeParentId, $this->fakeId));

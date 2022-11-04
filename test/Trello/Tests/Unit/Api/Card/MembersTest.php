@@ -30,11 +30,11 @@ class MembersTest extends TestCase
      */
     public function shouldSetMembers()
     {
-        $data = array(
+        $data = [
             $this->fakeId('member1'),
             $this->fakeId('member2'),
             $this->fakeId('member3')
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -51,7 +51,7 @@ class MembersTest extends TestCase
      */
     public function shouldNotSetMembersWithEmptyArray()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -82,7 +82,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->remove($this->fakeParentId, $this->fakeId));
@@ -96,7 +96,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with($this->getPath().'/membersVoted')
+            ->with($this->getPath() . '/membersVoted')
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->addVote($this->fakeParentId, $this->fakeId));
@@ -110,7 +110,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/membersVoted/'.$this->fakeId)
+            ->with($this->getPath() . '/membersVoted/' . $this->fakeId)
             ->will($this->returnValue($this->fakeId));
 
         $this->assertEquals($this->fakeId, $api->removeVote($this->fakeParentId, $this->fakeId));

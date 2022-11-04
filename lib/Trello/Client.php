@@ -59,14 +59,14 @@ class Client implements ClientInterface
     /**
      * @var array
      */
-    private $options = array(
-        'base_url'    => 'https://api.trello.com/',
-        'user_agent'  => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
-        'timeout'     => 50,
-        'api_limit'   => 5000,
+    private $options = [
+        'base_url' => 'https://api.trello.com/',
+        'user_agent' => 'php-trello-api (http://github.com/cdaguerre/php-trello-api)',
+        'timeout' => 50,
+        'api_limit' => 5000,
         'api_version' => 1,
-        'cache_dir'   => null,
-    );
+        'cache_dir' => null,
+    ];
 
     /**
      * The Buzz instance used to communicate with Trello
@@ -147,9 +147,9 @@ class Client implements ClientInterface
     /**
      * Authenticate a user for all next requests
      *
-     * @param string      $tokenOrLogin Trello private token/username/client ID
-     * @param null|string $password     Trello password/secret (optionally can contain $authMethod)
-     * @param null|string $authMethod   One of the AUTH_* class constants
+     * @param string $tokenOrLogin Trello private token/username/client ID
+     * @param null|string $password Trello password/secret (optionally can contain $authMethod)
+     * @param null|string $authMethod One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
      */
@@ -159,9 +159,15 @@ class Client implements ClientInterface
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN))) {
+        $valid = [
+            self::AUTH_URL_TOKEN,
+            self::AUTH_URL_CLIENT_ID,
+            self::AUTH_HTTP_PASSWORD,
+            self::AUTH_HTTP_TOKEN
+        ];
+        if (null === $authMethod && in_array($password, $valid)) {
             $authMethod = $password;
-            $password   = null;
+            $password = null;
         }
 
         if (null === $authMethod) {
@@ -235,7 +241,7 @@ class Client implements ClientInterface
      * Set option
      *
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @throws InvalidArgumentException if the option is not defined
      * @throws InvalidArgumentException if the api version is set to an unsupported one
@@ -260,14 +266,14 @@ class Client implements ClientInterface
      */
     public function getSupportedApiVersions()
     {
-        return array(1);
+        return [1];
     }
 
     /**
      * Proxies $this->members() to $this->api('members')
      *
      * @param string $name method name
-     * @param array  $args arguments
+     * @param array $args arguments
      *
      * @return ApiInterface
      *

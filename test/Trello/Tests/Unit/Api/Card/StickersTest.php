@@ -33,7 +33,7 @@ class StickersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->show($this->fakeParentId, $this->fakeId));
@@ -44,12 +44,12 @@ class StickersTest extends TestCase
      */
     public function shouldCreateSticker()
     {
-        $data = array(
-            'image'  => 'http://www.test.com/fake-image-url.jpg',
-            'top'    => 0,
-            'left'   => 0,
+        $data = [
+            'image' => 'http://www.test.com/fake-image-url.jpg',
+            'top' => 0,
+            'left' => 0,
             'zIndex' => 1,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -66,11 +66,11 @@ class StickersTest extends TestCase
      */
     public function shouldNotCreateStickerWhenParamsIncomplete()
     {
-        $data = array(
-            'top'    => 0,
-            'left'   => 0,
+        $data = [
+            'top' => 0,
+            'left' => 0,
             'zIndex' => 1,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -84,16 +84,16 @@ class StickersTest extends TestCase
      */
     public function shouldUpdateSticker()
     {
-        $data = array(
-            'top'    => 2,
-            'left'   => 2,
+        $data = [
+            'top' => 2,
+            'left' => 2,
             'zIndex' => 2,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue($data));
 
         $this->assertEquals($data, $api->update($this->fakeParentId, $this->fakeId, $data));
@@ -105,7 +105,7 @@ class StickersTest extends TestCase
      */
     public function shouldNotUpdateStickerWithoutAtLeastOneAllowedParam()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -122,7 +122,7 @@ class StickersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$this->fakeId)
+            ->with($this->getPath() . '/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->remove($this->fakeParentId, $this->fakeId));

@@ -21,19 +21,25 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function getApiMock()
     {
-        $httpClient = $this->getMock('Guzzle\Http\Client', array('send'));
-        $httpClient
-            ->expects($this->any())
+        $httpClient = $this->getMockBuilder('GuzzleHttp\Client')
+            ->setMethods(['send'])
+            ->getMock();
+        $httpClient->expects($this->any())
             ->method('send');
 
-        $mock = $this->getMock('Trello\HttpClient\HttpClient', array(), array(array(), $httpClient));
+        $mock = $this->getMockBuilder('Trello\HttpClient\HttpClient')
+            ->setConstructorArgs([
+                [],
+                $httpClient
+            ])
+            ->getMock();
 
         $client = new \Trello\Client($mock);
         $client->setHttpClient($mock);
 
         return $this->getMockBuilder($this->getApiClass())
-            ->setMethods(array('get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'))
-            ->setConstructorArgs(array($client))
+            ->setMethods(['get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'])
+            ->setConstructorArgs([$client])
             ->getMock();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Github\Tests;
 
 use Trello\Client;
@@ -41,12 +42,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function getAuthenticationFullData()
     {
-        return array(
-            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
-            array('token', null, Client::AUTH_HTTP_TOKEN),
-            array('token', null, Client::AUTH_URL_TOKEN),
-            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
-        );
+        return [
+            ['login', 'password', Client::AUTH_HTTP_PASSWORD],
+            ['token', null, Client::AUTH_HTTP_TOKEN],
+            ['token', null, Client::AUTH_URL_TOKEN],
+            ['client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID],
+        ];
     }
 
     /**
@@ -65,10 +66,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function getAuthenticationPartialData()
     {
-        return array(
-            array('token', Client::AUTH_HTTP_TOKEN),
-            array('token', Client::AUTH_URL_TOKEN),
-        );
+        return [
+            ['token', Client::AUTH_HTTP_TOKEN],
+            ['token', Client::AUTH_URL_TOKEN],
+        ];
     }
 
     /**
@@ -77,7 +78,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowExceptionWhenAuthenticatingWithoutMethodSet()
     {
-        $httpClient = $this->getHttpClientMock(array('addListener'));
+        $httpClient = $this->getHttpClientMock(['addListener']);
         $client = new Client($httpClient);
         $client->authenticate('login', null, null);
     }
@@ -87,7 +88,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldClearHeadersLazy()
     {
-        $httpClient = $this->getHttpClientMock(array('clearHeaders'));
+        $httpClient = $this->getHttpClientMock(['clearHeaders']);
         $httpClient->expects($this->once())->method('clearHeaders');
         $client = new Client($httpClient);
         $client->clearHeaders();
@@ -98,7 +99,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetHeadersLaizly()
     {
-        $headers = array('header1', 'header2');
+        $headers = ['header1', 'header2'];
         $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())->method('setHeaders')->with($headers);
         $client = new Client($httpClient);
@@ -147,37 +148,39 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function getApiClassesProvider()
     {
-        return array(
-            array('action', 'Trello\Api\Action'),
-            array('actions', 'Trello\Api\Action'),
-            array('board', 'Trello\Api\Board'),
-            array('boards', 'Trello\Api\Board'),
-            array('card', 'Trello\Api\Card'),
-            array('cards', 'Trello\Api\Card'),
-            array('checklist', 'Trello\Api\Checklist'),
-            array('checklists', 'Trello\Api\Checklist'),
-            array('list', 'Trello\Api\Cardlist'),
-            array('lists', 'Trello\Api\Cardlist'),
-            array('member', 'Trello\Api\Member'),
-            array('members', 'Trello\Api\Member'),
-            array('notification', 'Trello\Api\Notification'),
-            array('notifications', 'Trello\Api\Notification'),
-            array('organization', 'Trello\Api\Organization'),
-            array('organizations', 'Trello\Api\Organization'),
-            array('token', 'Trello\Api\Token'),
-            array('tokens', 'Trello\Api\Token'),
-            array('webhook', 'Trello\Api\Webhook'),
-            array('webhooks', 'Trello\Api\Webhook'),
-        );
+        return [
+            ['action', 'Trello\Api\Action'],
+            ['actions', 'Trello\Api\Action'],
+            ['board', 'Trello\Api\Board'],
+            ['boards', 'Trello\Api\Board'],
+            ['card', 'Trello\Api\Card'],
+            ['cards', 'Trello\Api\Card'],
+            ['checklist', 'Trello\Api\Checklist'],
+            ['checklists', 'Trello\Api\Checklist'],
+            ['list', 'Trello\Api\Cardlist'],
+            ['lists', 'Trello\Api\Cardlist'],
+            ['member', 'Trello\Api\Member'],
+            ['members', 'Trello\Api\Member'],
+            ['notification', 'Trello\Api\Notification'],
+            ['notifications', 'Trello\Api\Notification'],
+            ['organization', 'Trello\Api\Organization'],
+            ['organizations', 'Trello\Api\Organization'],
+            ['token', 'Trello\Api\Token'],
+            ['tokens', 'Trello\Api\Token'],
+            ['webhook', 'Trello\Api\Webhook'],
+            ['webhooks', 'Trello\Api\Webhook'],
+        ];
     }
 
-    public function getHttpClientMock(array $methods = array())
+    public function getHttpClientMock(array $methods = [])
     {
         $methods = array_merge(
-            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'authenticate'),
+            ['get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'authenticate'],
             $methods
         );
 
-        return $this->getMock('Trello\HttpClient\HttpClientInterface', $methods);
+        return $this->getMockBuilder('Trello\HttpClient\HttpClientInterface')
+            ->setMethods($methods)
+            ->getMock();
     }
 }

@@ -18,7 +18,7 @@ class Service extends Manager
     /**
      * Constructor.
      *
-     * @param ClientInterface               $client
+     * @param ClientInterface $client
      * @param EventDispatcherInterface|null $dispatcher
      */
     public function __construct(ClientInterface $client, EventDispatcherInterface $dispatcher = null)
@@ -41,9 +41,9 @@ class Service extends Manager
     /**
      * Attach an event listener
      *
-     * @param string   $eventName @see Events for name constants
-     * @param callable $listener  The listener
-     * @param int      $priority  The higher this value, the earlier an event
+     * @param string $eventName @see Events for name constants
+     * @param callable $listener The listener
+     * @param int $priority The higher this value, the earlier an event
      *                            listener will be triggered in the chain (defaults to 0)
      */
     public function addListener($eventName, $listener, $priority = 0)
@@ -83,14 +83,16 @@ class Service extends Manager
 
     /**
      * Checks whether a given request is a Trello webhook
-     * and raises appropriate events @see Events
+     * and raises appropriate events @param Request|null $request
+     * @see Events
      *
-     * @param Request|null $request
      */
     public function handleWebhook(Request $request = null)
     {
         if (!$request) {
             $request = Request::createFromGlobals();
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace($data);
         }
 
         if (!$this->isTrelloWebhook($request) || !$action = $request->get('action')) {
@@ -106,7 +108,7 @@ class Service extends Manager
         }
 
         $eventName = $action['type'];
-        $data      = $action['data'];
+        $data = $action['data'];
 
         switch ($eventName) {
             case Events::BOARD_CREATE:

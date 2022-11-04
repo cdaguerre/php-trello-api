@@ -35,7 +35,7 @@ class ActionsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with($this->getPath().'/comments')
+            ->with($this->getPath() . '/comments')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->addComment($this->fakeParentId, $text));
@@ -49,7 +49,7 @@ class ActionsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/comments/'.$this->fakeId)
+            ->with($this->getPath() . '/comments/' . $this->fakeId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->removeComment($this->fakeParentId, $this->fakeId));

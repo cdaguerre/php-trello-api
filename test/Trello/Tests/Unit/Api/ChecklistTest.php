@@ -15,12 +15,12 @@ class ChecklistTest extends TestCase
      */
     public function shouldShowChecklist()
     {
-        $expectedArray = array('id' => $this->fakeChecklistId);
+        $expectedArray = ['id' => $this->fakeChecklistId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId)
+            ->with($this->apiPath . '/' . $this->fakeChecklistId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeChecklistId));
@@ -31,10 +31,10 @@ class ChecklistTest extends TestCase
      */
     public function shouldCreateChecklist()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'name' => 'Test Checklist',
             'idCard' => $this->fakeId('list'),
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -51,9 +51,9 @@ class ChecklistTest extends TestCase
      */
     public function shouldNotCreateChecklistWithoutName()
     {
-        $data = array(
+        $data = [
             'idCard' => $this->fakeId('list'),
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -68,9 +68,9 @@ class ChecklistTest extends TestCase
      */
     public function shouldNotCreateChecklistWithoutCardId()
     {
-        $data = array(
-            'name'   => 'Test Checklist',
-        );
+        $data = [
+            'name' => 'Test Checklist',
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -84,12 +84,12 @@ class ChecklistTest extends TestCase
      */
     public function shouldUpdateChecklist()
     {
-        $expectedArray = array('name' => 'Test Checklist');
+        $expectedArray = ['name' => 'Test Checklist'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId)
+            ->with($this->apiPath . '/' . $this->fakeChecklistId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeChecklistId, $expectedArray));
@@ -103,7 +103,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId)
+            ->with($this->apiPath . '/' . $this->fakeChecklistId)
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->remove($this->fakeChecklistId));
@@ -119,7 +119,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId.'/name')
+            ->with($this->apiPath . '/' . $this->fakeChecklistId . '/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getField($this->fakeChecklistId, $field));
@@ -133,7 +133,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId.'/board')
+            ->with($this->apiPath . '/' . $this->fakeChecklistId . '/board')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getBoard($this->fakeChecklistId));
@@ -147,7 +147,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId.'/board/name')
+            ->with($this->apiPath . '/' . $this->fakeChecklistId . '/board/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getBoardField($this->fakeChecklistId, 'name'));
@@ -176,7 +176,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId.'/idCard')
+            ->with($this->apiPath . '/' . $this->fakeChecklistId . '/idCard')
             ->will($this->returnValue($card));
 
         $this->assertEquals($card, $api->setCard($this->fakeChecklistId, $card));
@@ -192,7 +192,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId.'/name')
+            ->with($this->apiPath . '/' . $this->fakeChecklistId . '/name')
             ->will($this->returnValue($name));
 
         $this->assertEquals($name, $api->setName($this->fakeChecklistId, $name));
@@ -208,7 +208,7 @@ class ChecklistTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeChecklistId.'/pos')
+            ->with($this->apiPath . '/' . $this->fakeChecklistId . '/pos')
             ->will($this->returnValue($position));
 
         $this->assertEquals($position, $api->setPosition($this->fakeChecklistId, $position));

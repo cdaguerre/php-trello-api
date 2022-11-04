@@ -15,12 +15,12 @@ class CardTest extends TestCase
      */
     public function shouldShowCard()
     {
-        $expectedArray = array('id' => $this->fakeCardId);
+        $expectedArray = ['id' => $this->fakeCardId];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId)
+            ->with($this->apiPath . '/' . $this->fakeCardId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($this->fakeCardId));
@@ -31,10 +31,10 @@ class CardTest extends TestCase
      */
     public function shouldCreateCard()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'name' => 'Test Card',
             'idList' => $this->fakeId('list')
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -51,10 +51,10 @@ class CardTest extends TestCase
      */
     public function shouldNotCreateCardWithoutName()
     {
-        $data = array(
+        $data = [
             'idList' => $this->fakeId('list'),
-            'desc'   => 'Test Card Description'
-        );
+            'desc' => 'Test Card Description'
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -69,10 +69,10 @@ class CardTest extends TestCase
      */
     public function shouldNotCreateCardWithoutListId()
     {
-        $data = array(
-            'name'   => 'Test Card',
-            'desc'   => 'Test Card Description'
-        );
+        $data = [
+            'name' => 'Test Card',
+            'desc' => 'Test Card Description'
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -86,12 +86,12 @@ class CardTest extends TestCase
      */
     public function shouldUpdateCard()
     {
-        $expectedArray = array('name' => 'Test Card');
+        $expectedArray = ['name' => 'Test Card'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId)
+            ->with($this->apiPath . '/' . $this->fakeCardId)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update($this->fakeCardId, $expectedArray));
@@ -107,7 +107,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/desc')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/desc')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getField($this->fakeCardId, $field));
@@ -136,7 +136,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/name')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/name')
             ->will($this->returnValue($name));
 
         $this->assertEquals($name, $api->setName($this->fakeCardId, $name));
@@ -152,7 +152,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/desc')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/desc')
             ->will($this->returnValue($description));
 
         $this->assertEquals($description, $api->setDescription($this->fakeCardId, $description));
@@ -168,7 +168,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/closed')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/closed')
             ->will($this->returnValue($closed));
 
         $this->assertEquals($closed, $api->setClosed($this->fakeCardId, $closed));
@@ -184,7 +184,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/subscribed')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/subscribed')
             ->will($this->returnValue($subscribed));
 
         $this->assertEquals($subscribed, $api->setSubscribed($this->fakeCardId, $subscribed));
@@ -200,7 +200,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/pos')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/pos')
             ->will($this->returnValue($position));
 
         $this->assertEquals($position, $api->setPosition($this->fakeCardId, $position));
@@ -216,7 +216,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/due')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/due')
             ->will($this->returnValue($date));
 
         $this->assertEquals($date, $api->setDueDate($this->fakeCardId, $date));
@@ -232,7 +232,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/idList')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/idList')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->setList($this->fakeCardId, $lisId));
@@ -246,7 +246,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/list')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/list')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getList($this->fakeCardId));
@@ -260,7 +260,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/list/name')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/list/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getListField($this->fakeCardId, 'name'));
@@ -289,7 +289,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/idBoard')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/idBoard')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->setBoard($this->fakeCardId, $lisId));
@@ -303,7 +303,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/board')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/board')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getBoard($this->fakeCardId));
@@ -317,7 +317,7 @@ class CardTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->apiPath.'/'.$this->fakeCardId.'/board/name')
+            ->with($this->apiPath . '/' . $this->fakeCardId . '/board/name')
             ->will($this->returnValue(true));
 
         $this->assertEquals(true, $api->getBoardField($this->fakeCardId, 'name'));

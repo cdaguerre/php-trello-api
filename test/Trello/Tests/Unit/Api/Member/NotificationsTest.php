@@ -35,7 +35,7 @@ class NotificationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$defaultFilter)
+            ->with($this->getPath() . '/' . $defaultFilter)
             ->will($this->returnValue($defaultFilter));
 
         $this->assertEquals($defaultFilter, $api->filter($this->fakeParentId));
@@ -51,7 +51,7 @@ class NotificationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/createCard')
+            ->with($this->getPath() . '/createCard')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));
@@ -62,12 +62,12 @@ class NotificationsTest extends TestCase
      */
     public function shouldFilterNotificationsWithArrayArgument()
     {
-        $filter = array('createCard','updateCard');
+        $filter = ['createCard', 'updateCard'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/createCard,updateCard')
+            ->with($this->getPath() . '/createCard,updateCard')
             ->will($this->returnValue($filter));
 
         $this->assertEquals($filter, $api->filter($this->fakeParentId, $filter));

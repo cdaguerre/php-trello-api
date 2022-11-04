@@ -35,7 +35,7 @@ class LabelsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with($this->getPath().'/'.$color)
+            ->with($this->getPath() . '/' . $color)
             ->will($this->returnValue($color));
 
         $this->assertEquals($color, $api->show($this->fakeParentId, $color));
@@ -67,7 +67,7 @@ class LabelsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('boards/'.$this->fakeParentId.'/labelNames/'.$color)
+            ->with('boards/' . $this->fakeParentId . '/labelNames/' . $color)
             ->will($this->returnValue($name));
 
         $this->assertEquals($name, $api->setName($this->fakeParentId, $color, $name));

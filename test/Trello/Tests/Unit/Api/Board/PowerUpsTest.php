@@ -13,14 +13,14 @@ class PowerUpsTest extends TestCase
 
     /**
      * @test
-     */    
+     */
     public function notImplementedYet()
     {
         $this->markTestSkipped(
             sprintf('The "%s" API is not implemented yet.', $this->getApiClass())
         );
     }
-    
+
     protected function getApiClass()
     {
         return 'Trello\Api\Board\PowerUps';

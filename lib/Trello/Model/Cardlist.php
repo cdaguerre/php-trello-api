@@ -9,10 +9,10 @@ class Cardlist extends AbstractObject implements CardlistInterface
 {
     protected $apiName = 'list';
 
-    protected $loadParams = array(
-        'cards'  => 'all',
+    protected $loadParams = [
+        'cards' => 'all',
         'fields' => 'all',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -125,7 +125,7 @@ class Cardlist extends AbstractObject implements CardlistInterface
      */
     public function getCards()
     {
-        $cards = array();
+        $cards = [];
 
         foreach ($this->data['cards'] as $card) {
             $cards[] = new Card($this->client, $card['id']);

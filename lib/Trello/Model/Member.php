@@ -11,9 +11,9 @@ class Member extends AbstractObject implements MemberInterface
 {
     protected $apiName = 'member';
 
-    protected $loadParams = array(
+    protected $loadParams = [
         'fields' => 'all',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -136,7 +136,7 @@ class Member extends AbstractObject implements MemberInterface
      */
     public function setMemberType($memberType)
     {
-        if (!in_array($memberType, array('admin', 'normal', 'observer'))) {
+        if (!in_array($memberType, ['admin', 'normal', 'observer'])) {
             throw new InvalidArgumentException(sprintf(
                 'The member type %s does not exist.',
                 $memberType
@@ -305,7 +305,7 @@ class Member extends AbstractObject implements MemberInterface
      */
     public function getBoards()
     {
-        $boards = array();
+        $boards = [];
 
         foreach ($this->data['idBoards'] as $boardId) {
             $boards[] = new Board($this->client, $boardId);
@@ -337,7 +337,7 @@ class Member extends AbstractObject implements MemberInterface
      */
     public function getPinnedBoards()
     {
-        $boards = array();
+        $boards = [];
 
         foreach ($this->data['idBoardsPinned'] as $boardId) {
             $boards[] = new Board($this->client, $boardId);
@@ -369,7 +369,7 @@ class Member extends AbstractObject implements MemberInterface
      */
     public function getOrganizations()
     {
-        $organizations = array();
+        $organizations = [];
 
         foreach ($this->data['idOrganizations'] as $organizationId) {
             $organizations[] = new Organization($this->client, $organizationId);

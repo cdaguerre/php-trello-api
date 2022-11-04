@@ -16,7 +16,7 @@ class LabelsTest extends TestCase
      */
     public function shouldSetLabels()
     {
-        $labels = array('green', 'purple');
+        $labels = ['green', 'purple'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -33,7 +33,7 @@ class LabelsTest extends TestCase
      */
     public function shouldNotSetUnexistingLabels()
     {
-        $labels = array('unexisting', 'purple');
+        $labels = ['unexisting', 'purple'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -52,7 +52,7 @@ class LabelsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with($this->getPath().'/'.$label)
+            ->with($this->getPath() . '/' . $label)
             ->will($this->returnValue($label));
 
         $this->assertEquals($label, $api->remove($this->fakeParentId, $label));

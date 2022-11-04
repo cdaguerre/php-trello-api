@@ -22,12 +22,12 @@ class Actions extends AbstractApi
      * Get actions related to a given board
      * @link https://trello.com/docs/api/board/#get-1-boards-board-id-actions
      *
-     * @param string $id     the board's id
-     * @param array  $params optional parameters
+     * @param string $id the board's id
+     * @param array $params optional parameters
      *
      * @return array
      */
-    public function all($id, array $params = array())
+    public function all($id, array $params = [])
     {
         return $this->get($this->getPath($id), $params);
     }
